@@ -1,0 +1,36 @@
+{
+  "project": "Pitch Compass (soccer control)",
+  "attribution": "Data (c) OpenStreetMap contributors, ODbL 1.0 (openstreetmap.org/copyright)",
+  "osm_data_timestamp": "2026-07-15T12:30:29Z",
+  "pulled_at_utc": "2026-07-15T12:32:29Z",
+  "ways_total": 4028,
+  "rows_with_bearing": 3904,
+  "signal_sample": 2455,
+  "axial_2t": {
+    "n": 2455,
+    "R": 0.0474,
+    "mean_deg": 87.5,
+    "p": 0.003972627989917892
+  },
+  "cardinal_4t": {
+    "n": 2455,
+    "R": 0.0895,
+    "mean_deg": 87.9,
+    "p": 2.804628215559101e-09
+  },
+  "pct_within_15deg_of_cardinal": 38.6,
+  "urban_4t": {
+    "n": 987,
+    "R": 0.1919,
+    "mean_deg": 3.9,
+    "p": 1.1234390871656527e-16
+  },
+  "urban_cardinal_pct": 45.1,
+  "rural_4t": {
+    "n": 1468,
+    "R": 0.0614,
+    "mean_deg": 73.2,
+    "p": 0.0039595731293530865
+  },
+  "rural_cardinal_pct": 34.3
+}
