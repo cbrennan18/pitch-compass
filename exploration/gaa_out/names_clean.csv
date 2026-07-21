@@ -1,0 +1,1334 @@
+osm_id,lat,lon,leisure,name,key,bucket,dedication,primary
+8025628,53.296245,-6.325888,sports_centre,Faugh's GAA,faugh s,club,,True
+8026074,53.296614,-6.327552,sports_centre,Saint Jude's GAA,saint jude s,club,,True
+8026075,53.297223,-6.329826,pitch,All Weather Pitch,all weather pitch,functional,,True
+22549903,53.361602,-6.206765,sports_centre,Scoil Uí Chonaill GAA Club,scoil ui chonaill,club,,True
+23106245,53.374057,-6.229946,sports_centre,St. Vincent's CLG,st vincent s,club,,True
+23733696,53.468006,-6.221111,sports_centre,Saint Colmcilles G.F.C.,saint colmcilles,club,,True
+25802545,53.289191,-6.31698,sports_centre,Páirc Uí Mhurchú,pairc ui mhurchu,ground,person-unattributed,True
+26343868,53.32319,-9.829936,pitch,Parc Mhic Dara,parc mhic dara,club,,True
+26711003,53.270127,-6.353499,sports_centre,Saint Anne's GAA Club,saint anne s,club,,True
+28411235,53.510372,-6.478423,pitch,Seán Eiffe Park,sean eiffe park,ground,person-unattributed,True
+28568272,52.563588,-6.326499,pitch,Buffers Alley GAA Pitch,buffers alley gaa pitch,functional,,True
+28570544,52.583053,-6.232583,pitch,Ballygarrett GAA Pitch,ballygarrett gaa pitch,club,,True
+28676302,53.388777,-8.958039,pitch,Annaghdown GAA,annaghdown,club,,True
+30342539,53.392604,-6.598459,pitch,Main pitch,main pitch,functional,,True
+31002705,53.379536,-6.590098,pitch,Harbour field,harbour field,ground,person-unattributed,True
+31322396,51.937761,-8.476154,sports_centre,Saint Mary's AFC,saint mary s afc,club,,True
+31323278,51.917711,-8.49739,sports_centre,Na Piarsaigh GAA,na piarsaigh,club,,True
+31408116,51.892745,-8.418249,sports_centre,Blackrock Hurling Club,blackrock,club,,True
+32565652,53.437208,-6.601791,pitch,Fitzgerald Kelly O'Brien Park,fitzgerald kelly o brien park,ground,place-or-other,True
+33146525,53.06565,-7.216433,sports_centre,The Heath GAA,the heath,club,,True
+33696347,53.378872,-6.44558,pitch,Garda Westmanstown Gaels GAA Club,garda westmanstown gaels,club,,True
+33910321,53.419882,-6.230713,sports_centre,ALSAA,alsaa,club,,True
+33911613,53.389793,-6.151554,pitch,Naomh Barróg,naomh barrog,club,,True
+34108175,53.388129,-6.59968,sports_centre,Maynooth GAA Club,maynooth,club,,True
+34659478,53.093439,-9.571219,pitch,An Pháirc,an phairc,club,,True
+34729983,53.162782,-6.142259,sports_centre,Fitzsimons Park,fitzsimons park,ground,person-unattributed,True
+34765926,53.386559,-6.604752,pitch,"Páirc na nGael Ollscoil na hÉireann , Má Nuad",pairc na ngael ollscoil na heireann ma nuad,ground,place-or-other,True
+34921969,52.301146,-7.309437,sports_centre,Portlaw GAA,portlaw,club,,True
+34993853,53.306133,-6.229896,pitch,Devlin Park,devlin park,ground,person-unattributed,True
+35305789,52.133017,-7.453899,sports_centre,Stradbally GAA,stradbally,club,,True
+35784816,51.884498,-8.520814,,Bishopstown GAA Club,bishopstown,club,,True
+35834677,52.906675,-7.266851,sports_centre,Spink GFC,spink,club,,True
+38152575,52.257436,-7.134876,,Roanmore GAA Club Sports & Social Centre,roanmore gaa club sports social centre,club,,True
+38992885,53.384401,-6.298663,sports_centre,Erins Isle GAA Club,erins isle,club,,True
+39236969,52.240442,-7.13934,sports_centre,Saint Saviours GAA Club,saint saviours,club,,True
+39236986,52.254606,-7.128461,stadium,Páirc an Bhreatnaigh GAA,pairc an bhreatnaigh,ground,person-unattributed,True
+39472462,53.578015,-6.113699,sports_centre,Skerries Harps GAA,skerries harps,club,,True
+39472466,53.575367,-6.117123,pitch,Ballast pit,ballast pit,club,,True
+40379889,52.23918,-7.180143,sports_centre,Butlerstown GAA Club,butlerstown,club,,True
+40637361,53.361106,-6.207609,sports_centre,Scoil Uí Chonaill GAA Club,scoil ui chonaill,club,,False
+40637362,53.360893,-6.207569,sports_centre,Scoil Uí Chonaill GAA Club,scoil ui chonaill,club,,False
+40812066,53.372877,-6.216569,pitch,CLG Croabh Chiaráin,clg croabh chiarain,club,,True
+41264717,52.524657,-8.392521,pitch,GAA pitch,gaa pitch,functional,,True
+42111715,52.598848,-8.713928,pitch,Pairc Antoin O' Briain,pairc antoin o briain,ground,place-or-other,True
+42737547,52.260851,-7.133876,sports_centre,Mount Sion GAA Club,mount sion,club,,True
+42998955,51.887379,-8.43872,pitch,Ballinlough GAA Pitch,ballinlough gaa pitch,club,,True
+44029388,52.254806,-7.128902,pitch,Walsh Park,walsh park,ground,person-unattributed,True
+44154919,52.25743,-7.138742,sports_centre,De La Salle GAA Club - Cleaboy Grounds,de la salle gaa club cleaboy grounds,club,,True
+44157954,52.168975,-7.141008,sports_centre,Tramore GAA,tramore,club,,True
+45148896,52.258717,-7.138697,sports_centre,Roanmore GAA Club - Cleaboy Grounds,roanmore gaa club cleaboy grounds,club,,True
+45842437,52.043552,-7.570496,pitch,Páirc Uí Shíocháin,pairc ui shiochain,ground,person-unattributed,True
+46725431,52.681976,-6.291929,pitch,Saint Endas GAA Field,saint endas gaa field,ground,saint,True
+46725454,52.681248,-6.274586,,Naomh Éanna GAA Club,naomh eanna,club,,True
+48052011,53.363712,-6.198292,sports_centre,Clontarf GAA,clontarf,club,,True
+48999634,53.329652,-6.293363,sports_centre,Templeogue Synge Street GAA Club,templeogue synge street,club,,True
+49577162,53.272816,-6.191989,sports_centre,Kilmacud Crokes GAA (Silver Park),kilmacud crokes gaa silver park,club,,True
+49849461,52.310447,-7.173299,pitch,Kilmacow GAA Club,kilmacow,club,,True
+49989847,51.909246,-8.442553,pitch,Tank Field,tank field,ground,person-unattributed,True
+50577437,53.259948,-6.302839,sports_centre,Frank Kelly Park,frank kelly park,ground,person-unattributed,True
+50835189,52.202355,-7.42457,sports_centre,Kilmacthomas GAA,kilmacthomas,club,,True
+51334107,53.527948,-6.178419,sports_centre,Thomas Ashe Park,thomas ashe park,ground,patriot,True
+51334108,53.527774,-6.178153,pitch,Round Towers TAP 1,round towers tap 1,functional,,True
+51334110,53.527616,-6.177072,pitch,Round Towers Astro,round towers astro,functional,,True
+51516098,53.437125,-6.145186,sports_centre,Naomh Mearnóg GAA Club,naomh mearnog,club,,True
+51677971,52.546108,-6.960363,,GAA/Soccer Pitches,gaa soccer pitches,club,,True
+51732025,52.249908,-7.179058,pitch,Pitch 1,pitch 1,functional,,True
+51732026,52.250613,-7.177954,pitch,Pitch 2,pitch 2,functional,,True
+52019568,51.877159,-8.498868,sports_centre,Saint Finbarr's National Hurling and Football club,saint finbarr s national hurling and football,club,,True
+52876202,53.364707,-6.50261,sports_centre,Leixlip GAA Club,leixlip,club,,True
+53493320,52.836577,-8.855341,sports_centre,Clooney-Quin GAA,clooney quin,club,,True
+56046594,53.19812,-6.5858,sports_centre,Eadestown GAA,eadestown,club,,True
+56304910,52.294502,-7.259314,sports_centre,Cumann Lúthchleas Gael Móin Choinn,cumann luthchleas gael moin choinn,club,,True
+57787743,53.393562,-6.406241,pitch,Juvenile pitch,juvenile pitch,functional,,True
+57805543,53.394629,-6.404962,pitch,Main Pitch,main pitch,functional,,True
+57938886,52.49806,-6.57591,sports_centre,Rapparees Starlights GAA,rapparees starlights,club,,True
+57978618,53.280422,-7.489628,stadium,O'Connor Park,o connor park,ground,person-unattributed,True
+58266252,52.226543,-7.067043,sports_centre,Ballygunner GAA Club,ballygunner,club,,True
+58463378,53.09171,-7.908917,stadium,Saint Brendan's Park,saint brendan s park,ground,saint,True
+58529863,53.280689,-7.493345,sports_centre,Tullamore GAA,tullamore,club,,True
+59519703,54.138075,-6.262002,sports_centre,Burren GAA,burren,club,,True
+60441906,53.30329,-6.485962,sports_centre,Saint Finian's GAA,saint finian s,club,,True
+61094196,53.207174,-6.127819,sports_centre,Bray Emmets GAA Club,bray emmets,club,,True
+62201628,53.692552,-7.614821,,Devine Park (Mostrim GFC / Wolfe Tones HC),devine park mostrim gfc wolfe tones,club,,True
+62244203,54.945436,-7.752672,pitch,Saint Eunan's Gaelic Football Club,saint eunan s gaelic football,club,,True
+63374004,52.853188,-7.586445,sports_centre,Kelly O'Daly Park,kelly o daly park,ground,place-or-other,True
+63544144,52.881728,-7.451379,sports_centre,Ballacolla GAA,ballacolla,club,,True
+64361097,53.057317,-7.407944,sports_centre,Ballyfin GAA,ballyfin,club,,True
+64738776,52.976302,-7.430103,pitch,Trumera GAA,trumera,club,,True
+64877624,53.024574,-7.302428,sports_centre,Laois GAA Centre of Excellence,laois gaa centre of excellence,club,,True
+66156115,54.944794,-7.754766,pitch,Saint Eunan's Gaelic Football Club,saint eunan s gaelic football,club,,False
+66609016,53.396533,-6.358782,sports_centre,Sport Ireland Campus,sport ireland campus,club,,True
+66626569,52.997231,-7.562074,sports_centre,Camross GAA,camross,club,,True
+67263507,52.786183,-6.985707,sports_centre,Ballinabrannagh GAA,ballinabrannagh,club,,True
+67398116,53.411658,-6.185818,sports_centre,Innisfails GAA Club,innisfails,club,,True
+67398139,53.408914,-6.1983,sports_centre,Craobh Chiaráin Hurling and Football Club,craobh chiarain hurling and football,club,,True
+67398755,52.81619,-8.859237,pitch,Quin National School Football Pitch,quin national school football pitch,club,,True
+67407292,52.861648,-8.744595,sports_centre,Tulla G.A.A.,tulla,club,,True
+67425540,52.824291,-7.495088,sports_centre,Cullohill GAA,cullohill,club,,True
+68233620,53.413937,-6.163832,sports_centre,Trinity Gaels GAA Club,trinity gaels,club,,True
+68543261,53.008862,-7.145741,pitch,Bill Delaney Park,bill delaney park,ground,person-unattributed,True
+68640754,51.810965,-8.379252,sports_centre,Carrigaline GAA,carrigaline,club,,True
+68996648,52.931617,-7.577779,park,Kilcotton GAA Grounds,kilcotton gaa grounds,club,,True
+69597433,53.438637,-6.150204,sports_centre,St Sylvester's GAA,st sylvester s,club,,True
+70390602,53.55253,-6.187376,sports_centre,Man O War GAA,man o war,club,,True
+70738463,53.586283,-6.29332,sports_centre,Clann Mhuire CLG,clann mhuire,club,,True
+70935360,53.118977,-7.150883,sports_centre,O'Dempsey's GAA,o dempsey s,club,,True
+71417881,51.807578,-8.280924,sports_centre,Crosshaven GAA,crosshaven,club,,True
+71801722,52.09673,-7.62448,stadium,Fraher Field,fraher field,ground,person-unattributed,True
+72001870,53.379908,-6.236879,sports_centre,Whitehall Colmcille GAA,whitehall colmcille,club,,True
+72928205,52.159059,-7.015765,sports_centre,Gaultier GAA,gaultier,club,,True
+73286851,51.914338,-8.365286,sports_centre,Erin's Own GAA,erin s own,club,,True
+74798728,51.927914,-8.388148,sports_centre,Sarsfield's GAA,sarsfield s,club,,True
+75142934,52.228536,-6.976519,sports_centre,Passage Hurling Club,passage,club,,True
+75861862,53.526475,-6.313896,pitch,Handball Alley,handball alley,functional,,True
+75861908,53.526393,-6.315496,sports_centre,Wild Geese GAA,wild geese,club,,True
+76739314,53.342909,-6.32477,sports_centre,Liffey Gaels GAA Club,liffey gaels,club,,True
+77158862,51.907715,-8.264901,sports_centre,Carrigtwohill GAA,carrigtwohill,club,,True
+80457142,51.891638,-8.436185,stadium,Páirc Uí Rinn,pairc ui rinn,ground,person-unattributed,True
+80728562,51.874234,-8.442337,sports_centre,Douglas GAA,douglas,club,,True
+81492636,53.259768,-6.138912,,Foxrock Cabinteely GAA Club,foxrock cabinteely,club,,True
+81982680,53.144676,-7.511839,sports_centre,Clonaslee St Manman's GAA,clonaslee st manman s,club,,True
+82559658,51.810757,-8.529616,sports_centre,Ballinhassig G.A.A. Club,ballinhassig,club,,True
+82561206,51.823783,-8.457938,sports_centre,Ballygarvan GAA (Liam MacCarthy Park),ballygarvan gaa liam maccarthy park,club,,True
+83939606,53.02619,-7.302448,stadium,O'Moore Park,o moore park,ground,person-unattributed,True
+84272564,52.338257,-6.477423,sports_centre,Clonard GAA Club,clonard,club,,True
+86250710,53.515058,-6.5515,sports_centre,Dunshaughlin GAA,dunshaughlin,club,,True
+87387312,53.266243,-6.865668,sports_centre,Ballyteague GAA,ballyteague,club,,True
+88267917,53.283953,-6.762891,sports_centre,Saint Farnans Park,saint farnans park,ground,saint,True
+88450346,53.277074,-6.820679,pitch,Brockagh Park,brockagh park,ground,person-unattributed,True
+88450353,53.276985,-6.821027,sports_centre,Robertstown GAA,robertstown,club,,True
+88670551,54.265188,-8.500783,pitch,St Mary's GAA,st mary s,club,,True
+88740945,53.649812,-6.693506,stadium,Páirc Tailteann,pairc tailteann,ground,person-unattributed,True
+90185033,52.846879,-6.917007,stadium,Netwatch Cullen Park,netwatch cullen park,ground,person-unattributed,True
+90539913,52.910705,-6.845023,sports_centre,Castledermot GAA,castledermot,club,,True
+91111504,52.546165,-6.960953,pitch,Graiguenamanagh GAA,graiguenamanagh,club,,True
+91788161,54.358775,-6.661698,pitch,Abbey Park,abbey park,ground,person-unattributed,True
+91811083,52.282264,-9.689873,pitch,Na Gaeil,na gaeil,club,,True
+91818311,52.270097,-9.693667,pitch,Austin Stack Park,austin stack park,ground,person-unattributed,True
+92291159,51.854544,-8.490901,sports_centre,Páirc Uí Laoire - Redmonds GAA Club,pairc ui laoire redmonds,ground,place-or-other,True
+93159233,53.331294,-6.760443,sports_centre,Saint Kevin's GFC (GAA),saint kevin s,club,,True
+94450434,52.708096,-6.948874,sports_centre,Bagenalstown Gaels GAA,bagenalstown gaels,club,,True
+96152189,52.23908,-6.930991,sports_centre,St. James GAA Club,st james,club,,True
+96761801,52.634337,-8.689059,sports_centre,Mungret St. Pauls G.A.A. Club,mungret st pauls,club,,True
+100195875,53.025471,-7.264827,sports_centre,Portlaoise GAA Ground,portlaoise gaa ground,club,,True
+102640500,53.255372,-6.737438,sports_centre,Éire Óg Corra Choill,eire og corra choill,club,,True
+103036154,51.772895,-8.491878,pitch,Ballymartle GAA,ballymartle,club,,True
+104005002,51.906723,-8.468809,,Christian Brothers College Sports Complex,christian brothers college sports complex,club,,True
+105320174,53.179804,-6.794725,stadium,St. Conleth's Park,st conleth s park,ground,saint,True
+110376173,53.515588,-6.552436,pitch,GAA All-weather Astro-turf Pitch,gaa all weather astro turf pitch,functional,,True
+112981295,53.280959,-6.222041,sports_centre,Naomh Olaf GAA Club,naomh olaf,club,,True
+113413476,54.184012,-6.35162,pitch,Derrybeg Kickabout,derrybeg kickabout,club,,True
+113523274,54.163192,-6.334212,stadium,Páirc Esler (Down GAA & Newry Shamrocks GAC),pairc esler down gaa newry shamrocks,ground,place-or-other,True
+113628447,54.18114,-6.343081,,Saint John Bosco Sports Hall,saint john bosco sports hall,club,,True
+113631292,54.15295,-6.324749,,Gerry Brown Park,gerry brown park,ground,person-unattributed,True
+113631294,54.16185,-6.334459,pitch,Newry Shamrocks GAC (Training Pitches),newry shamrocks gac training pitches,functional,,True
+113741345,53.132327,-6.06706,sports_centre,Éire Óg Greystones GAA Club,eire og greystones,club,,True
+116707409,52.238528,-7.393522,sports_centre,Newtown & Ballydurn GAA Grounds,newtown ballydurn gaa grounds,club,,True
+116709173,53.2566,-9.132802,pitch,Ball Alley,ball alley,functional,,True
+117569386,53.230892,-6.665757,sports_centre,Naas GAA,naas,club,,True
+118518914,53.064321,-9.522249,pitch,Páirc Peile Inis Oírr,pairc peile inis oirr,ground,place-or-other,True
+118852158,55.033164,-7.310325,pitch,Steelstown GAA,steelstown,club,,True
+119001010,52.941837,-8.041463,pitch,Kilruane MacDonaghs GAA & Camógie Club,kilruane macdonaghs,club,,True
+119611644,53.162611,-6.142636,pitch,Kilmacanoge GAA,kilmacanoge,club,,True
+123068752,51.853803,-8.566536,sports_centre,Ballinora GAA Grounds (Football),ballinora gaa grounds football,club,,True
+123070168,51.864126,-8.554301,sports_centre,Ballinore GAA Grounds (Hurling),ballinore gaa grounds,club,,True
+123523949,54.983328,-7.311841,sports_centre,Doire Trasna CLG,doire trasna,club,,True
+125624857,52.359657,-7.331815,sports_centre,Piltown GAA Complex,piltown gaa complex,club,,True
+126563223,53.992353,-9.115729,pitch,Moy Davitts GAA,moy davitts,club,,True
+126629374,52.583745,-7.241044,sports_centre,Danesfort GAA,danesfort,club,,True
+127202620,52.175595,-7.250223,pitch,Páirc Uí Bhriain,pairc ui bhriain,ground,person-unattributed,True
+129462852,51.892146,-8.589119,sports_centre,Ballincollig GAA,ballincollig,club,,True
+129784318,52.414267,-7.368213,pitch,Tullahought Sportsfield,tullahought sportsfield,ground,person-unattributed,True
+131056992,53.263415,-9.084548,stadium,Pearse Stadium,pearse stadium,ground,patriot,True
+132127675,53.374408,-6.26407,sports_centre,Na Fianna GAA,na fianna,club,,True
+132134422,53.374376,-6.263036,,Na Fianna CLG,na fianna,club,,False
+132667760,54.16568,-9.07837,sports_centre,Páirc Naomh Bhreandáin,pairc naomh bhreandain,ground,saint,True
+134149379,53.675321,-8.010184,pitch,St. Faithleach's,st faithleach s,club,,True
+134149380,53.672633,-8.010785,pitch,St. Faithleach's,st faithleach s,club,,False
+134149381,53.673706,-8.009827,pitch,St. Faithleach's,st faithleach s,club,,False
+135207099,52.790119,-6.176452,sports_centre,Arklow Rock Parnells,arklow rock parnells,club,,True
+135216799,52.800771,-6.169093,sports_centre,Arklow Geraldines GAA,arklow geraldines,club,,True
+136085631,52.799132,-6.457839,sports_centre,Tinahely GAA,tinahely,club,,True
+136216777,52.510375,-6.92358,sports_centre,St.Mullins GAA,stmullins,club,,True
+136414236,52.251295,-7.176913,pitch,Pitch 3,pitch 3,functional,,True
+136426051,52.081654,-8.630591,sports_centre,Clyda Rovers Dressing Rooms,clyda rovers dressing rooms,functional,,True
+136426060,52.082045,-8.629251,pitch,New Pitch,new pitch,club,,True
+136426061,52.083016,-8.630953,pitch,Old Pitch,old pitch,club,,True
+137339093,52.266379,-7.096811,sports_centre,Ferrybank G.A.A. Club,ferrybank,club,,True
+138776922,53.739326,-7.804909,pitch,Pearse Park,pearse park,ground,patriot,True
+139609784,52.252458,-9.598294,sports_centre,Ballymacelligot GAA,ballymacelligot,club,,True
+142903238,53.566174,-6.377373,,John McDonnell Memorial Park,john mcdonnell memorial park,ground,memorial,True
+144338529,52.99326,-6.968983,sports_centre,Athy GAA,athy,club,,True
+144410061,52.973345,-6.02645,sports_centre,St Patricks GAA,st patricks,club,,True
+144584690,52.989194,-6.081442,sports_centre,Rathnew GAA,rathnew,club,,True
+144996243,54.690706,-6.659919,pitch,McCracken Park,mccracken park,ground,patriot,True
+145035865,54.807197,-6.514898,pitch,Pairc Sean de Bruin,pairc sean de bruin,ground,person-unattributed,True
+145108605,52.923348,-6.241592,sports_centre,Avondale GAA,avondale,club,,True
+145313675,54.916461,-6.663784,pitch,Michael Davitt Swatragh GAC Park,michael davitt swatragh gac park,club,,True
+145774856,52.153136,-10.047465,pitch,Paddy Kennedy Memorial Park (Annascaul GAA),paddy kennedy memorial park annascaul,ground,memorial,True
+146202463,52.29016,-6.491201,sports_centre,Saint Martin's GAA Club,saint martin s,club,,True
+146276918,52.697887,-6.289534,pitch,Clonee GAA Pitch,clonee gaa pitch,club,,True
+146980119,53.377081,-6.352014,sports_centre,Russell Park,russell park,ground,person-unattributed,True
+147443214,52.871323,-6.41033,sports_centre,Ballymanus GAA,ballymanus,club,,True
+148323742,51.96314,-7.86547,pitch,Youghal GAA pitch,youghal gaa pitch,club,,True
+148543725,54.573583,-5.983539,stadium,Casement Park,casement park,ground,patriot,True
+148708733,53.165941,-7.217054,stadium,Gracefield GAA,gracefield,club,,True
+149582864,52.343999,-7.427978,sports_centre,St. Mollerans GAA Club,st mollerans,club,,True
+149629534,52.348494,-7.419397,sports_centre,Carrick Davins GAA Club,carrick davins,club,,True
+149727672,53.510172,-7.135384,sports_centre,Killucan GAA Grounds,killucan gaa grounds,club,,True
+149828301,53.930423,-7.413765,pitch,Ballinagh GAA Grounds,ballinagh gaa grounds,club,,True
+149834199,53.949751,-7.49323,pitch,Páirc Naomh Fionnán,pairc naomh fionnan,ground,saint,True
+149975239,53.920814,-7.426341,pitch,Joe Crowe Park,joe crowe park,ground,person-unattributed,True
+150084650,55.29782,-7.262096,pitch,Malin Gaelic Football Pitch,malin gaelic football pitch,club,,True
+150092012,53.921625,-7.578285,pitch,Michael Cully Park,michael cully park,ground,person-unattributed,True
+150279435,52.645758,-7.145613,sports_centre,"Clara GAA Club, Kilkenny",clara gaa club kilkenny,club,,True
+150718595,53.672225,-6.681295,sports_centre,Simonstown GAA Club,simonstown,club,,True
+151942767,52.280948,-7.445203,sports_centre,Clonea G.A.A.,clonea,club,,True
+152194768,52.942803,-7.294445,sports_centre,Ballyroan GAA,ballyroan,club,,True
+152547088,53.998025,-7.353417,pitch,Saint Felim's Park,saint felim s park,ground,saint,True
+152547090,53.99839,-7.352313,sports_centre,Drumalee GFC,drumalee,club,,True
+152640341,52.993532,-7.296702,sports_centre,Clonad GAA,clonad,club,,True
+153101670,52.682323,-7.825914,stadium,FBD Semple Stadium,fbd semple stadium,ground,person-unattributed,True
+153103110,51.909466,-7.900345,pitch,St. Ita's GAA Club,st ita s,club,,True
+153170866,51.958522,-7.728353,sports_centre,St. Declan's GAA Ground,st declan s gaa ground,club,,True
+153999169,52.656415,-7.239709,pitch,Nowlan Park,nowlan park,ground,person-unattributed,True
+153999465,52.656522,-7.239953,stadium,UPMC Nowlan Park,upmc nowlan park,ground,person-unattributed,True
+154693640,52.648065,-7.256564,pitch,Father Tommy Maher Field,father tommy maher field,ground,clergy,True
+154843889,52.656948,-7.272949,sports_centre,Dicksboro GAA Club,dicksboro,club,,True
+157028908,51.881548,-9.570024,sports_centre,Kenmare Shamrocks GAA (Father Breen Park),kenmare shamrocks gaa father breen park,ground,clergy,True
+157699460,52.618396,-7.422105,,St. Brigid's Camogie Club,st brigid s,club,,True
+157708521,52.619017,-7.42085,sports_centre,Graigue Ballycallan GAA Club,graigue ballycallan,club,,True
+157858240,52.660662,-7.443954,sports_centre,Tullaroan GAA Club,tullaroan,club,,True
+157914146,52.269736,-9.693156,stadium,Austin Stack Park,austin stack park,ground,person-unattributed,False
+158449393,53.861796,-7.316429,sports_centre,Crosserlough GFC,crosserlough,club,,True
+158449395,53.861498,-7.315778,pitch,Doctor Plunkett Memorial Park,doctor plunkett memorial park,ground,patriot,True
+158889349,52.489656,-7.063783,sports_centre,Rower Inistioge GAA Club,rower inistioge,club,,True
+159852020,52.503649,-6.576729,pitch,Rapparees-Starlights GAA Club,rapparees starlights,club,,False
+159879657,52.499959,-6.575205,sports_centre,GAA Grounds,gaa grounds,club,,True
+160039303,52.505424,-6.555911,pitch,Shamrocks GAA Pitches,shamrocks gaa pitches,club,,True
+160977311,53.282861,-9.016796,,Saint James GAA Club,saint james,club,,True
+161923267,53.822615,-7.529019,sports_centre,Mullinalaghta St. Columba's GFC (The Laurels),mullinalaghta st columba s gfc the laurels,club,,True
+161931433,53.772687,-7.488185,sports_centre,Granard St. Mary's GFC,granard st mary s,club,,True
+163961680,53.861092,-7.209383,pitch,Fay Park,fay park,ground,person-unattributed,True
+164060216,52.144211,-7.851265,sports_centre,Cappoquin Affane GAA Club,cappoquin affane,club,,True
+164247762,53.86616,-7.550812,sports_centre,Gowna GFC,gowna,club,,True
+164247765,53.866753,-7.551377,pitch,Clubspot Park,clubspot park,ground,person-unattributed,True
+164352709,53.271201,-7.489616,pitch,School Field,school field,ground,person-unattributed,True
+164358008,53.239223,-7.328421,pitch,Geashill Gaa Pitch,geashill gaa pitch,club,,True
+164389292,52.102881,-7.600075,sports_centre,Abbeyside - Ballinacourty GAA Club,abbeyside ballinacourty,club,,True
+164415516,51.802688,-8.583408,pitch,Walsh Park,walsh park,ground,person-unattributed,True
+164680743,53.374898,-6.172919,pitch,Raheny GAA 9,raheny gaa 9,club,,True
+164680745,53.372894,-6.183027,pitch,GAA 7,gaa 7,club,,True
+164680747,53.373489,-6.186491,pitch,GAA 6,gaa 6,club,,True
+164680749,53.374442,-6.186299,pitch,GAA 3,gaa 3,club,,True
+165129925,52.614399,-6.425897,pitch,Saint Patrick's G.A.A. Club,saint patrick s,club,,True
+165242468,52.593704,-6.512611,sports_centre,Ferns Saint Aidan's G.A.A. Club,ferns saint aidan s,club,,True
+165329515,53.275723,-9.078869,,Saint Michael's GAA Clubhouse,saint michael s gaa clubhouse,functional,,True
+165503300,52.177958,-7.336604,sports_centre,Kill GAA Club,kill,club,,True
+165511846,52.16587,-7.516881,sports_centre,Kilrossanty GAA Club,kilrossanty,club,,True
+166024806,53.281657,-7.606086,sports_centre,Rahan GAA,rahan,club,,True
+167689080,53.133673,-7.803784,sports_centre,Rath GAA,rath,club,,True
+168738164,54.711394,-8.733271,pitch,Naomh Columba Training Pitch,naomh columba training pitch,functional,,True
+170571317,54.365014,-5.848739,pitch,St Colman's GAA,st colman s,club,,True
+171402447,53.15736,-8.803301,pitch,Ardrahan GAA,ardrahan,club,,True
+171920256,54.801412,-7.777988,pitch,Training pitch,training pitch,functional,,True
+171926889,53.231039,-8.875495,pitch,Páirc Droichead An Chlairin,pairc droichead an chlairin,ground,person-unattributed,True
+172232825,53.771509,-7.537027,sports_centre,Ballymore GFC,ballymore,club,,True
+172597636,53.292472,-7.563817,sports_centre,Ballinamere GAA,ballinamere,club,,True
+172597751,53.315569,-7.51093,sports_centre,Durrow GAA,durrow,club,,True
+172999328,53.824335,-7.614252,sports_centre,Colmcille GFC (McGee Park),colmcille gfc mcgee park,club,,True
+173196847,53.302003,-7.291675,sports_centre,Daingean GAA,daingean,club,,True
+173540261,53.762375,-7.734258,sports_centre,Killoe Emmet Óg GFC (Páirc Emmet),killoe emmet og gfc pairc emmet,ground,patriot,True
+173870071,53.837361,-7.739205,sports_centre,Fr Manning Gaels GFC,fr manning gaels,club,,True
+174378523,53.984993,-6.387412,pitch,Pitch 2,pitch 2,functional,,True
+174381146,53.985019,-6.385442,pitch,Pitch 3,pitch 3,functional,,True
+175616333,53.769964,-7.157761,pitch,Oldcastle United FC,oldcastle united,club,,True
+176411699,53.693678,-7.818782,,Grattan Óg GFC,grattan og,club,,True
+177035672,54.707286,-7.59996,pitch,Caisleán na Deirge Naomh Eoghan CLG (Castlederg Gaelic Football Club),caislean na deirge naomh eoghan clg castlederg gaelic football,club,,True
+177232871,54.215835,-7.389159,pitch,St Patricks GAA,st patricks,club,,True
+177239378,54.095395,-8.519588,pitch,Ballymote CLG,ballymote,club,,True
+177267443,53.256958,-9.603001,pitch,Páirc an Chathanaigh,pairc an chathanaigh,ground,person-unattributed,True
+177287573,53.423706,-8.589367,sports_centre,Menlough GAA,menlough,club,,True
+177287598,53.423556,-8.589829,pitch,Menlough GAA Pitch,menlough gaa pitch,club,,True
+177437671,51.850836,-9.231028,pitch,CLG Béal Átha'n Ghraorthaidh,clg beal atha n ghraorthaidh,club,,True
+177585445,53.43672,-8.436768,sports_centre,Caltra GAA,caltra,club,,True
+177841564,53.716081,-7.800892,sports_centre,Longford Slashers GAA (Michael Fay Park),longford slashers gaa michael fay park,club,,True
+178004424,53.295744,-8.750018,sports_centre,St Mary's Athenry - Kenny Park,st mary s athenry kenny park,ground,saint,True
+178413701,53.669678,-7.706294,sports_centre,Ardagh St. Patrick's GFC (Keenan Park),ardagh st patrick s gfc keenan park,ground,saint,True
+178560831,53.247906,-9.368079,pitch,Páirc na mBreathnaigh,pairc na mbreathnaigh,ground,person-unattributed,True
+178560977,53.271146,-9.531469,pitch,Páirc Ros a' Mhíl,pairc ros a mhil,ground,person-unattributed,True
+178703673,53.60229,-7.283329,pitch,Crookedwood Hurling Club,crookedwood,club,,True
+179061799,53.186316,-6.1262,pitch,Saint Fergals GAA Club,saint fergals,club,,True
+179859092,52.244235,-8.428194,sports_centre,Kildorrery GAA,kildorrery,club,,True
+180160683,54.044235,-8.446936,sports_centre,Eastern Harps,eastern harps,club,,True
+180184106,53.774632,-8.853583,sports_centre,Connacht GAA Centre Of Excellence,connacht gaa centre of excellence,club,,True
+181726239,54.633998,-8.348589,pitch,Naomh Ultan GAA Pitch,naomh ultan gaa pitch,club,,True
+181814473,52.310278,-7.481525,sports_centre,Rathgormack GAA Club,rathgormack,club,,True
+182212042,53.306341,-8.906026,,Handball Alley,handball alley,functional,,True
+182234970,55.194233,-7.023082,,CLG Bun an Phobail,clg bun an phobail,club,,True
+182241844,55.193999,-7.022945,pitch,The Carrick Field,the carrick field,ground,person-unattributed,True
+182395433,53.389689,-6.151814,sports_centre,Naomh Barróg GAA,naomh barrog,club,,False
+182616926,54.010202,-7.527688,pitch,Pairc Padraig Ui Daobhlaion,pairc padraig ui daobhlaion,ground,place-or-other,True
+182676964,52.145738,-8.614941,sports_centre,Mallow GAA Club,mallow,club,,True
+182944834,53.981823,-7.360472,stadium,Breffni Park,breffni park,ground,person-unattributed,True
+182945763,53.987755,-7.363518,pitch,Terry Coyle Park,terry coyle park,ground,person-unattributed,True
+182947674,53.979284,-7.363578,pitch,3G Pitch,3g pitch,functional,,True
+182947675,53.980602,-7.362579,pitch,Cavan GAA training pitch,cavan gaa training pitch,functional,,True
+183071014,54.01067,-7.526875,sports_centre,Killeshandra Leaguers GAA,killeshandra leaguers,club,,True
+183094638,53.623657,-7.818561,,Kenagh GFC (McGann Park),kenagh gfc mcgann park,club,,True
+183233874,54.238782,-9.056403,sports_centre,Enniscrone Kilglass GAA,enniscrone kilglass,club,,True
+183236679,52.443309,-6.353623,,Saint Brigid's GAA,saint brigid s,club,,True
+183656966,53.690772,-7.884744,sports_centre,Killashee St. Brigid's GFC,killashee st brigid s,club,,True
+183844289,53.324999,-8.2337,sports_centre,Ballinasloe GAA,ballinasloe,club,,True
+183855204,54.07287,-7.079448,pitch,Hugh O'Reilly GAA Memorial Park,hugh o reilly gaa memorial park,ground,memorial,True
+183917323,54.281825,-7.060796,pitch,Pairc Mhuire,pairc mhuire,ground,saint,True
+183931544,52.084812,-7.63885,sports_centre,Dungarvan GAA Club,dungarvan,club,,True
+184084486,52.271848,-8.097996,sports_centre,Ballyporeen/Skeheenarinky GAA,ballyporeen skeheenarinky,club,,True
+184165985,52.278949,-8.00427,sports_centre,Fr. Sheehys GAA,fr sheehys,club,,True
+184165987,52.184083,-7.992069,sports_centre,Ballysaggart GAA,ballysaggart,club,,True
+184165988,52.274262,-8.2003,pitch,Ballygiblin GAA,ballygiblin,club,,True
+184229293,53.675846,-7.9733,sports_centre,Rathcline GFC,rathcline,club,,True
+184452846,51.981591,-8.101513,pitch,Dungourney GAA,dungourney,club,,True
+184546779,51.585111,-9.025127,pitch,Ardagh Pitch,ardagh pitch,club,,True
+184751731,51.764734,-8.662728,pitch,The Bleach,the bleach,club,,True
+184915166,54.634993,-8.481513,pitch,Na Cealla Beaga GAA Pitch,na cealla beaga gaa pitch,club,,True
+185492325,53.27801,-9.659703,pitch,Páirc a' Mháimín,pairc a mhaimin,ground,person-unattributed,True
+186165577,51.739477,-8.742489,sports_centre,Bandon GAA,bandon,club,,True
+188185745,51.621288,-8.926334,sports_centre,Clonakilty GAA Club,clonakilty,club,,True
+188233050,53.302136,-8.622653,sports_centre,Killimordaly GAA Club,killimordaly,club,,True
+188233053,53.377568,-8.700364,sports_centre,Monivea-Abbey GAA Club,monivea abbey,club,,True
+188281918,53.853003,-9.283258,pitch,Páirc Gerry McDonald,pairc gerry mcdonald,ground,person-unattributed,True
+188841376,53.569436,-7.761261,sports_centre,Leo Casey Park (Ballymahon GFC),leo casey park ballymahon,club,,True
+189149517,52.643147,-6.555699,pitch,Kilrush Askamore GAA Grounds,kilrush askamore gaa grounds,club,,True
+189347900,53.722402,-8.994677,pitch,Claremorris GAA,claremorris,club,,True
+189348987,53.672852,-8.958233,pitch,Davitts GFC,davitts,club,,True
+189354525,53.724164,-8.876619,pitch,Eastern Gaels,eastern gaels,club,,True
+189358477,53.646802,-9.021429,pitch,Garrymore GFC,garrymore,club,,True
+189363474,54.261899,-9.22442,pitch,Lacken GFC,lacken,club,,True
+189377213,53.436727,-8.860742,pitch,Corofin GAA,corofin,club,,True
+189380029,53.564858,-8.800166,pitch,Cortoon Shamrocks GAA,cortoon shamrocks,club,,True
+189966862,52.46297,-7.396487,sports_centre,Windgap GAA Club,windgap,club,,True
+191564159,51.856439,-8.285618,pitch,Cobh GAA,cobh,club,,True
+194149760,53.481554,-8.569904,,Moylough Handball,moylough,functional,,True
+194343304,52.829824,-6.917293,,Éire Óg CLG,eire og,club,,True
+194343433,52.829292,-6.911521,pitch,Éire Óg Ashgrove,eire og ashgrove,club,,True
+194486283,54.289971,-8.97888,pitch,Easkey GAA - Easkey Sea Blues,easkey gaa easkey sea blues,club,,True
+194572562,54.101159,-8.241896,pitch,Tennis,tennis,club,,True
+194572566,54.101609,-8.24145,pitch,Geevagh Community Sports Ground,geevagh community sports ground,club,,True
+194820107,54.35108,-7.635159,pitch,Brewster Park,brewster park,ground,person-unattributed,True
+194839487,53.203366,-8.552116,pitch,St. Brendan's Park,st brendan s park,ground,saint,True
+195634153,53.845599,-9.234122,pitch,Breaffy GAA,breaffy,club,,True
+196693935,53.630485,-8.195806,,Saint Comans Handball Club,saint comans,functional,,True
+196694138,53.621627,-8.197574,pitch,Galway Road Pitch,galway road pitch,club,,True
+196858511,52.749498,-7.954083,pitch,Bishop Quinlan Park,bishop quinlan park,ground,person-unattributed,True
+197101160,54.059735,-7.79408,sports_centre,Sean O'Heslins G.A.A Club,sean o heslins,club,,True
+200148960,54.801405,-7.573209,pitch,Robert Emmets GFC,robert emmets,club,,True
+200421251,53.585626,-9.128709,pitch,Kilmaine Community Pitch,kilmaine community pitch,club,,True
+201186341,51.862255,-8.123139,pitch,Cloyne GAA small training pitch,cloyne gaa small training pitch,functional,,True
+201186342,51.86155,-8.122487,pitch,Cloyne GAA second pitch,cloyne gaa second pitch,club,,True
+202347907,52.46741,-6.730999,pitch,Cloughbawn GAA,cloughbawn,club,,True
+202623970,53.602996,-7.106002,pitch,Delvin GAA,delvin,club,,True
+203358271,52.349481,-7.696742,sports_centre,"Hillview Tennis, Badminton, Pitch & Putt",hillview tennis badminton pitch putt,club,,True
+203944406,52.720423,-7.29357,sports_centre,Conahy Shamrocks GAA Club,conahy shamrocks,club,,True
+204410886,54.176969,-8.490001,pitch,Owenmore Gaels,owenmore gaels,club,,True
+204410887,54.17765,-8.490145,pitch,Owenmore Gaels,owenmore gaels,club,,False
+205114548,51.555377,-9.146295,pitch,Black Field,black field,ground,person-unattributed,True
+205388256,54.192762,-7.701988,pitch,Saint Mary's,saint mary s,club,,True
+205459005,54.100096,-7.439733,sports_centre,Belturbet Rory O'Moores GFC,belturbet rory o moores,club,,True
+205489663,54.047989,-7.374963,pitch,Páirc Emmet,pairc emmet,ground,patriot,True
+205507471,54.117904,-7.747989,pitch,Saint Patrick's Park,saint patrick s park,ground,saint,True
+206358710,54.119754,-7.58496,pitch,Pairc na gCead Ultach,pairc na gcead ultach,ground,person-unattributed,True
+206358716,54.204358,-7.575997,pitch,Derrylin GAA,derrylin,club,,True
+206634750,53.01517,-8.910078,pitch,Tubber GAA,tubber,club,,True
+207462255,53.537572,-9.273559,pitch,The Neale GAA,the neale,club,,True
+207559648,52.570935,-9.373392,pitch,Tarbert GAA,tarbert,club,,True
+208188749,52.842013,-8.905033,pitch,Astroturf,astroturf,functional,,True
+208189843,52.841914,-8.907999,sports_centre,Gorteen GAA,gorteen,club,,True
+208559866,55.182515,-7.988484,pitch,The Bridge,the bridge,club,,True
+210016825,52.273827,-9.716556,pitch,Caherslee GAA Club,caherslee,club,,True
+210016834,52.27653,-9.712594,sports_centre,Austin Stacks GAA Club,austin stacks,club,,True
+211017965,52.446906,-9.477697,sports_centre,Listowel Emmets GAA (Frank Sheehy Park),listowel emmets gaa frank sheehy park,club,,True
+212363981,52.832026,-8.991085,sports_centre,Éire Óg Inís GAA Academy,eire og inis gaa academy,club,,True
+215369885,52.563979,-9.280831,pitch,Glin GAA,glin,club,,True
+216956729,52.114486,-9.125711,pitch,Cullen Football Pitch,cullen football pitch,club,,True
+217437887,52.840274,-9.021174,sports_centre,Banner GAA,banner,club,,True
+217543266,51.93913,-9.149385,pitch,Old Naomh Ában Pitch,old naomh aban pitch,club,,True
+217672072,52.180176,-9.507974,pitch,Currow GAA,currow,club,,True
+217748538,52.067248,-9.504094,pitch,Dr. Croke's GAA,dr croke s,club,,True
+217748553,52.07271,-9.508841,pitch,Derreen Park,derreen park,ground,person-unattributed,True
+218448702,54.122425,-7.674113,pitch,Saint Aidan's Park,saint aidan s park,ground,saint,True
+218494188,54.069437,-7.47831,pitch,O'Connell Park,o connell park,ground,person-unattributed,True
+219292366,52.709701,-6.2052,pitch,Páirc Perry,pairc perry,ground,person-unattributed,True
+219574656,52.938996,-7.039204,pitch,Ballylynan GAA,ballylynan,club,,True
+219788338,53.27392,-7.449879,pitch,Cappincur GAA,cappincur,club,,True
+220283455,52.813886,-9.095459,sports_centre,Kilmaley GAA,kilmaley,club,,True
+220533063,53.483018,-7.863206,pitch,Tubberclare Football pitch,tubberclare football pitch,club,,True
+220882861,52.869817,-9.061401,pitch,Inagh-Kilnamona GAA Club,inagh kilnamona,club,,True
+220889698,52.878044,-9.180611,sports_centre,Inagh-Kilnamona GAA Club,inagh kilnamona,club,,True
+221380560,53.509641,-6.411775,sports_centre,Donaghmore-Ashbourne GAA,donaghmore ashbourne,club,,True
+221830908,52.38573,-6.426818,,Shelmaliers GAA Clubhouse,shelmaliers gaa clubhouse,functional,,True
+221830949,52.385947,-6.427112,sports_centre,Hollymount,hollymount,club,,True
+223275977,53.933367,-9.916942,pitch,Davitt Park,davitt park,ground,patriot,True
+223399675,53.884918,-7.048919,pitch,Jim Smith Memorial Park,jim smith memorial park,ground,memorial,True
+223670783,54.402518,-7.537145,pitch,Coa GAA,coa,club,,True
+224356335,54.410424,-8.091388,pitch,Devenish GAA,devenish,club,,True
+225111322,52.563244,-9.166789,,Gerald Griffins GAA,gerald griffins,club,,True
+225111738,52.499057,-9.377535,sports_centre,Moyvane GAA,moyvane,club,,True
+225114856,51.94039,-8.00248,sports_centre,Killeagh GAA,killeagh,club,,True
+225312250,54.345889,-7.552964,pitch,Lisbellaw Saint Patricks GAA,lisbellaw saint patricks,club,,True
+225394986,52.234589,-7.299169,sports_centre,Ballyduff Lower GAA,ballyduff lower,club,,True
+225541978,53.793688,-7.066027,pitch,Saint Bartholomew's Park,saint bartholomew s park,ground,saint,True
+226388575,54.352366,-7.620739,pitch,Training Pitch,training pitch,functional,,True
+226644108,54.249603,-7.452296,pitch,Lisnaskea GAA,lisnaskea,club,,True
+227184688,52.744834,-8.777737,,Sixmilebridge GAA,sixmilebridge,club,,True
+227234086,54.240727,-7.17013,pitch,Roslea GAA,roslea,club,,True
+228300768,51.945419,-10.234488,pitch,St. Mary's GAA,st mary s,club,,True
+229000208,52.267064,-9.715495,sports_centre,Kerins O'Rahillys GAA Club,kerins o rahillys,club,,True
+229884303,53.617177,-6.196034,sports_centre,O'Dwyers GAA Club,o dwyers,club,,True
+229884304,53.616991,-6.194633,sports_centre,O'Dwyers GAA Club,o dwyers,club,,False
+230473051,51.566118,-9.456737,sports_centre,Gabriel Rangers GAA - Schull & Ballydehob,gabriel rangers gaa schull ballydehob,club,,True
+231256264,54.119639,-7.013892,pitch,Pairc Naomh Mhuire,pairc naomh mhuire,ground,saint,True
+231638860,51.710634,-8.532874,sports_centre,Kinsale G.A.A. Club,kinsale,club,,True
+232526599,54.281904,-7.060992,sports_centre,Scotstown GAA,scotstown,club,,True
+232754638,54.170763,-7.046916,sports_centre,Aghabog Emmetts GAA,aghabog emmetts,club,,True
+232875746,54.157348,-6.804132,sports_centre,Monaghan GAA Centre of Excellence,monaghan gaa centre of excellence,club,,True
+233033866,52.322038,-6.644448,sports_centre,Taghmon Camross GAA,taghmon camross,club,,True
+233545024,54.187632,-7.364712,pitch,Newtownbutler GAA,newtownbutler,club,,True
+234193661,52.060478,-9.067257,pitch,Millstreet Astro Turf,millstreet astro turf,functional,,True
+235852405,53.331041,-6.527722,sports_centre,Celbridge GAA,celbridge,club,,True
+236685381,52.839798,-8.672049,sports_centre,O'Callaghans Mills GAA,o callaghans mills,club,,True
+237051733,53.012198,-6.109643,sports_centre,Ashford GAA Club,ashford,club,,True
+237148419,53.853697,-9.286459,stadium,MacHale Park,machale park,ground,person-unattributed,True
+237270882,53.247826,-9.278362,pitch,CLG An Spidéal,clg an spideal,club,,True
+237375658,52.363138,-6.844501,sports_centre,Rathgarogue GAA,rathgarogue,club,,True
+237530818,53.004714,-6.301003,sports_centre,Laragh GFC,laragh,club,,True
+238747871,53.325196,-6.271146,pitch,Portobello GAA,portobello,club,,True
+239004461,52.852281,-6.335112,sports_centre,O'Byrne Park,o byrne park,ground,person-unattributed,True
+239264662,53.172822,-8.018885,sports_centre,Lusmagh GAA,lusmagh,club,,True
+239573205,52.184005,-6.837528,sports_centre,St Mogues GAA,st mogues,club,,True
+239844939,52.77813,-6.622938,sports_centre,Coolkenno GAA,coolkenno,club,,True
+239848475,52.854232,-6.570147,sports_centre,Clonmore GFC,clonmore,club,,True
+239865032,54.072311,-7.079638,sports_centre,Cootehill Celtic GAA,cootehill celtic,club,,True
+240440967,54.06181,-6.815286,pitch,Sarsfield Park,sarsfield park,ground,patriot,True
+241512968,52.997924,-6.669521,sports_centre,Stratford Grangecon GAA,stratford grangecon,club,,True
+241874178,53.176403,-7.732326,sports_centre,Kilcormac-Killoughy GAA,kilcormac killoughy,club,,True
+242062275,53.251722,-7.541518,sports_centre,Mucklagh Shamrocks GAA,mucklagh shamrocks,club,,True
+242348926,52.238012,-9.463293,pitch,Castleisland Desmonds GAA Club,castleisland desmonds,club,,True
+242420732,53.215057,-7.447484,sports_centre,Killeigh GAA,killeigh,club,,True
+242597701,52.803007,-8.75495,sports_centre,Hamilton Park,hamilton park,ground,person-unattributed,True
+243503269,53.921141,-7.426822,sports_centre,Lacken Celtic GFC,lacken celtic,club,,True
+243700364,53.835399,-7.439528,sports_centre,Mullahoran Dreadnoughts GAA,mullahoran dreadnoughts,club,,True
+243700366,53.835159,-7.43909,pitch,Our Lady of Lourdes Park,our lady of lourdes park,ground,place-or-other,True
+244499991,53.83496,-7.354244,sports_centre,Ballymachugh GAA,ballymachugh,club,,True
+244500009,53.834994,-7.354309,pitch,Sheelin Park,sheelin park,ground,person-unattributed,True
+244761816,52.305158,-6.763839,sports_centre,Clongeen GAA Club,clongeen,club,,True
+244954754,54.068766,-7.226275,pitch,Drung GAA Grounds,drung gaa grounds,club,,True
+244962133,54.046341,-7.314364,sports_centre,Ballyhaise GFC,ballyhaise,club,,True
+244962137,54.046211,-7.314435,pitch,Annalee Park,annalee park,ground,person-unattributed,True
+246372475,52.784817,-7.213195,,Canon Kearns Park,canon kearns park,ground,clergy,True
+246880940,54.66233,-5.968716,sports_centre,St. Endas G.A.C,st endas,club,,True
+247632646,52.683636,-6.675549,sports_centre,Kildavin-Clonegal GAA,kildavin clonegal,club,,True
+251867486,54.381644,-7.460802,pitch,Tempo GAA,tempo,club,,True
+252140292,54.642767,-6.750437,pitch,Fr Rocks GAC,fr rocks,club,,True
+252337196,53.141298,-8.706379,pitch,St Thomas' GAA Pitch,st thomas gaa pitch,club,,True
+253202679,53.985871,-7.354953,pitch,Cavan Astro Park,cavan astro park,functional,,True
+254010244,54.475155,-7.629861,pitch,Irvinestown GAA,irvinestown,club,,True
+254445863,53.930419,-7.414176,sports_centre,Ballinagh GAA,ballinagh,club,,True
+255521183,54.718475,-7.228987,pitch,St. Patrick's GAA #1,st patrick s gaa #1,club,,True
+255521184,54.719731,-7.232705,pitch,St. Patricks GAA #2,st patricks gaa #2,club,,True
+255618267,52.642859,-7.24465,sports_centre,James Stephen's Park,james stephen s park,ground,place-or-other,True
+256098297,52.256811,-6.733089,pitch,Grantstown G.A.A. Park,grantstown gaa park,club,,True
+257020726,55.164616,-6.695985,pitch,Eoghan Rua Pitch,eoghan rua pitch,club,,True
+257317333,53.376981,-6.350522,pitch,St Brigid's GAA Club,st brigid s,club,,True
+258513478,53.510414,-7.402193,sports_centre,Shandonagh GAA,shandonagh,club,,True
+260465147,53.745727,-7.17391,pitch,Millbrook Football Field,millbrook football field,ground,person-unattributed,True
+260784102,54.485212,-8.088729,pitch,Erne Gaels GAA,erne gaels,club,,True
+260977231,54.36411,-6.964707,pitch,Saint Mellan's,saint mellan s,club,,True
+261739829,54.509596,-6.788877,pitch,Cian's Field,cian s field,ground,person-unattributed,True
+261739830,54.508552,-6.787176,pitch,O'Neill Park,o neill park,ground,person-unattributed,True
+261859309,52.669411,-8.595362,pitch,St. Patrick's GAA,st patrick s,club,,True
+262114489,54.531366,-7.655342,pitch,Ederney St Joseph's,ederney st joseph s,club,,True
+262317809,53.615429,-8.742446,sports_centre,Dunmore McHales GAA,dunmore mchales,club,,True
+262940513,52.918169,-7.341912,pitch,Scoil Mhuire Pitches,scoil mhuire pitches,club,,True
+263257424,52.848425,-6.914669,sports_centre,Carlow Town Hurling Club,carlow town,club,,True
+263280958,53.461319,-7.10462,sports_centre,Coralstown / Kinnegad GAA Club,coralstown kinnegad,club,,True
+263417976,53.486018,-6.130961,sports_centre,Robbie Farrell Park,robbie farrell park,ground,person-unattributed,True
+263417977,53.484959,-6.130007,pitch,Saint Patrick's GAA Club,saint patrick s,club,,True
+263647342,53.618103,-6.867915,pitch,Clann na nGael CLG,clann na ngael,club,,True
+263675571,53.52297,-6.661572,pitch,Kiltale GAA Main Field,kiltale gaa main field,club,,True
+263675578,53.522404,-6.660284,pitch,Kiltale GAA Secondary Field,kiltale gaa secondary field,club,,True
+263781792,53.021397,-6.619344,pitch,Donard Glen GAA,donard glen,club,,True
+263781793,53.022136,-6.617581,,Donard Glen GAA,donard glen,club,,False
+263781794,53.021258,-6.613061,,Donard Handball Alley,donard handball alley,functional,,True
+263990465,53.188072,-6.810849,sports_centre,Sarsfields GAA,sarsfields,club,,True
+264163379,53.97713,-6.716343,fitness_centre,Phoenix Centre,phoenix centre,club,,True
+264215099,54.690976,-6.757081,pitch,Lissan GAC,lissan,club,,True
+264274779,53.96713,-6.477992,pitch,Saint Brides GFC,saint brides,club,,True
+264288606,53.365567,-6.289906,,Naomh Fionnbarra GAA Club,naomh fionnbarra,club,,True
+264302023,53.575026,-8.095041,pitch,Handball Alley,handball alley,functional,,True
+264340834,53.926087,-6.969637,pitch,Saint Anne's Park,saint anne s park,ground,saint,True
+264441906,53.572412,-8.076475,pitch,St. Dominics GAA Club,st dominics,club,,True
+264454923,53.719969,-6.880371,pitch,Páirc Colmcille,pairc colmcille,ground,person-unattributed,True
+264519252,53.746766,-6.940102,pitch,Páirc Naoimh Ciarán,pairc naoimh ciaran,ground,person-unattributed,True
+265235682,52.671656,-8.557868,pitch,Maguires Pitches,maguires pitches,club,,True
+265235684,52.67256,-8.558836,pitch,Maguires Pitches,maguires pitches,club,,False
+265724353,53.333484,-7.70651,sports_centre,Ballycumber GAA,ballycumber,club,,True
+265871265,53.197509,-6.827074,sports_centre,Hawkfield GAA,hawkfield,club,,True
+266251272,53.311579,-6.606874,pitch,Straffan GAA,straffan,club,,True
+266597358,53.311901,-6.607461,,Straffan GFC,straffan,club,,False
+266737057,53.282533,-7.720797,sports_centre,Erin Rovers GAA,erin rovers,club,,True
+267256202,54.291427,-7.478263,pitch,Maguiresbridge GAA,maguiresbridge,club,,True
+267264803,53.807794,-6.939126,pitch,CLG Cuchulainn,clg cuchulainn,club,,True
+267304053,54.059966,-6.643964,pitch,Cullaville Blues,cullaville blues,club,,True
+267770340,53.722753,-6.35928,sports_centre,O'Raghallaigh's CLG,o raghallaigh s,club,,True
+267770341,53.723656,-6.359451,pitch,County Grounds,county grounds,ground,person-unattributed,True
+268783838,53.270215,-7.821294,sports_centre,Ferbane GAA,ferbane,club,,True
+270010644,53.222434,-7.884187,sports_centre,Cloghan GAA,cloghan,club,,True
+270898540,51.905972,-8.050825,sports_centre,Castlemartyr GAA,castlemartyr,club,,True
+271214262,54.290213,-7.866817,pitch,Pháirc Gaeil na Siónainne,phairc gaeil na sionainne,club,,True
+271934136,53.331723,-7.830946,pitch,Doon GAA,doon,club,,True
+271934137,53.331954,-7.830007,sports_centre,Doon GAA,doon,club,,False
+272146796,54.290232,-7.672904,pitch,Belnaleck GAA,belnaleck,club,,True
+273018620,53.103724,-7.083929,sports_centre,Courtwood GAA,courtwood,club,,True
+273359546,53.364841,-6.38614,sports_centre,Somerton Park,somerton park,ground,person-unattributed,True
+274975878,53.705686,-6.878942,pitch,Páirc Colmcille,pairc colmcille,ground,person-unattributed,False
+275509609,53.285008,-6.459967,sports_centre,Dawson Park (Commercials Hurling & Camogie Club),dawson park commercials,club,,True
+275871405,53.455615,-6.242309,pitch,GAA pitch 2,gaa pitch 2,functional,,True
+276514581,51.929078,-8.56145,pitch,Blarney GAA Club,blarney,club,,True
+277081959,52.638747,-9.2469,pitch,Shannon Gaels GAA,shannon gaels,club,,True
+277478883,53.242489,-7.938629,,Belmont GAA,belmont,club,,True
+277667454,52.203667,-6.374536,sports_centre,Our Lady's Island GAA Club,our lady s island,club,,True
+277858184,52.937669,-8.156267,pitch,Kilruane Camógie,kilruane,club,,True
+278007279,53.7541,-9.244243,pitch,Ray Prendergast Memorial Park,ray prendergast memorial park,ground,saint,True
+278211027,53.367259,-8.905809,pitch,Turloughmore GAA,turloughmore,club,,True
+278220586,53.509443,-8.853857,pitch,Saint Jarlath's Park,saint jarlath s park,ground,saint,True
+278221733,53.509261,-8.853827,stadium,Saint Jarlath's Park,saint jarlath s park,ground,saint,False
+278521682,52.856812,-8.261809,pitch,Burgess GAA,burgess,club,,True
+278521690,52.855699,-8.260912,pitch,Burgess GAA,burgess,club,,False
+279533512,53.391171,-6.266107,pitch,Setanta GAA,setanta,club,,True
+279533513,53.391957,-6.26618,pitch,Setanta GAA,setanta,club,,False
+279547947,53.390897,-6.265187,sports_centre,Setanta GAA,setanta,club,,False
+282903991,52.505725,-9.671819,pitch,Stack Park,stack park,ground,person-unattributed,True
+283115806,54.765328,-6.584814,sports_centre,O’Donovan Rossa G.A.C.,o’donovan rossa,club,,True
+284832491,54.298856,-7.882949,pitch,Belcoo GAA,belcoo,club,,True
+285735333,53.130286,-6.58726,sports_centre,Ballymore Eustace GAA,ballymore eustace,club,,True
+286186947,52.989374,-7.090571,pitch,Saint Joseph's GAA,saint joseph s,club,,True
+286186951,52.989334,-7.091251,sports_centre,Tony Byrne Park,tony byrne park,ground,person-unattributed,True
+288095520,53.835874,-7.082601,,Virginia Handball Club,virginia,functional,,True
+288183245,53.33768,-8.938923,sports_centre,Claregalway GAA,claregalway,club,,True
+288780384,52.669851,-8.654428,stadium,TUS Gaelic Grounds,tus gaelic grounds,ground,person-unattributed,True
+289242798,53.531478,-7.342378,sports_centre,Harbour Field [Coláiste Mhuire Grounds],harbour field [colaiste mhuire grounds],ground,saint,True
+290249273,54.423327,-7.8286,pitch,Derrygonnelly Harps GAA,derrygonnelly harps,club,,True
+290249274,54.421994,-7.827948,pitch,Derrygonnelly Harps GAA,derrygonnelly harps,club,,False
+290403959,53.921838,-7.578439,sports_centre,Saint Patrick's Arva GAA,saint patrick s arva,club,,True
+290623771,53.293547,-9.048784,,Menlo Emmets GAA Club,menlo emmets,club,,True
+292230507,54.099283,-7.321841,pitch,Max McGrath Park,max mcgrath park,ground,person-unattributed,True
+292660553,55.130759,-6.04373,,Robert Emmets GAC,robert emmets,club,,True
+293642469,51.605694,-10.035618,sports_centre,Garnish GAA Club,garnish,club,,True
+294492762,52.966313,-6.955416,sports_centre,Grangenolvin GAA,grangenolvin,club,,True
+295020455,53.188651,-7.975516,sports_centre,St. Rynaghs Hurling Club,st rynaghs,club,,True
+295120335,51.714467,-9.108788,sports_centre,Doheny's GAA (Sam Maguire Park),doheny s gaa sam maguire park,club,,True
+296190267,53.076685,-7.891444,sports_centre,Crinkill GAA,crinkill,club,,True
+296628571,53.485171,-6.131589,pitch,Pitch 2,pitch 2,functional,,True
+296628749,53.48693,-6.13338,pitch,Pitch 3,pitch 3,functional,,True
+296628852,53.485482,-6.12929,pitch,Academy Training Area,academy training area,functional,,True
+297179114,54.530864,-5.886958,pitch,Carryduff GAC,carryduff,club,,True
+299862745,52.828931,-6.874677,sports_centre,"Palatine GAA Club, Bennekerry",palatine gaa club bennekerry,club,,True
+301472088,53.727939,-6.880799,,Kells Handball Club,kells,functional,,True
+302041551,52.725317,-7.577009,sports_centre,Emeralds GAA,emeralds,club,,True
+303051434,52.944608,-9.067353,,Corofin GAA Club,corofin,club,,True
+303858245,52.265828,-7.148644,sports_centre,De La Salle GAA Club - Gracedieu Grounds,de la salle gaa club gracedieu grounds,club,,True
+304214766,53.270128,-6.355113,pitch,Main Pitch,main pitch,functional,,True
+304494529,53.581806,-7.522746,sports_centre,Ballynacargy GAA,ballynacargy,club,,True
+304720995,53.331294,-6.458877,sports_centre,Lucan Sarsfields GAA Club,lucan sarsfields,club,,True
+304834130,53.535243,-7.315154,pitch,St Lomans GAA Club,st lomans,club,,True
+305296985,53.296908,-6.566129,sports_centre,Ardclough GAA,ardclough,club,,True
+305545627,53.502327,-6.586485,sports_centre,Drumree GAA,drumree,club,,True
+306141595,54.543379,-6.690725,pitch,Coalisland Fianna G.F.C.,coalisland fianna,club,,True
+307050597,54.312984,-7.394013,pitch,Brookeborough GAA,brookeborough,club,,True
+307055778,54.217439,-7.676601,pitch,Kinawley GAA,kinawley,club,,True
+307056378,54.269286,-7.375946,pitch,Knocks GAA,knocks,club,,True
+307440001,53.293632,-9.077082,sports_centre,University of Galway Sports Campus,university of galway sports campus,club,,True
+307624774,52.172744,-9.773928,pitch,Keel GAA,keel,club,,True
+307810821,53.101139,-7.708711,sports_centre,Kinnitty GAA,kinnitty,club,,True
+309756552,53.934506,-8.951571,pitch,Swinford GAA Club,swinford,club,,True
+309853433,53.697256,-7.482649,sports_centre,Streete Parish Park and Community Centre,streete parish park and community centre,ground,place-or-other,True
+309881113,54.710673,-8.732541,pitch,Naomh Columba Gaelic Pitch,naomh columba gaelic pitch,club,,True
+310066859,53.073869,-7.800539,sports_centre,Clareen GAA,clareen,club,,True
+313461715,51.881054,-10.370296,pitch,Portmagee GAA,portmagee,club,,True
+314076146,54.626018,-8.60309,pitch,Cill Chartha GAA Pitch,cill chartha gaa pitch,club,,True
+314076147,54.628378,-8.601238,pitch,Cill Chartha GAA Training Pitch,cill chartha gaa training pitch,functional,,True
+314637357,52.400727,-7.693071,pitch,Moyle Rovers GAA,moyle rovers,club,,True
+315134918,52.27506,-9.784343,pitch,Churchill GAA Pitch,churchill gaa pitch,club,,True
+315135761,52.274344,-9.78414,pitch,Training Pitch,training pitch,functional,,True
+316156948,52.263498,-8.26595,sports_centre,Handball Alley,handball alley,functional,,True
+316538696,53.473517,-6.545106,pitch,Batterstown GAA Pitch,batterstown gaa pitch,club,,True
+316538698,53.474027,-6.545344,sports_centre,Blackhall Gaels GAA Club Batterstown,blackhall gaels gaa club batterstown,club,,True
+316737198,53.021545,-6.619373,sports_centre,Donard Glen GAA,donard glen,club,,False
+316776929,53.395291,-6.403957,pitch,All weather astro pitch,all weather astro pitch,functional,,True
+317592780,52.587679,-8.466256,sports_centre,Caherline GAA,caherline,club,,True
+319388600,53.114293,-6.530394,sports_centre,Valleymount GAA,valleymount,functional,,True
+320169756,53.116151,-7.295915,sports_centre,The Rock GAA,the rock,club,,True
+320564220,52.407963,-7.747918,pitch,GAA Pitch,gaa pitch,functional,,True
+323445092,53.901663,-7.174741,pitch,Lavey GAA Grounds,lavey gaa grounds,club,,True
+327862796,53.977637,-7.058634,pitch,Saint Bridget's Park,saint bridget s park,ground,saint,True
+328188378,53.022255,-7.032669,sports_centre,Castlemitchell GAA club,castlemitchell,club,,True
+328261823,53.803303,-9.141311,pitch,Balla GAA Club,balla,club,,True
+329131865,53.369712,-6.184372,pitch,GAA 34,gaa 34,club,,True
+329131866,53.369493,-6.18298,pitch,GAA 35,gaa 35,club,,True
+329132459,53.370743,-6.182949,pitch,GAA 30,gaa 30,club,,True
+329132462,53.370814,-6.18382,pitch,GAA 29,gaa 29,club,,True
+329132652,53.370154,-6.193392,pitch,GAA 21,gaa 21,club,,True
+329132653,53.370024,-6.192547,pitch,GAA 22,gaa 22,club,,True
+329748068,53.964081,-7.319062,pitch,Killygarry Athletic Grounds,killygarry athletic grounds,ground,person-unattributed,True
+329748071,53.963656,-7.319563,sports_centre,Killygarry GAA,killygarry,club,,True
+329781259,53.800155,-7.039224,sports_centre,Maghera MacFinn GFC,maghera macfinn,club,,True
+329781261,53.800613,-7.038872,pitch,MacFinn Park,macfinn park,ground,person-unattributed,True
+329963896,51.658514,-9.260726,sports_centre,Clann Na Gael GAA,clann na gael,club,,True
+329986496,53.83058,-7.069336,pitch,Ramor United Park,ramor united park,ground,person-unattributed,True
+329986499,53.829767,-7.071788,pitch,Dolan Park,dolan park,ground,person-unattributed,True
+330086119,53.902032,-7.174685,sports_centre,Lavey GFC,lavey,club,,True
+330451881,53.808785,-6.93923,,Mullagh Sports Centre,mullagh sports centre,club,,True
+330451889,53.807803,-6.940941,park,Edwin Carolan Community Park,edwin carolan community park,ground,place-or-other,True
+330521359,53.983163,-7.238101,pitch,PJ Duke Memorial Park,pj duke memorial park,ground,memorial,True
+330521363,53.983202,-7.236662,sports_centre,Laragh United GAA,laragh united,club,,True
+330823584,54.592384,-7.067822,stadium,Páirc Cholmcille,pairc cholmcille,ground,person-unattributed,True
+331092054,52.851756,-8.814554,sports_centre,Clare GAA Centre of Excellence,clare gaa centre of excellence,club,,True
+331266142,53.987933,-7.363567,sports_centre,Cavan Gaels GAA,cavan gaels,club,,True
+335294374,53.885341,-7.051928,sports_centre,Killinkere GFC,killinkere,club,,True
+337500308,53.92131,-7.266992,pitch,Saint Matthew's Park,saint matthew s park,ground,saint,True
+337500311,53.92091,-7.266136,sports_centre,Denn GFC,denn,club,,True
+340116345,53.375238,-6.190328,pitch,GAA 1,gaa 1,club,,True
+340116504,53.37359,-6.182097,pitch,Astro Pitch 5,astro pitch 5,functional,,True
+340116776,53.374985,-6.168976,pitch,Raheny GAA 12,raheny gaa 12,club,,True
+340116777,53.374476,-6.168082,pitch,GAA 13,gaa 13,club,,True
+340116779,53.374353,-6.1716,pitch,Raheny GAA 10,raheny gaa 10,club,,True
+340116781,53.375453,-6.16991,pitch,Raheny GAA 12a,raheny gaa 12a,club,,True
+340601943,54.039494,-6.463082,sports_centre,Roche Emmets Gaelic Football Club,roche emmets gaelic football,club,,True
+347974036,51.606282,-8.73457,sports_centre,Barryroe GAA,barryroe,club,,True
+349888076,52.822376,-9.117205,pitch,Kilmaley GAA Grounds and Astro Turf,kilmaley gaa grounds and astro turf,functional,,True
+352923327,53.84904,-9.010827,sports_centre,Gilmartin Park,gilmartin park,ground,person-unattributed,True
+357192678,53.949602,-7.492911,sports_centre,Cornafean GFC,cornafean,club,,True
+358492428,52.678699,-8.163745,sports_centre,Sean Treacys GAA Club,sean treacys,club,,True
+366473113,54.092559,-7.758095,sports_centre,Aughawillan GAA,aughawillan,club,,True
+367355096,51.865973,-8.344493,sports_centre,Passage West GAA,passage west,club,,True
+367454864,53.524977,-6.269326,sports_centre,Ballyboughal Rangers GAA,ballyboughal rangers,club,,True
+373349969,54.192684,-7.703127,sports_centre,Swanlinbar GFC,swanlinbar,club,,True
+374982810,53.624355,-6.609996,sports_centre,Walterstown GFC,walterstown,club,,True
+374982811,53.624568,-6.609327,pitch,John Fitzpatrick Memorial Park,john fitzpatrick memorial park,ground,memorial,True
+375562697,53.466546,-6.213959,pitch,All Weather Pitch,all weather pitch,functional,,True
+376514317,52.372477,-7.924749,sports_centre,Cahir GAA Club,cahir,club,,True
+377224632,54.122464,-7.674387,sports_centre,Templeport GFC,templeport,club,,True
+377236162,54.117678,-7.748033,sports_centre,Corlough GFC,corlough,club,,True
+379622810,51.540871,-9.217749,pitch,Castlehaven GAA Main Pitch,castlehaven gaa main pitch,club,,True
+380818008,54.592234,-5.977465,pitch,Naomh Eoin CLG,naomh eoin,club,,True
+381836649,54.11977,-7.583747,sports_centre,Kildallan GFC,kildallan,club,,True
+384422362,52.509858,-7.877274,sports_centre,Cashel King Cormacs GAA Club,cashel king cormacs,club,,True
+384963395,52.443691,-7.881097,sports_centre,Rockwell Rovers GAA Club,rockwell rovers,club,,True
+386266274,52.718806,-7.913509,sports_centre,Drom & Inch GAA Club,drom inch,club,,True
+386266511,52.768859,-7.898689,pitch,Drom GAA field,drom gaa field,club,,True
+386841353,54.055074,-7.134588,pitch,Rathluden Park,rathluden park,ground,person-unattributed,True
+388599310,52.44541,-9.060764,pitch,Scoil Mhuire & íde Sports field,scoil mhuire ide sports field,ground,saint,True
+388918582,52.55233,-8.937719,pitch,Cappagh GAA pitch,cappagh gaa pitch,club,,True
+389438028,53.172313,-6.850165,sports_centre,Moorefield GAA Club,moorefield,club,,True
+389713643,54.568262,-5.873336,pitch,The Henry Jones Memorial Playing Fields,the henry jones memorial playing fields,ground,memorial,True
+389757452,53.774634,-8.240029,sports_centre,Tulsk Handball Alley,tulsk handball alley,functional,,True
+391527346,53.523378,-6.660147,pitch,Kiltale Squash Area,kiltale squash area,club,,True
+393607715,53.203166,-8.553003,sports_centre,Loughrea GAA Club,loughrea,club,,True
+397278050,53.239168,-7.328773,sports_centre,Geashill GAA,geashill,club,,True
+397278051,53.267297,-7.33221,sports_centre,Ballinagar GAA,ballinagar,club,,True
+397278052,53.336271,-7.280648,sports_centre,Croghan GAA,croghan,club,,True
+397278053,53.34431,-7.208663,sports_centre,Rhode GAA,rhode,club,,True
+397278054,53.350609,-7.052401,sports_centre,Edenderry GAA,edenderry,club,,True
+397278055,53.262952,-7.0847,sports_centre,Clonbulloge GAA,clonbulloge,club,,True
+397278056,53.229242,-7.225675,sports_centre,Walsh Island GAA,walsh island,club,,True
+397278057,53.013521,-7.842762,sports_centre,Coolderry GAA,coolderry,club,,True
+397278058,52.986086,-7.924354,sports_centre,Shinrone GAA,shinrone,club,,True
+397278059,53.283833,-7.365403,sports_centre,Ballycommon GAA,ballycommon,club,,True
+397509499,53.139427,-7.415094,sports_centre,Rosenallis GAA,rosenallis,club,,True
+397509504,53.002224,-7.477547,sports_centre,Mountrath GAA,mountrath,club,,True
+397509505,52.940812,-7.617985,sports_centre,Borris-in-Ossory GAA,borris in ossory,club,,True
+397509507,52.853488,-7.587201,pitch,Rathdowney GAA,rathdowney,club,,True
+397509509,52.912868,-7.352907,sports_centre,Abbeyleix GAA,abbeyleix,club,,True
+397509512,53.009553,-7.146681,sports_centre,Stradbally GAA,stradbally,club,,True
+397509513,53.051687,-7.090363,sports_centre,Annough GAA,annough,club,,True
+397509515,53.148862,-7.178561,sports_centre,Portarlington GAA,portarlington,club,,True
+397509519,53.103862,-7.304015,sports_centre,Mountmellick GAA,mountmellick,club,,True
+397509520,52.850588,-7.396449,sports_centre,The Harps GAA,the harps,club,,True
+397509522,52.784295,-7.722038,sports_centre,Moyne-Templetouhy GAA,moyne templetouhy,club,,True
+397509524,52.880919,-7.308371,sports_centre,Ballinakill GAA,ballinakill,club,,True
+397509527,52.969306,-7.212515,sports_centre,Timahoe GAA,timahoe,club,,True
+398012865,52.621902,-8.338425,sports_centre,Cappamore GAA,cappamore,club,,True
+398012867,52.601101,-8.246655,sports_centre,Doon GAA,doon,club,,True
+398012869,52.566502,-8.338688,sports_centre,Pallasgreen GAA,pallasgreen,club,,True
+398157694,52.651647,-8.40009,sports_centre,Murroe/Boher GAA,murroe boher,club,,True
+398385612,53.140221,-7.056703,sports_centre,Monasterevin GFC,monasterevin,club,,True
+398385614,53.290643,-6.872973,sports_centre,Allenwood GFC,allenwood,club,,True
+398385624,53.412172,-6.822474,sports_centre,Na Fianna CLG,na fianna,club,,True
+398385625,53.393673,-6.66704,sports_centre,Kilcock GAA,kilcock,club,,True
+398385629,53.103902,-6.940632,sports_centre,Nurney GAA,nurney,club,,True
+398385632,53.042453,-6.858658,sports_centre,St Laurence's GAA,st laurence s,club,,True
+398385637,53.10678,-6.857876,sports_centre,Suncroft GAA,suncroft,club,,True
+398385640,53.244078,-6.597907,sports_centre,Kill GAA,kill,club,,True
+398385644,53.127457,-6.755204,sports_centre,Kilcullen GAA,kilcullen,club,,True
+398385647,53.184602,-6.985817,sports_centre,Ellistown GFC,ellistown,club,,True
+398385648,53.393251,-6.845396,sports_centre,Johnstownbridge GAA,johnstownbridge,club,,True
+398385651,53.232968,-6.719066,sports_centre,Raheens GAA,raheens,club,,True
+398553686,52.846301,-6.913079,sports_centre,O'Hanrahan's GFC,o hanrahan s,club,,True
+398553689,52.807716,-6.744785,sports_centre,St Patrick's GAA,st patrick s,club,,True
+398553691,52.737451,-7.021066,sports_centre,Old Leighlin GAA,old leighlin,club,,True
+398553694,52.738663,-6.981726,sports_centre,Naomh Brid GAA,naomh brid,club,,True
+398553701,52.687591,-6.78759,sports_centre,Naomh Eoin GAA,naomh eoin,club,,True
+398553704,52.799489,-6.881163,sports_centre,Tinryland GAA,tinryland,club,,True
+398553708,52.877654,-6.695465,sports_centre,Rathvilly GAA,rathvilly,club,,True
+398553711,52.589673,-6.912758,sports_centre,Mount Leinster Rangers GAA,mount leinster rangers,club,,True
+398553716,52.648862,-6.928052,pitch,Ballinkillen GAA,ballinkillen,club,,True
+398553718,52.84208,-6.787194,sports_centre,Grange GAA,grange,club,,True
+398553721,52.716213,-6.847014,sports_centre,Fenagh GAA,fenagh,club,,True
+398553725,52.77022,-6.837865,sports_centre,Fighting Cocks GAA,fighting cocks,club,,True
+398624070,52.47694,-8.43365,sports_centre,Hospital-Herbertstown GAA,hospital herbertstown,club,,True
+398912103,52.469224,-8.157325,sports_centre,Arravale Rovers GAA (Seán Tracey Park),arravale rovers gaa sean tracey park,club,,True
+399444213,52.072047,-8.286244,sports_centre,Bride Rovers GAA,bride rovers,club,,True
+399543484,53.437653,-6.601074,sports_centre,Blackhall Gaels GAA Club Kilcloon,blackhall gaels gaa club kilcloon,club,,True
+399996016,54.579697,-6.223961,pitch,Glenavy GAC,glenavy,club,,True
+401695626,51.897355,-8.150808,sports_centre,Ballinacurra GAA Club,ballinacurra,club,,True
+401696705,54.716385,-7.231051,sports_centre,Badoney Ladies LGFA,badoney ladies lgfa,club,,True
+401696886,52.718858,-7.9139,pitch,Drom & Inch GAA grounds,drom inch gaa grounds,club,,True
+401697011,54.579697,-6.224419,sports_centre,St Joseph's Glenavy GAC,st joseph s glenavy,club,,True
+401697373,54.285042,-5.995067,sports_centre,Fontenoy Park GAC,fontenoy park,club,,True
+402160908,51.91994,-8.176067,pitch,Midleton GAA pitch,midleton gaa pitch,club,,True
+408752934,53.538071,-7.357088,pitch,Handball Courts,handball courts,functional,,True
+411649479,52.968693,-6.144397,,Glenealy Community Centre,glenealy community centre,club,,True
+411729160,53.533815,-7.341303,,Club House / Changing Rooms,club house changing rooms,club,,True
+411729786,53.534429,-7.340201,sports_centre,Saint Oliver Plunkett's GAA Hurling Club,saint oliver plunkett s,club,,True
+411782332,53.530249,-7.333414,,Mullingar Shamrocks GAA Club,mullingar shamrocks,club,,True
+411793025,53.528,-7.337829,stadium,Cusack Park GAA Grounds,cusack park gaa grounds,club,,True
+423983513,54.069004,-7.478445,sports_centre,Drumlane GFC,drumlane,club,,True
+427795619,54.009044,-7.351525,sports_centre,Saint Patrick's College Handball,saint patrick s college,functional,,True
+428490897,54.614192,-7.297601,stadium,Healy Park,healy park,ground,person-unattributed,True
+428656803,51.982173,-8.533683,pitch,Astro Pitch,astro pitch,functional,,True
+432594103,53.090309,-6.611753,sports_centre,Hollywood GAA,hollywood,club,,True
+432601585,53.180443,-6.540409,sports_centre,Blessington GAA,blessington,club,,True
+432959419,53.558225,-8.649316,sports_centre,Kilkerrin-Clonberne GAA,kilkerrin clonberne,club,,True
+433023953,53.49799,-8.402568,sports_centre,Killyan Community Field,killyan community field,ground,person-unattributed,True
+433037681,54.530769,-7.657511,pitch,Ederney GAA,ederney,club,,True
+435383621,53.826918,-9.403497,sports_centre,Islandeady GAA,islandeady,club,,True
+436408013,51.693378,-9.95126,sports_centre,Urhan GAA Club,urhan,club,,True
+436588303,53.219694,-6.228439,sports_centre,Stars of Erin GAA,stars of erin,club,,True
+438506037,54.236616,-7.234044,sports_centre,Aghadrumsee GAA,aghadrumsee,club,,True
+440183249,53.390791,-7.698815,sports_centre,Moate All Whites,moate all whites,club,,True
+445134204,53.335957,-6.308091,sports_centre,Good Counsel GAA Club,good counsel,club,,True
+445881793,51.829088,-10.268642,pitch,Páirc Peile Naomh Mhichíl,pairc peile naomh mhichil,ground,saint,True
+445918648,53.858474,-9.297272,sports_centre,Handball Club,handball club,functional,,True
+446115506,54.042786,-7.018327,pitch,Boyle Park,boyle park,ground,person-unattributed,True
+446115514,54.042772,-7.018605,sports_centre,Drumgoon Éire Óg,drumgoon eire og,club,,True
+453578625,53.808151,-9.521635,pitch,Westport GAA,westport,club,,True
+456348618,53.723964,-6.865219,pitch,The Running Field,the running field,ground,person-unattributed,True
+462608484,53.966259,-6.479438,pitch,Saint Brides GFC,saint brides,club,,False
+462868065,53.070456,-6.058171,sports_centre,Newcastle GAA,newcastle,club,,True
+463714354,52.803725,-8.634264,sports_centre,Broadford GAA,broadford,club,,True
+463882992,51.861125,-9.688341,sports_centre,Templenoe GAA Club,templenoe,club,,True
+467161469,52.966616,-7.369891,sports_centre,Colt GAA,colt,club,,True
+467178308,52.800914,-8.189191,sports_centre,Silvermines GAA Club,silvermines,club,,True
+473080771,53.907155,-6.801491,pitch,O'Raghallaigh Park,o raghallaigh park,ground,person-unattributed,True
+473786880,52.798645,-7.837077,sports_centre,JK Brackens GAA,jk brackens,club,,True
+474194555,52.386368,-9.830968,sports_centre,Ballyheigue Sports Field,ballyheigue sports field,ground,person-unattributed,True
+475519165,53.193305,-6.181829,sports_centre,Saint Mary GAA,saint mary,club,,True
+481614967,53.522761,-6.660346,pitch,Kiltale GAA Ground,kiltale gaa ground,club,,True
+481636942,53.737559,-6.422348,,Glen Emmets,glen emmets,club,,True
+483091713,52.614581,-8.883117,sports_centre,Kilcornan GAA,kilcornan,club,,True
+483229527,51.919987,-8.17568,sports_centre,Midleton GAA Club,midleton,club,,True
+488672170,52.092552,-8.003597,pitch,Brideview GAA,brideview,club,,True
+490171438,51.66317,-8.594066,sports_centre,Courcey Rovers G.A.A. Club,courcey rovers,club,,True
+490317028,54.768018,-6.538199,sports_centre,Castledawson GAC,castledawson,club,,True
+490317529,54.867458,-6.512961,sports_centre,Greenlough GAA,greenlough,club,,True
+491438230,51.98262,-8.531963,pitch,Pitch 1,pitch 1,functional,,True
+491438231,51.983569,-8.532964,pitch,Pitch 2,pitch 2,functional,,True
+494400233,52.841412,-6.35534,sports_centre,Dressing Rooms and Gym,dressing rooms and gym,functional,,True
+494790720,52.614766,-7.261971,sports_centre,Pairc Sheamuis Stiopháin,pairc sheamuis stiophain,ground,person-unattributed,True
+496306583,53.363547,-6.198404,sports_centre,Clontarf GAA,clontarf,club,,False
+500380369,53.453555,-6.396479,sports_centre,Kilbride GAA,kilbride,club,,True
+500415455,53.466814,-6.213267,sports_centre,Fingallians GAA Club,fingallians,club,,True
+500425491,53.080571,-6.116051,sports_centre,Newtown GAA,newtown,club,,True
+502426964,54.58827,-6.038448,pitch,Leamh Dearg,leamh dearg,club,,True
+503563662,52.098046,-9.474971,sports_centre,Kilcummin GAA,kilcummin,club,,True
+504744166,52.26948,-7.723258,sports_centre,The Nire - Fourmilewater GAA,the nire fourmilewater,club,,True
+505272397,51.929699,-10.252369,sports_centre,Renard GAA,renard,club,,True
+505780373,53.945165,-6.77092,pitch,Magheracloone Mitchells GAA (Old),magheracloone mitchells gaa old,club,,True
+505973054,54.062272,-6.814645,sports_centre,Aughnamullen GAA,aughnamullen,club,,True
+508030764,53.746263,-7.172964,sports_centre,Oldcastle GFC,oldcastle,club,,True
+509215784,53.841285,-6.543168,sports_centre,Páirc Mhuire,pairc mhuire,ground,saint,True
+509316316,53.453944,-7.028085,sports_centre,St. Finian's Park,st finian s park,ground,saint,True
+510580210,52.42292,-6.921292,sports_centre,Ballyanne Handball Alley,ballyanne handball alley,functional,,True
+510766512,52.731203,-7.916976,pitch,Tipperary County Camogie Grounds,tipperary county camogie grounds,club,,True
+514010672,52.153026,-9.078948,pitch,Boherbue GAA,boherbue,club,,True
+516658565,53.45365,-6.242834,,St. Finian's G.A.A. Club,st finian s,club,,True
+516750084,51.834655,-8.87675,sports_centre,Jack Fitzgerald Memorial Park,jack fitzgerald memorial park,ground,memorial,True
+517206652,51.934246,-8.398033,,Glanmire G.A.A. Club,glanmire,club,,True
+517535996,53.761326,-7.832586,sports_centre,Clonguish GAA,clonguish,club,,True
+517710860,54.590012,-5.972326,,Cardinal O'Donnell's Gaelic Athletics Club,cardinal o donnell s gaelic athletics,club,,True
+531039316,53.16068,-6.91363,stadium,Round Towers - Kildare Town GAA,round towers kildare town,club,,True
+534858275,52.463885,-8.272522,sports_centre,Lattin Cullen GAA Club,lattin cullen,club,,True
+536313620,53.099943,-7.000319,sports_centre,Kildangan GAA,kildangan,club,,True
+536941065,54.926382,-6.920282,,St Canices Gaelic Athletic Club,st canices gaelic athletic,club,,True
+539826660,51.584217,-9.149486,sports_centre,Goulding Park,goulding park,ground,person-unattributed,True
+543789308,54.265411,-9.796953,pitch,Playground and Pitch,playground and pitch,club,,True
+548899592,52.930374,-8.244472,sports_centre,Kiladangan GAA,kiladangan,club,,True
+553225814,51.875123,-8.670748,sports_centre,Éire Óg GAA,eire og,club,,True
+556773487,54.381671,-6.311312,sports_centre,Tullylish GAC,tullylish,club,,True
+560753475,53.39759,-6.183801,sports_centre,O'Tooles Gaelic Association Club,o tooles gaelic association,club,,True
+562581062,53.372914,-6.216322,stadium,Parnell Park,parnell park,ground,person-unattributed,True
+564099741,53.359879,-6.250778,stadium,Croke Park,croke park,ground,person-unattributed,True
+564724322,54.534962,-7.281801,sports_centre,Tattyreagh St. Patrick's GAC,tattyreagh st patrick s,club,,True
+570270624,53.552868,-6.802111,sports_centre,Trim GAA Club,trim,club,,True
+571349339,54.35029,-5.653489,pitch,Saul GAC,saul,club,,True
+571477564,53.683937,-6.587143,sports_centre,Father Tully Park,father tully park,ground,clergy,True
+575037774,54.343846,-6.662464,stadium,Armagh GAA Athletic Grounds,armagh gaa athletic grounds,club,,True
+576788565,54.612851,-7.491367,,Drumquin Wolfe Tones GAC,drumquin wolfe tones,club,,True
+577520144,52.683028,-7.819584,pitch,Railway Field,railway field,ground,person-unattributed,True
+580929222,51.643407,-9.926141,sports_centre,Castletownbere GAA Club,castletownbere,club,,True
+583055136,54.21588,-7.041343,sports_centre,Seán McDermott's GFC,sean mcdermott s,club,,True
+584004955,55.130577,-6.044495,sports_centre,Lig-na-Arigid Park,lig na arigid park,ground,person-unattributed,True
+587477974,54.882316,-6.483175,pitch,O'Cahan Park,o cahan park,ground,person-unattributed,True
+587477976,54.881619,-6.480683,pitch,Kelly Park,kelly park,ground,person-unattributed,True
+589969692,52.967311,-7.787629,sports_centre,Roscrea GAA Hurling,roscrea,club,,True
+590500660,53.397987,-6.36814,sports_centre,GAA National Games Development Centre,gaa national games development centre,club,,True
+600883855,53.16102,-6.807396,pitch,Páirc Imeartha Ghaelscoil Chill Dara,pairc imeartha ghaelscoil chill dara,ground,place-or-other,True
+602925643,54.350548,-7.63678,pitch,training pitch,training pitch,functional,,False
+603169510,54.169104,-6.357637,pitch,Thomas Davis GFC Corrinshego,thomas davis gfc corrinshego,club,,True
+603990579,54.590649,-5.972891,pitch,Mac Rory Park - Cardineal Uí Domnaill c.l.c.g,mac rory park cardineal ui domnaill c l c g,ground,place-or-other,True
+612123351,51.926329,-8.675106,pitch,GAA Pitch,gaa pitch,functional,,True
+612746792,53.453982,-7.027833,pitch,Practice Pitch,practice pitch,club,,True
+612746793,53.455085,-7.02756,pitch,Practice Pitch,practice pitch,club,,False
+614702548,52.270508,-8.099829,sports_centre,Handball Alley,handball alley,functional,,True
+616251289,52.095616,-7.997663,sports_centre,Tallow GAA Club,tallow,club,,True
+617433394,51.853312,-8.036712,sports_centre,Russel Rovers GAA,russel rovers,club,,True
+618310000,51.904118,-9.452796,sports_centre,Kilgarvan G.A.A.,kilgarvan,club,,True
+619109996,51.684841,-9.713022,sports_centre,Adrigole GAA Club,adrigole,club,,True
+619761402,51.752616,-9.531269,sports_centre,Glengarriff GAA Club,glengarriff,club,,True
+619911747,51.498785,-9.717994,sports_centre,Goleen GAA Club,goleen,club,,True
+620904364,53.38553,-9.611323,sports_centre,Páirc na bPiarsach,pairc na bpiarsach,ground,person-unattributed,True
+620969767,53.726384,-6.326186,sports_centre,Newtown Blues,newtown blues,club,,True
+620979543,53.49188,-10.017379,sports_centre,Clifden GAA,clifden,club,,True
+621435627,51.638915,-8.775608,sports_centre,Argideen Rangers GAA Club,argideen rangers,club,,True
+622029247,53.615241,-9.211676,sports_centre,Ballinrobe GAA- Flanagan Park,ballinrobe gaa flanagan park,club,,True
+629588753,52.912856,-8.532935,sports_centre,Scarriff GAA Club,scarriff,club,,True
+632233281,53.963808,-6.403978,sports_centre,Mc Geough Park (Geraldines GFC),mc geough park geraldines,club,,True
+632422914,54.000756,-6.26362,sports_centre,Saint Patrick's GFC,saint patrick s,club,,True
+639777519,51.574243,-8.906573,sports_centre,St. James' GAA,st james,club,,True
+641097746,53.947839,-8.076056,stadium,Páirc Seán Mac Diarmada,pairc sean mac diarmada,ground,patriot,True
+641393181,51.981404,-8.531624,pitch,Community Pitch,community pitch,club,,True
+641411590,52.318067,-7.86427,sports_centre,Ardfinnan GAA Club,ardfinnan,club,,True
+648256293,51.654679,-9.902768,pitch,Ball Alley,ball alley,functional,,True
+648289155,54.413151,-5.500625,sports_centre,Ballygalget GAC,ballygalget,club,,True
+651702229,51.707647,-9.030058,sports_centre,Randal Óg GAA Club,randal og,club,,True
+651945300,51.76203,-8.38132,sports_centre,Tracton GAA,tracton,club,,True
+656475469,54.993019,-7.333442,stadium,Celtic Park,celtic park,ground,person-unattributed,True
+658700783,52.474762,-7.595607,sports_centre,St. Patrick's GAA,st patrick s,club,,True
+660546750,52.370637,-8.351856,sports_centre,Ballylanders GAA,ballylanders,club,,True
+661836477,53.388881,-6.179492,,St Monica's CLG,st monica s,club,,True
+662530161,52.4999,-7.97783,sports_centre,Golden Kilfeacle GAA Club,golden kilfeacle,club,,True
+668272878,55.094115,-7.230484,,CLG Naomh Padraig Uisce Chaoin,clg naomh padraig uisce chaoin,club,,True
+669935018,54.70205,-6.58949,pitch,An Lúb GAA Club,an lub,club,,True
+670245633,54.927976,-5.952183,pitch,Shane O'Neills Hurling Club,shane o neills,club,,True
+670438145,54.658594,-6.559534,pitch,Balinderry GAA Pitch,balinderry gaa pitch,club,,True
+670438146,54.659753,-6.559021,pitch,Balinderry GAA Pitch,balinderry gaa pitch,club,,False
+670670955,52.550684,-8.496436,sports_centre,Ballybricken-Bohermore GAA,ballybricken bohermore,club,,True
+670690756,54.741606,-6.523686,pitch,Ballymaguigan St Treas GFC Training Pitch,ballymaguigan st treas gfc training pitch,functional,,True
+675438965,54.296662,-6.847243,sports_centre,Middletown GAA,middletown,club,,True
+675735962,53.441031,-6.301636,sports_centre,St Margarets GAA,st margarets,club,,True
+676048438,54.678235,-7.702782,,Aghyaran St. Davog's GAA,aghyaran st davog s,club,,True
+676545197,54.143013,-6.552235,pitch,Dorset Emett GFC,dorset emett,club,,True
+676612762,54.143014,-6.362056,pitch,Killeavy Memorial Park,killeavy memorial park,ground,memorial,True
+676831316,52.328229,-6.454156,sports_centre,St. Mary's Maudlintown GAA Club,st mary s maudlintown,club,,True
+676837090,52.350736,-6.485013,sports_centre,St. Johns's Volunteers GAA Club,st johns s volunteers,club,,True
+676970984,53.50398,-6.304321,sports_centre,Fingal Ravens GFC,fingal ravens,club,,True
+678131095,51.665845,-8.832226,sports_centre,Ballinascarthy Hurling & Football Club,ballinascarthy hurling football,club,,True
+678850700,51.91047,-8.560767,pitch,Gleann na Laoi,gleann na laoi,club,,True
+680143469,52.226799,-7.067293,pitch,Handball Alley,handball alley,functional,,True
+680143476,52.251764,-7.113349,sports_centre,Erin's Own GAA Club,erin s own,club,,True
+680143494,52.254353,-7.099992,pitch,De La Salle College Playing Fields,de la salle college playing fields,ground,place-or-other,True
+680693845,51.849371,-8.783539,sports_centre,Cloughduv GAA,cloughduv,club,,True
+680908741,52.130079,-9.209888,sports_centre,Knocknagree G.A.A. Club,knocknagree,club,,True
+681494716,51.671381,-8.994588,sports_centre,Kilmeen & Kilbree GAA Club,kilmeen kilbree,club,,True
+682071804,54.109828,-6.487985,pitch,Mullaghbawn Gaelic & Ladies Football & Camogie Clu,mullaghbawn gaelic ladies football camogie clu,club,,True
+682177922,52.37314,-6.571018,,Glynn Barntown GAA Clubhouse,glynn barntown gaa clubhouse,functional,,True
+682180593,52.584828,-6.514815,sports_centre,Halo Tiles Wexford GAA Centre of Excellence,halo tiles wexford gaa centre of excellence,club,,True
+683218339,54.182538,-6.397749,pitch,Carrickcruppen GAC,carrickcruppen,club,,True
+683613696,53.64349,-6.876435,sports_centre,Rathmore Handball Club,rathmore,functional,,True
+683896557,52.703918,-7.312536,pitch,Threecastles GAA Club,threecastles,club,,True
+684101606,51.709458,-8.89825,sports_centre,Oliver Plunkett's GAA,oliver plunkett s,club,,True
+685932723,54.88232,-6.701352,pitch,Bottom Pitch,bottom pitch,club,,True
+685932724,54.883681,-6.700647,pitch,Main Pitch,main pitch,functional,,True
+687599926,52.902401,-6.607421,sports_centre,Kiltegan GAA,kiltegan,club,,True
+688432048,54.906298,-7.156591,pitch,Cumber Forest Gaelic Pitch,cumber forest gaelic pitch,club,,True
+688921622,54.005764,-8.784734,sports_centre,Curry GAA Club,curry,club,,True
+689886849,51.676664,-8.684657,pitch,Kilbrittain GAA (Sand Cross),kilbrittain gaa sand cross,club,,True
+690500271,51.905502,-7.946024,,Fr. O' Neill's GAA Club,fr o neill s,club,,True
+690727050,52.128517,-7.870059,,Tourin GAA Grounds,tourin gaa grounds,club,,True
+691184734,51.785065,-8.691797,sports_centre,Valley Rovers G.A.A. Club,valley rovers,functional,,True
+691703854,51.902711,-8.853489,sports_centre,Canovee GAA Club,canovee,club,,True
+693838571,54.350205,-7.618295,pitch,Box alley,box alley,functional,,True
+693838574,54.352169,-7.619547,pitch,Junior Alleys,junior alleys,functional,,True
+698883069,53.3749,-7.796904,sports_centre,Castledaly G.A.A. Club,castledaly,club,,True
+701061451,51.92951,-9.020565,sports_centre,Clondrohid GAA,clondrohid,club,,True
+701079098,51.875176,-8.987871,sports_centre,Kilmichael GAA,kilmichael,club,,True
+705413206,52.775467,-8.074027,sports_centre,Father Kenyon Park,father kenyon park,ground,clergy,True
+706193745,53.329818,-8.405903,sports_centre,Kilconnell Sports Centre,kilconnell sports centre,club,,True
+706352869,51.741979,-9.413491,sports_centre,St. Colum's GAA,st colum s,club,,True
+708435686,52.021119,-8.337297,sports_centre,Watergrasshill GAA,watergrasshill,club,,True
+711615111,51.90871,-8.441621,,Brian Dillons GAA Club,brian dillons,club,,True
+712336309,52.392182,-6.711261,sports_centre,Adamstown GAA Club,adamstown,club,,True
+723517314,51.498582,-9.353023,sports_centre,Ilen Rovers GAA,ilen rovers,club,,True
+723737110,53.396913,-6.407144,pitch,Saint Peregrine's GAA - Hill Pitch,saint peregrine s gaa hill pitch,club,,True
+723737111,53.398094,-6.408723,pitch,Saint Peregrine's GAA - Briarwood pitch,saint peregrine s gaa briarwood pitch,club,,True
+724598054,53.526392,-6.87167,sports_centre,Boardsmill GAA,boardsmill,club,,True
+727999994,51.734083,-8.486675,sports_centre,Belgooly G.A.A. Club,belgooly,club,,True
+738687426,54.549655,-7.152908,sports_centre,Saint Mary’s Park,saint mary’s park,ground,saint,True
+746126229,54.182335,-6.224879,,Mayobridge GAA Club,mayobridge,club,,True
+746503408,54.182365,-6.346057,pitch,Jack Macken Park,jack macken park,ground,person-unattributed,True
+749019472,53.392344,-6.596775,pitch,U14 Pitch,u14 pitch,functional,,True
+749019473,53.393318,-6.596941,pitch,New Senior Pitch,new senior pitch,club,,True
+749019474,53.393689,-6.595412,pitch,U12 Pitch,u12 pitch,functional,,True
+749352367,51.892767,-8.588618,pitch,Páirc Uí Chonchúir,pairc ui chonchuir,ground,person-unattributed,True
+753677738,51.879203,-8.474809,,Ballyphehane GAA Club,ballyphehane,club,,True
+758393556,52.397874,-8.573415,sports_centre,Kilmallock GAA,kilmallock,club,,True
+765830002,54.883519,-6.700322,sports_centre,CLG Eiméid Sleacht Néill,clg eimeid sleacht neill,club,,True
+765830004,54.88443,-6.700606,pitch,Ball Wall,ball wall,functional,,True
+766771683,52.286452,-7.069136,sports_centre,Slieverue GAA Club,slieverue,club,,True
+766857120,52.34302,-7.060236,,Glenmore GAA,glenmore,club,,True
+769134622,52.216254,-6.721772,pitch,Cullenstown Handball Alley,cullenstown handball alley,functional,,True
+769907315,52.323439,-8.413954,sports_centre,Glenroe GAA Club,glenroe,club,,True
+770009341,52.511463,-8.212851,sports_centre,Solohead GAA Club,solohead,club,,True
+770032809,52.564047,-8.112411,sports_centre,Eire Og Annacarty Donohill GAA,eire og annacarty donohill,club,,True
+770252443,53.390771,-6.996537,sports_centre,Clogherinkoe & Broadford GAA Club,clogherinkoe broadford,club,,True
+771646598,52.088649,-8.230778,sports_centre,Castlelyons GAA,castlelyons,club,,True
+772928069,53.156734,-7.051675,sports_centre,Ballykelly GFC,ballykelly,club,,True
+778324707,54.177181,-8.4912,,Owenmore Gaels GAA Club,owenmore gaels,club,,False
+779008628,54.953743,-6.734822,,John Mitchells GAC Glenullin,john mitchells gac glenullin,club,,True
+779943966,54.165608,-9.34636,sports_centre,Moygownagh GAA Club,moygownagh,club,,True
+781900730,52.141872,-8.052659,sports_centre,Ballyduff Upper GAA Club,ballyduff upper,club,,True
+787298888,52.299978,-8.213426,sports_centre,Galtee Gaels GAA,galtee gaels,club,,True
+789148185,52.057838,-7.888579,sports_centre,Shamrocks Hurling & Football Club,shamrocks hurling football,club,,True
+798271798,53.46676,-6.212333,ball wall,fingallians ball wall,fingallians ball wall,functional,,True
+798553941,52.152296,-7.369183,sports_centre,Bunmahon GAA Club,bunmahon,club,,True
+800505817,52.212694,-7.711374,,Sliabh gCua - St. Mary's GAA Club,sliabh gcua st mary s,club,,True
+807600533,54.390435,-6.741805,,"O'Connell's GAA, Tullysaran",o connell s gaa tullysaran,club,,True
+807750462,52.003324,-7.633712,sports_centre,CLG An tSean Phobail,clg an tsean phobail,club,,True
+813240109,53.522666,-6.175916,pitch,Chapel Farm Pitch,chapel farm pitch,club,,True
+813240111,53.52894,-6.180492,pitch,Round Towers TAP 2,round towers tap 2,functional,,True
+813920252,54.217948,-5.892084,sports_centre,Bryansford GAC,bryansford,club,,True
+814009402,51.806711,-8.536936,sports_centre,Ballinhassig GAA Ballinaboy Pitches,ballinhassig gaa ballinaboy pitches,club,,True
+819173474,52.456267,-8.645164,,Athlacca Gaa,athlacca,club,,True
+819181186,52.572656,-8.665375,,Crecora Manister GAA,crecora manister,club,,True
+820010444,52.842285,-6.941879,sports_centre,Graiguecullen GAA,graiguecullen,club,,True
+823086837,53.019139,-8.027019,pitch,Knockshegowna GAA,knockshegowna,club,,True
+823097026,53.058375,-7.979931,sports_centre,Carrig & Riverstown GAA Club,carrig riverstown,club,,True
+823692500,52.586571,-7.544534,sports_centre,Ballingarry GAA,ballingarry,club,,True
+823835736,53.39439,-6.412731,pitch,St Peregrine's GAA - Oakview park pitch,st peregrine s gaa oakview park pitch,ground,saint,True
+823837197,53.395781,-6.411325,pitch,Saint Peregrine's GAA - Hartstown pitch,saint peregrine s gaa hartstown pitch,club,,True
+824615366,51.991795,-8.476518,sports_centre,Carraig na bhFear GAA Club,carraig na bhfear,club,,True
+825476996,52.959099,-7.841865,sports_centre,Ballyskenach-Killavilla GAA Club,ballyskenach killavilla,club,,True
+827961181,52.288228,-7.222921,sports_centre,Carrigeen GAA,carrigeen,club,,True
+828235805,52.131735,-7.613632,pitch,Ball Alley,ball alley,functional,,True
+828238911,53.774109,-8.239509,,Tulsk GAA,tulsk,club,,True
+828914068,53.234187,-6.65624,pitch,Naas Park Training Field IV,naas park training field iv,functional,,True
+828914069,53.233755,-6.657346,pitch,Naas Park Training Field III,naas park training field iii,functional,,True
+828914070,53.234734,-6.658059,pitch,Naas Park Training Field I,naas park training field i,functional,,True
+830437449,52.195245,-8.361114,sports_centre,Glanworth GAA Club,glanworth,club,,True
+835061102,53.742012,-6.616809,sports_centre,Rathkenny GFC,rathkenny,club,,True
+837449176,53.887445,-6.71386,sports_centre,Meath Hill GAA,meath hill,club,,True
+838200544,53.692304,-6.797332,sports_centre,Saint Ultans GAA Martry,saint ultans gaa martry,club,,True
+838218282,53.688714,-6.991779,sports_centre,Kilskyre GAA,kilskyre,club,,True
+843954699,53.62691,-6.909273,sports_centre,Pairc Ui Gramhnaigh Áth Buí (Clann Na Ngael),pairc ui gramhnaigh ath bui clann na ngael,ground,place-or-other,True
+849876545,52.069301,-9.541217,sports_centre,Fossa GAA Club,fossa,club,,True
+851257225,52.348447,-7.411936,,Carrick Swan GAA Club,carrick swan,club,,True
+852171568,52.362232,-8.473227,sports_centre,Kilfinane Blackrock GAA,kilfinane blackrock,club,,True
+853352576,52.408012,-8.508811,sports_centre,Staker Wallace GAA Club,staker wallace,club,,True
+854001151,53.30489,-8.903977,,Carnmore GAA Ground,carnmore gaa ground,club,,True
+854248021,52.358085,-8.610354,sports_centre,Effin GAA,effin,club,,True
+854302628,53.722358,-8.382457,sports_centre,Saint Croans GAA Club,saint croans,club,,True
+857848000,53.374008,-6.324659,,St. Oliver Plunkett Eoghan Ruadh GAA Club,st oliver plunkett eoghan ruadh,club,,True
+859364778,51.540653,-9.217336,sports_centre,Castlehaven GAA,castlehaven,club,,True
+862312977,54.103857,-6.229205,sports_centre,St Peter's GAC Warrenpoint,st peter s gac warrenpoint,club,,True
+863893515,52.674692,-7.824244,sports_centre,Durlas Óg GAA,durlas og,club,,True
+864607359,52.678625,-7.829053,sports_centre,Dr. Morris Park,dr morris park,ground,person-unattributed,True
+864679149,54.531521,-5.888212,pitch,Carryduff GAC,carryduff,club,,False
+864679150,54.530528,-5.887994,,Carryduff GAC,carryduff,club,,False
+864679152,54.530632,-5.889044,,Carryduff GAC,carryduff,club,,False
+871466488,54.166276,-6.311704,pitch,Ballyholland GAC,ballyholland,club,,True
+871466490,54.165327,-6.311944,,Ballyholland GAC,ballyholland,club,,False
+871576996,53.532916,-6.106364,sports_centre,St. Maur's GAA,st maur s,club,,True
+871699304,52.620671,-8.476608,sports_centre,Murroe Boher GAA,murroe boher,club,,True
+881578374,51.865363,-8.120882,sports_centre,Cloyne GAA,cloyne,club,,True
+882402248,54.181089,-6.345241,,Saint John Bosco CLG,saint john bosco,club,,True
+886481085,51.927596,-8.675847,pitch,GAA Training Pitch,gaa training pitch,functional,,True
+886481094,51.92723,-8.675086,pitch,Hurling wall,hurling wall,club,,True
+886481112,51.928561,-8.672655,pitch,Pairc Camogaiochta Iniscartha,pairc camogaiochta iniscartha,ground,person-unattributed,True
+886481118,51.925593,-8.674126,,Inniscarra GAA Clubhouse,inniscarra gaa clubhouse,functional,,True
+892861653,52.628876,-7.078978,,Young Irelands GAA Club,young irelands,club,,True
+895662760,51.964832,-8.407963,pitch,Sarsfield Juvenile Hurling Pitch,sarsfield juvenile hurling pitch,functional,,True
+902835363,51.782533,-8.872484,sports_centre,Newcestown GAA,newcestown,club,,True
+902862976,53.672466,-6.814911,,Saint Ultans GAA Club,saint ultans,club,,True
+906829819,51.77398,-8.974864,sports_centre,Diarmuid O'Mathuna GAA Club,diarmuid o mathuna,club,,True
+907323976,51.893397,-10.087615,,Club CLG Piarsaigh na Dromoda,club clg piarsaigh na dromoda,club,,True
+907662674,54.112637,-6.7307,stadium,Saint Mary's Park,saint mary s park,ground,saint,True
+911038795,55.076596,-6.058462,,Ruairí Óg,ruairi og,club,,True
+919167894,54.317671,-5.70169,sports_centre,Russell Gaelic Union,russell gaelic union,club,,True
+919691374,52.311308,-6.957263,sports_centre,Horeswood GAA Club,horeswood,club,,True
+925165261,52.138054,-10.267109,pitch,Páirc an Asaigh,pairc an asaigh,ground,person-unattributed,True
+942109335,53.69998,-6.681406,sports_centre,Wolfe Tones GAA Club,wolfe tones,club,,True
+942114327,53.720017,-6.87995,sports_centre,Gaeil Colmcille,gaeil colmcille,club,,True
+942309019,53.845969,-6.807124,sports_centre,Kilmainhamwood GFC,kilmainhamwood,club,,True
+948713291,52.326135,-8.664754,sports_centre,Ballyhea GAA,ballyhea,club,,True
+949130201,52.236393,-8.673312,sports_centre,Buttevant GAA,buttevant,club,,True
+949556366,52.308482,-6.855879,sports_centre,Gusserane O'Rahillys GAA,gusserane o rahillys,club,,True
+951684863,51.937267,-8.484962,sports_centre,Rathpeacon GAA/LGFA Club,rathpeacon gaa lgfa,club,,True
+953058396,55.08319,-8.30996,,C.L.G. Ghaoth Dobhair,clg ghaoth dobhair,club,,True
+961129663,53.229967,-8.730797,,Craughwell Hurling Club,craughwell,club,,True
+963588287,51.843131,-9.128892,sports_centre,Uibh Laoire GAA,uibh laoire,club,,True
+969215852,53.365291,-6.289996,sports_centre,Naomh Fionnbarra GAA Club,naomh fionnbarra,club,,False
+971011981,53.466202,-6.216177,pitch,Balheary Pitch 1,balheary pitch 1,functional,,True
+971011982,53.467493,-6.215447,pitch,Balheary Pitch 2,balheary pitch 2,functional,,True
+971015958,53.050877,-8.397919,sports_centre,Tommy Larkins GAA,tommy larkins,club,,True
+971016607,55.031789,-7.460779,sports_centre,CLG Beart,clg beart,club,,True
+971024899,53.230454,-8.555933,sports_centre,Loughrea Gaelic Football Club,loughrea gaelic football,club,,True
+971029735,53.770576,-7.156699,sports_centre,Gilson Park,gilson park,ground,person-unattributed,True
+971420534,52.91312,-7.29461,sports_centre,Ballypickas GAA,ballypickas,club,,True
+971922999,53.396852,-7.108395,,Boyne Park,boyne park,ground,person-unattributed,True
+971923000,53.396284,-7.108495,pitch,Ballinabrakey GAA,ballinabrakey,club,,True
+972246601,53.329708,-6.527586,pitch,Pairc na nÓg - Main,pairc na nog main,ground,person-unattributed,True
+975200699,53.006482,-7.216205,sports_centre,Park Ratheniska GAA,park ratheniska,club,,True
+977555348,52.271708,-7.806871,sports_centre,Newcastle GAA Club,newcastle,club,,True
+981029605,53.780899,-6.875464,sports_centre,Moynalty GFC,moynalty,club,,True
+981310106,53.026728,-6.998598,sports_centre,Rheban GFC,rheban,club,,True
+983578761,53.12998,-8.408122,sports_centre,Tynagh Abbey Duniry Hurling Club,tynagh abbey duniry,club,,True
+983578762,53.129608,-8.408431,pitch,Duniry Pitch,duniry pitch,club,,True
+990886424,52.894666,-8.552351,sports_centre,Bodyke GAA Club,bodyke,club,,True
+990907128,52.871608,-8.457868,sports_centre,Ogonnelloe GAA Club,ogonnelloe,club,,True
+999316776,53.488775,-8.919942,sports_centre,Belclare GAA,belclare,club,,True
+1001864917,54.491661,-6.944129,sports_centre,Killeeshil St Mary's,killeeshil st mary s,club,,True
+1001890105,54.452774,-7.491345,sports_centre,Trillick St. Macartan's GAC,trillick st macartan s,club,,True
+1002818552,52.253612,-9.734794,pitch,Naomh Pádraig CLG,naomh padraig,club,,True
+1005051658,53.737382,-6.299883,sports_centre,St Fechin's GAA,st fechin s,club,,True
+1006440355,54.185427,-7.23328,stadium,Saint Tiernach’s Park,saint tiernach’s park,ground,saint,True
+1006441119,54.26766,-6.91749,sports_centre,Tyholland Stadium,tyholland stadium,ground,person-unattributed,True
+1007850619,53.289676,-6.388526,sports_centre,St. Mark's GAA Club,st mark s,club,,True
+1009173442,52.731134,-7.393153,sports_centre,St. Lachtain's GAA,st lachtain s,club,,True
+1012746902,53.885625,-8.679477,pitch,"Kilmovee Shamrocks GAA Club, Canon Henry Park",kilmovee shamrocks gaa club canon henry park,ground,clergy,True
+1012752187,52.641925,-7.740987,sports_centre,Moycarkey Borris GAA,moycarkey borris,club,,True
+1030843132,52.340919,-8.852851,sports_centre,Milford GAA,milford,club,,True
+1033865344,53.380821,-6.2426,sports_centre,Whitehall Colmcille GAA,whitehall colmcille,club,,False
+1040904822,53.429281,-9.315141,sports_centre,Oughterard GAA,oughterard,club,,True
+1047034471,53.161565,-6.690404,sports_centre,Two Mile House GAA Club,two mile house,club,,True
+1053569285,54.28891,-7.672688,pitch,Belnaleck GAA,belnaleck,club,,False
+1060504647,52.844285,-7.765251,sports_centre,JK Brackens GAA Club,jk brackens,club,,True
+1060881538,52.886169,-7.818477,sports_centre,Clonakenny GAA Club,clonakenny,club,,True
+1062854597,52.770425,-7.787417,sports_centre,Loughmore Castleiney GAA Club,loughmore castleiney,club,,True
+1064529165,54.761949,-6.506877,sports_centre,Newbridge GAC,newbridge,club,,True
+1064529178,54.742343,-6.523546,sports_centre,Ballymaguigan St Treas GFC,ballymaguigan st treas,club,,True
+1065750616,52.814736,-9.454533,sports_centre,Kilmurry Ibrickane GAA Club,kilmurry ibrickane,club,,True
+1066433902,53.291048,-9.12216,sports_centre,Rahoon / Newcastle GAA,rahoon newcastle,club,,True
+1066844740,53.706031,-6.877872,sports_centre,Gael Colmcille,gael colmcille,club,,True
+1067988827,53.767804,-6.826791,sports_centre,Saint Michaels GFC,saint michaels,club,,True
+1067988828,53.767523,-6.826959,pitch,Saint Michaels,saint michaels,club,,False
+1070597256,55.192642,-7.831735,sports_centre,Downings GAA,downings,club,,True
+1078075598,52.569741,-7.895267,sports_centre,Boherlahan - Dualla GAA Sports Centre,boherlahan dualla gaa sports centre,club,,True
+1079491813,53.349628,-7.057814,sports_centre,Edenderry GAA - Weaver's Fields,edenderry gaa weaver s fields,club,,True
+1080374500,53.33832,-6.216017,sports_centre,Clanna Gael Fontenoy GAA Club,clanna gael fontenoy,club,,True
+1081005404,54.883205,-6.698722,pitch,Training Pitch Left,training pitch left,functional,,True
+1081005405,54.88432,-6.698853,pitch,Training Pitch Right,training pitch right,functional,,True
+1082192287,54.465253,-6.27707,pitch,Saint Patrick's Park,saint patrick s park,ground,saint,True
+1084020673,54.570483,-7.360339,sports_centre,Drumragh Sarsfields G.A.C,drumragh sarsfields,club,,True
+1084022310,54.601075,-7.255392,sports_centre,"St. Mary's GAC, Killyclogher",st mary s gac killyclogher,club,,True
+1084030051,54.490763,-7.127243,sports_centre,Tyrone GAA Garvaghey Centre,tyrone gaa garvaghey centre,club,,True
+1086617300,54.045039,-8.031536,sports_centre,Shane McGettigan Memorial Park - Allen Gaels,shane mcgettigan memorial park allen gaels,ground,memorial,True
+1087945644,53.262839,-9.08695,sports_centre,The Prarie,the prarie,club,,True
+1090560776,52.642133,-8.866936,,Pallaskenry GAA,pallaskenry,club,,True
+1104733237,52.22236,-9.382663,pitch,Cordal GAA Grounds,cordal gaa grounds,club,,True
+1105450219,53.894744,-7.951361,sports_centre,Annaduff GAA,annaduff,club,,True
+1107208751,51.896993,-8.395986,,Cork Camogie Club,cork,club,,True
+1107208752,51.897041,-8.394746,,Cork Camogie Clubhouse,cork camogie clubhouse,functional,,True
+1110065030,53.392522,-6.595179,pitch,School Pitch,school pitch,club,,True
+1115991691,53.9804,-6.880134,pitch,O'Hagan Park,o hagan park,ground,person-unattributed,True
+1118052523,52.059799,-8.099488,,St Catherine's GAA club house,st catherine s gaa club house,club,,True
+1120583555,53.806402,-7.218973,pitch,Pairc Droichead Uí Dhálaigh,pairc droichead ui dhalaigh,ground,place-or-other,True
+1122315101,52.951079,-8.374014,,Whitegate GAA Club,whitegate,club,,True
+1124772516,52.789887,-7.389788,sports_centre,Lisdowney GAA Club,lisdowney,club,,True
+1125705153,54.478867,-6.641815,pitch,Robert Emmet Park,robert emmet park,ground,patriot,True
+1125706666,54.479266,-6.64081,pitch,Robert Emmet GAC training pitch,robert emmet gac training pitch,functional,,True
+1126059834,51.688154,-9.447157,sports_centre,Bantry Blues GAA,bantry blues,club,,True
+1126153460,53.35946,-6.248196,sports_centre,National Handball Centre,national handball centre,functional,,True
+1126650101,53.874331,-7.534502,pitch,Astro Pitch,astro pitch,functional,,True
+1127331708,53.368815,-8.021209,sports_centre,Clann na nGael GAA (Johnstown),clann na ngael gaa johnstown,club,,True
+1131696470,51.652855,-9.341454,sports_centre,Tadhg MacCarthaigh GAA,tadhg maccarthaigh,club,,True
+1132402457,53.51561,-6.552179,pitch,GAA All-weather Astro-turf Pitch,gaa all weather astro turf pitch,functional,,False
+1132402458,53.515592,-6.552889,pitch,GAA All-weather Astro-turf Pitch,gaa all weather astro turf pitch,functional,,False
+1132402459,53.515601,-6.552534,pitch,GAA All-weather Astro-turf Pitch,gaa all weather astro turf pitch,functional,,False
+1136144389,52.752862,-7.563932,,Fenians Johnstown GAA,fenians johnstown,club,,True
+1137615405,54.26897,-7.053753,sports_centre,Scotstown GAA Training Grounds,scotstown gaa training grounds,functional,,True
+1141065032,54.249171,-6.960711,stadium,Monaghan Harps GAA,monaghan harps,club,,True
+1144794204,52.393208,-8.897423,sports_centre,Feenagh Kilmeedy GAA,feenagh kilmeedy,club,,True
+1149437448,51.554487,-9.272171,sports_centre,O'Donovan Rossa GAA Club,o donovan rossa,club,,True
+1152759172,51.575422,-9.038174,sports_centre,Carbery Rangers GAA,carbery rangers,club,,True
+1156120066,51.542364,-9.341863,sports_centre,Ilen Rovers GAA Club,ilen rovers,club,,True
+1157701761,52.980369,-7.503194,sports_centre,Castletown GAA,castletown,club,,True
+1158959858,54.467608,-6.329469,,Saint Peter's Gaelic Athletic Association Club,saint peter s gaelic athletic association,club,,True
+1160959473,53.768112,-6.839692,pitch,Saint Michaels GFC Football Pitch,saint michaels gfc football pitch,club,,True
+1166110103,53.988403,-7.363976,sports_centre,Terry Coyle GAA Club,terry coyle,club,,True
+1175538178,54.105166,-6.061783,sports_centre,Attical GAC,attical,club,,True
+1175884035,53.72699,-6.937971,sports_centre,Drumbaragh Emmets GFC,drumbaragh emmets,club,,True
+1176450238,53.979893,-6.88001,sports_centre,Shercock GAA,shercock,club,,True
+1177211353,54.289932,-7.866944,sports_centre,Shannon Gaels GAA,shannon gaels,club,,True
+1177214372,54.09989,-7.439017,pitch,Rory O'Moore Park,rory o moore park,ground,place-or-other,True
+1177215199,54.099467,-7.322099,sports_centre,Redhills GAA,redhills,club,,True
+1177216237,54.047281,-7.374779,sports_centre,Butlersbridge GAA,butlersbridge,club,,True
+1181742621,52.247915,-9.67724,sports_centre,John Mitchels GAA Club,john mitchels,club,,True
+1186425279,54.214369,-6.282849,sports_centre,Saval GAC,saval,club,,True
+1187355426,54.235836,-6.023716,sports_centre,Kilcoo GAC,kilcoo,club,,True
+1188453814,54.255725,-5.941293,sports_centre,Castlewellan GAC,castlewellan,club,,True
+1189984551,54.354937,-6.148651,sports_centre,Ballela GAC,ballela,club,,True
+1195586491,53.718972,-6.878844,,Gaeil Colmcille GAA Clubhouse,gaeil colmcille gaa clubhouse,functional,,True
+1198828085,53.412642,-6.240224,sports_centre,Cloghran Grounds,cloghran grounds,ground,person-unattributed,True
+1201200390,52.614178,-8.808893,,Kildimo GAA,kildimo,club,,True
+1204986343,54.345287,-6.326416,sports_centre,Aghaderg Ballyvarley GAC,aghaderg ballyvarley,club,,True
+1206889869,53.888214,-9.540205,pitch,Burrishoole GAA Club,burrishoole,club,,True
+1207573458,54.644246,-8.199536,sports_centre,St Nauls GAA Club,st nauls,club,,True
+1208781419,53.660706,-9.116632,sports_centre,Hollymount Carramore GAA club,hollymount carramore,club,,True
+1210349821,53.992575,-6.604589,,Inniskeen Grattans GAA Club,inniskeen grattans,club,,True
+1212347238,53.724233,-6.865026,sports_centre,Round Towers GAA & Kells AC,round towers gaa kells ac,club,,True
+1217543503,53.882191,-7.781498,sports_centre,Gortletteragh GAA,gortletteragh,club,,True
+1218394611,53.846433,-6.805908,,Kilmainhamwood GAA Club,kilmainhamwood,club,,False
+1219586150,54.364161,-6.96399,sports_centre,Truagh GAA,truagh,club,,True
+1220103030,54.218836,-6.844076,sports_centre,Clontibret O'Neills GAA,clontibret o neills,club,,True
+1220266405,54.160254,-6.814719,sports_centre,Cremartin Shamrocks GAA,cremartin shamrocks,club,,True
+1221519119,54.268292,-5.595111,,Ardtole Memorial Park,ardtole memorial park,ground,memorial,True
+1221893093,54.16428,-7.143409,sports_centre,Killeevan Sarasfields GAA,killeevan sarasfields,club,,True
+1223035671,54.010098,-6.821338,sports_centre,Corduff Gaels G.F.C.,corduff gaels,club,,True
+1223205653,54.585336,-5.971886,,Saint Gall's Gaelic Athletic Club,saint gall s gaelic athletic,club,,True
+1223950899,54.223035,-7.097381,sports_centre,Éire Óg GAA,eire og,club,,True
+1225075531,54.848074,-6.679752,,Watty Graham's GAC,watty graham s,club,,True
+1225253233,53.983642,-6.702784,sports_centre,Platinum Tanks Park,platinum tanks park,ground,person-unattributed,True
+1225578178,53.984974,-6.721739,sports_centre,Paírc Emmet,pairc emmet,ground,patriot,True
+1225741743,54.131389,-6.818107,sports_centre,Doohamlet O'Neills GAA,doohamlet o neills,club,,True
+1226358345,54.07399,-6.94808,sports_centre,Latton O'Rahilly GFC,latton o rahilly,club,,True
+1227778587,54.146098,-6.694623,sports_centre,Oram G.F.C.,oram,club,,True
+1228928916,54.264596,-8.477562,pitch,Summerhill College Astro,summerhill college astro,functional,,True
+1229513502,54.111727,-9.162432,sports_centre,Ballina Stephenites GAA Club,ballina stephenites,club,,True
+1232299806,52.363324,-7.583529,sports_centre,Kilsheelan Kilcash GAA,kilsheelan kilcash,club,,True
+1232987172,52.352334,-7.414164,sports_centre,Carrick Swan GAA Club,carrick swan,club,,False
+1234171710,54.18648,-7.238762,sports_centre,The Peace Link,the peace link,club,,True
+1234747710,52.343656,-7.059507,sports_centre,Glenmore GAA Club,glenmore,club,,False
+1234767211,52.366403,-7.176051,sports_centre,Mullinavat GAA Club,mullinavat,club,,True
+1237393401,52.220657,-7.444052,sports_centre,John Mitchels GAA,john mitchels,club,,True
+1238106339,52.273817,-7.871388,sports_centre,Ballybacon - Grange GAA,ballybacon grange,club,,True
+1238188346,53.762196,-7.235373,sports_centre,Saint Brigid's GFC,saint brigid s,club,,True
+1239260658,52.514485,-7.501318,sports_centre,CJ Kickhams Mullinahone GAA Club,cj kickhams mullinahone,club,,True
+1239634418,52.564153,-7.670066,sports_centre,Killenaule GAA Complex,killenaule gaa complex,club,,True
+1240315982,53.330053,-6.528502,pitch,Pairc na nÓg - Juvenile - 1,pairc na nog juvenile 1,functional,,True
+1240315983,53.329265,-6.529064,pitch,Pairc na nÓg - Juvenile - 2,pairc na nog juvenile 2,functional,,True
+1240465943,52.673957,-7.601962,sports_centre,Gortnahoe Glengoole GAA Club,gortnahoe glengoole,club,,True
+1241506227,53.808626,-6.939065,,CLG Cuchulainn GAA Glub,clg cuchulainn gaa glub,club,,True
+1241630984,54.108286,-9.024385,sports_centre,Bonniconlon GAA,bonniconlon,club,,True
+1241787480,52.612368,-7.958007,sports_centre,Clonoulty Rossmore GAA,clonoulty rossmore,club,,True
+1242574513,52.648859,-7.87709,sports_centre,Holycross Ballycahill GAA Club,holycross ballycahill,club,,True
+1242951724,52.66137,-7.951408,sports_centre,Upperchurch Drombane GAA Club,upperchurch drombane,club,,True
+1243277225,52.687393,-7.91088,sports_centre,Holycross Ballycahill GAA,holycross ballycahill,club,,True
+1244123270,52.4112,-8.226086,sports_centre,Aherlow GAA Club,aherlow,club,,True
+1244711739,52.464742,-8.34796,sports_centre,Emly GAA Club,emly,club,,True
+1248084818,54.477256,-6.39633,pitch,Wolfe Tones GAC,wolfe tones,club,,True
+1248691500,52.157897,-7.685762,sports_centre,Colligan GAA,colligan,club,,True
+1248692725,52.156801,-7.653599,sports_centre,Kilgobnet GAA Club,kilgobnet,club,,True
+1249340790,52.244286,-6.401004,sports_centre,St Marys Rosslare GAA & Camogie Club,st marys rosslare,club,,True
+1252111469,52.105129,-8.747502,,Kilshannig GAA,kilshannig,club,,True
+1254383460,51.735202,-8.939086,,St. Marys GAA Club,st marys,club,,True
+1276482435,52.020799,-8.335815,pitch,Hurling Wall,hurling wall,club,,True
+1276482436,52.02059,-8.336094,pitch,Astro training pitch,astro training pitch,functional,,True
+1280899874,52.269368,-9.692969,,Coiste Chontae Chiarraí CLG,coiste chontae chiarrai,club,,True
+1285789518,54.154333,-6.461251,pitch,Lislea Gaelic Pitch,lislea gaelic pitch,club,,True
+1288069407,54.010731,-6.413451,sports_centre,Clan na Gael G.F.C.,clan na gael,club,,True
+1292632665,52.594675,-7.181865,sports_centre,Bennetsbridge G.A.A. Club,bennetsbridge,club,,True
+1300090537,53.822019,-6.468916,sports_centre,"St. Kevin's GAA, Philipstown",st kevin s gaa philipstown,club,,True
+1304460211,53.330782,-8.229374,stadium,Duggan Park,duggan park,ground,person-unattributed,True
+1305792628,52.78137,-7.333557,sports_centre,St. Patrick's GAA Club,st patrick s,club,,True
+1311747786,54.599023,-6.831898,sports_centre,Rock St Patrick's GAC,rock st patrick s,club,,True
+1316649029,54.294869,-5.715698,,Bright GAC,bright,club,,True
+1318434556,53.998671,-6.401547,sports_centre,Dundalk Gaels,dundalk gaels,club,,True
+1321939991,55.061505,-6.310246,sports_centre,Loughgiel Shamrocks GAA,loughgiel shamrocks,club,,True
+1323702309,54.508646,-6.777005,,Eoghan Ruadh Hurling Club,eoghan ruadh,club,,True
+1323938736,54.168139,-6.3561,sports_centre,Thomas Davis Hub,thomas davis hub,club,,True
+1327091503,52.320376,-6.47349,,St. Joseph's GAA Club,st joseph s,club,,True
+1328232514,52.949018,-6.208052,sports_centre,Wicklow GAA,wicklow,club,,True
+1332478781,53.094452,-6.069804,sports_centre,Kilcoole GAA,kilcoole,club,,True
+1333456423,52.714855,-6.493422,sports_centre,Carnew Emmets Badminton and GAA,carnew emmets badminton and,club,,True
+1337716842,51.927429,-8.472176,,Delanys GAA Club,delanys,club,,True
+1338594592,53.894589,-6.38694,sports_centre,The Grove Field,the grove field,ground,person-unattributed,True
+1351667760,53.450157,-6.153903,sports_centre,St. Sylvesters GAA,st sylvesters,club,,True
+1363562163,52.802582,-8.754838,,O'Callaghans Mills GAA Club,o callaghans mills,club,,True
+1366786885,52.867805,-6.49863,sports_centre,Knockananna GAA,knockananna,club,,True
+1377824417,53.059217,-6.691188,sports_centre,Dunlavin GAA,dunlavin,club,,True
+1382873931,54.250518,-10.00155,sports_centre,Belmullet GAA Club,belmullet,club,,True
+1386674799,52.968927,-6.145011,sports_centre,Gleneally GAA,gleneally,club,,True
+1387205654,53.394575,-6.405013,sports_centre,Saint Peregrine's GAA,saint peregrine s,club,,True
+1388183555,54.038497,-8.834758,sports_centre,Tourlestrane G.A.A. Park,tourlestrane gaa park,club,,True
+1388760547,52.815336,-8.439312,sports_centre,Ballina GAA,ballina,club,,True
+1388762396,52.803503,-8.446232,stadium,Smith-O' Brien GAA Field,smith o brien gaa field,club,,True
+1409427023,53.663285,-9.3523,sports_centre,Tourmakeady GFC,tourmakeady,club,,True
+1410388733,53.489658,-9.020398,,Caherlistrane GAA,caherlistrane,club,,True
+1410945071,54.359782,-5.771219,,Teconnaught GAC,teconnaught,club,,True
+1412088112,54.010537,-6.170493,sports_centre,Father McEvoy Park,father mcevoy park,ground,clergy,True
+1416096798,54.436686,-6.455344,pitch,Páirc Athair uí Raifeartaigh,pairc athair ui raifeartaigh,ground,place-or-other,True
+1416096799,54.43629,-6.454694,,Tír na nÓg Gaelic Football Club,tir na nog gaelic football,club,,True
+1416787033,52.853919,-6.216289,sports_centre,Roosters Park,roosters park,ground,person-unattributed,True
+1427101900,52.726782,-6.855175,sports_centre,Carlow GAA Centre of Excellence,carlow gaa centre of excellence,club,,True
+1428381381,52.735094,-6.792198,sports_centre,Ballon GAA,ballon,club,,True
+1435609081,51.891021,-8.393422,sports_centre,Ballinure GAA Club,ballinure,club,,True
+1435658861,51.889431,-8.393228,sports_centre,Saint Michael's GAA Club,saint michael s,club,,True
+1435736269,52.882315,-7.947781,sports_centre,Moneygall GAA,moneygall,club,,True
+1435894955,52.853978,-6.996182,sports_centre,Killeshin GAA,killeshin,club,,True
+1435894957,52.85436,-6.998065,sports_centre,Killeshin GAA,killeshin,club,,False
+1436414101,52.94783,-6.993566,sports_centre,Barrowhouse GAA,barrowhouse,club,,True
+1436736645,52.892762,-6.995431,sports_centre,Arles Killeen GAA Club,arles killeen,club,,True
+1436737745,52.938681,-7.068768,sports_centre,Milltown GAA,milltown,club,,True
+1436740314,52.865606,-7.106098,sports_centre,Crettyard GAA Club,crettyard,club,,True
+1436742819,52.846936,-7.079966,sports_centre,Monavea Handball Club,monavea,functional,,True
+1436745148,52.909163,-7.4067,sports_centre,Shanahoe GAA,shanahoe,club,,True
+1436745442,52.959955,-7.69205,sports_centre,Kyle GAA,kyle,club,,True
+1436745802,53.032706,-7.50291,sports_centre,Sliabh Bloom GAA,sliabh bloom,club,,True
+1436911363,52.765079,-6.427386,sports_centre,Shillelagh-Coolboy GAA,shillelagh coolboy,club,,True
+1436912748,53.197446,-6.468827,sports_centre,Kilbride GAA,kilbride,club,,True
+1436913751,52.928102,-6.155733,sports_centre,Barndarrig GAA,barndarrig,club,,True
+1436943094,52.755607,-6.5312,sports_centre,Shillelagh GAA,shillelagh,club,,True
+1441916417,52.741808,-6.964407,sports_centre,Leighlinbridge GFC,leighlinbridge,club,,True
+1441920120,52.719674,-6.721283,sports_centre,Kilbride GAA,kilbride,club,,True
+1441923257,52.781828,-6.952143,sports_centre,Millford GAA,millford,club,,True
+1442096969,52.9067,-7.267908,pitch,Spink Community Field,spink community field,ground,person-unattributed,True
+1442301309,53.195207,-7.368823,sports_centre,Kilcavan GAA,kilcavan,club,,True
+1442780619,53.258683,-6.737197,sports_centre,Éire Óg Corra Choill,eire og corra choill,club,,False
+1447022804,52.213306,-7.712066,sports_centre,Kirwan Park,kirwan park,ground,person-unattributed,True
+1449973369,53.366906,-8.913706,sports_centre,Claregalway GAA,claregalway,club,,True
+1456714295,53.281349,-6.262701,pitch,Ballinteer St Johns Broadford Pitch,ballinteer st johns broadford pitch,club,,True
+1456871168,53.2489,-8.955939,sports_centre,Chubb Renville Gaelic Grounds,chubb renville gaelic grounds,ground,place-or-other,True
+1459584901,52.720371,-9.063428,pitch,Clondegad GAA Pitch,clondegad gaa pitch,club,,True
+1459931679,54.232398,-6.774034,sports_centre,Derrynoose GAC,derrynoose,club,,True
+1462049943,54.144297,-6.36111,sports_centre,"St. Moninne's GAA, Killeavy",st moninne s gaa killeavy,club,,True
+1462409547,52.451134,-9.670166,pitch,Ballyduff Pitch 1,ballyduff pitch 1,functional,,True
+1462753558,54.256407,-6.701204,sports_centre,Gerard McGleenan Park,gerard mcgleenan park,ground,person-unattributed,True
+1463975989,51.825817,-10.16238,sports_centre,Waterville GAA Club,waterville,club,,True
+1463975992,51.842706,-9.901532,sports_centre,Sneem GAA Club,sneem,club,,True
+1466833289,51.554684,-9.267824,sports_centre,O'Donovan Rossa Riverside Complex,o donovan rossa riverside complex,club,,True
+1469222773,51.943535,-9.161329,sports_centre,CLG Naomh Ában,clg naomh aban,club,,True
+1470103836,51.840744,-8.834474,,Kilmurry GAA Crookstown Grounds,kilmurry gaa crookstown grounds,club,,True
+1470445842,53.337613,-8.87262,sports_centre,Turloughmore GAA,turloughmore,club,,True
+1471395052,52.178778,-9.234432,sports_centre,Ballydesmond GAA Club,ballydesmond,club,,True
+1472052706,51.902556,-8.973054,sports_centre,Macroom GAA Club,macroom,club,,True
+1472124894,54.28933,-6.631583,sports_centre,Ballymacnab Round Towers GAA,ballymacnab round towers,club,,True
+1472725694,54.199486,-6.13525,,Conduff GAC,conduff,club,,True
+1473411913,52.935496,-9.320027,sports_centre,Ennistymon GAA Club,ennistymon,club,,True
+1473420618,52.62704,-9.391179,sports_centre,Killimer GAA Club,killimer,club,,True
+1473423275,53.713414,-6.371937,sports_centre,Jimmy Pentony Park,jimmy pentony park,ground,person-unattributed,True
+1474688951,54.485055,-7.202779,sports_centre,Eskra Emmetts GAC,eskra emmetts,club,,True
+1474692856,54.493225,-7.328285,,Fintona Pearses GAC,fintona pearses,club,,True
+1474827936,51.898976,-9.083641,sports_centre,CLG Cill Na Martra,clg cill na martra,club,,True
+1475352696,51.952498,-7.860358,sports_centre,Youghal GAA Club,youghal,club,,True
+1476258292,54.498097,-8.192009,sports_centre,Aodh Ruadh GAA,aodh ruadh,club,,True
+1476267208,54.474664,-8.282632,sports_centre,Réalt na Mara GAA,realt na mara,club,,True
+1476488331,52.396325,-9.51578,sports_centre,Saint Sennan's GAA,saint sennan s,club,,True
+1476570391,54.950177,-7.691145,sports_centre,Letterkenny Gaels GAA/Rugby Club,letterkenny gaels gaa rugby,club,,True
+1476581387,52.172874,-9.546957,sports_centre,Firies GAA Club,firies,club,,True
+1477398631,54.830841,-6.605978,sports_centre,Erins Own Lavey GAC,erins own lavey,club,,True
+1477860087,52.388753,-9.304484,sports_centre,Father Casey's GAA,father casey s,club,,True
+1477868854,52.525149,-8.930534,sports_centre,Mick Neville Park,mick neville park,ground,person-unattributed,True
+1477868855,52.527623,-8.948371,sports_centre,Rathkeale GAA,rathkeale,club,,True
+1478548802,52.511417,-8.331846,pitch,Knockane GAA Pitch,knockane gaa pitch,club,,True
+1478641252,52.211362,-8.585231,sports_centre,Doneraile GAA,doneraile,club,,True
+1478944269,52.563788,-8.806807,sports_centre,Adare GAA Club,adare,club,,True
+1479284987,54.65486,-8.122207,sports_centre,Na Ceithre Máistrí - Four Masters GAA,na ceithre maistri four masters,club,,True
+1480578774,52.608268,-9.103974,sports_centre,St. Senan's GAA,st senan s,club,,True
+1480591988,52.44738,-8.067332,sports_centre,Galtee Rovers GAA,galtee rovers,club,,True
+1480804903,52.669555,-7.795989,sports_centre,Thurles Gaels GAA,thurles gaels,club,,True
+1481437721,53.13532,-7.042126,sports_centre,Ros Glas GAA,ros glas,club,,True
+1481451519,52.353228,-7.712581,stadium,Clonmel St. Mary's GAA,clonmel st mary s,club,,True
+1481456256,52.362334,-7.705378,sports_centre,Clonmel Óg GAA,clonmel og,club,,True
+1481609066,54.941983,-6.484106,sports_centre,St.Marys GAC,stmarys,club,,True
+1481969208,52.850677,-8.814257,pitch,Caherlohan GAA Training Pitch,caherlohan gaa training pitch,functional,,True
+1481969209,52.851488,-8.816186,pitch,Caherlohan GAA Training Pitch,caherlohan gaa training pitch,functional,,False
+1482844090,53.057557,-7.407081,pitch,Ball Wall,ball wall,functional,,True
+1483921963,54.801551,-7.778216,sports_centre,CLG Seán MacCumhaill,clg sean maccumhaill,club,,True
+1484048563,53.659337,-8.275768,sports_centre,Oran GAA,oran,club,,True
+1485447207,53.947026,-8.075021,sports_centre,St Mary's GAA Carrick,st mary s gaa carrick,club,,True
+1485447209,53.997033,-8.056585,sports_centre,Leitrim Gaels GAA,leitrim gaels,club,,True
+1486969419,52.707782,-8.395912,sports_centre,Newport GAA,newport,club,,True
+1490289631,52.064279,-9.239281,sports_centre,Rathmore GAA Club,rathmore,club,,True
+1493920749,51.802839,-9.755138,pitch,Tuosist GAA,tuosist,club,,True
+1499608641,53.771967,-7.489791,sports_centre,Granard Sports Complex,granard sports complex,club,,True
+1501216287,54.616874,-5.947542,pitch,Cliftonville Playing Field (The Cricky),cliftonville playing field the cricky,ground,place-or-other,True
+1501546493,52.820492,-6.176774,pitch,Arklow Geraldines Ballymoney GAA Club,arklow geraldines ballymoney,club,,True
+1501546848,53.17709,-6.511595,pitch,Lacken GAA Pitch,lacken gaa pitch,club,,True
+1501549373,52.622584,-6.48117,pitch,Clonee GAA Pitch,clonee gaa pitch,club,,True
+1501551769,54.321197,-8.202381,pitch,St. Osnat's GAA,st osnat s,club,,True
+1501979407,54.07236,-8.201181,sports_centre,St Ronan's GAA,st ronan s,club,,True
+1510770332,52.134711,-7.945567,sports_centre,Lismore GAA Club,lismore,club,,True
+1511440534,53.314974,-6.306797,sports_centre,Páirc Lorcáin Uí Thuathail,pairc lorcain ui thuathail,ground,place-or-other,True
+1511706786,54.407249,-6.574293,pitch,Ballyhegan Davitt's GAA,ballyhegan davitt s,club,,True
+1511709570,54.252284,-6.418646,pitch,Lissummon GAA,lissummon,club,,True
+1511709856,54.317429,-6.713671,pitch,Madden Rapparees GAA,madden rapparees,club,,True
+1511709891,54.503367,-6.45949,pitch,"Sarsfield's GAA, High Moss",sarsfield s gaa high moss,club,,True
+1511710051,54.392203,-6.663137,pitch,"St. Colmcille's GAA, Grange",st colmcille s gaa grange,club,,True
+1511710190,54.432637,-6.474692,pitch,"St. Malachy's GAA, Portadown",st malachy s gaa portadown,club,,True
+1511724396,55.008992,-7.338137,pitch,Doire Colmcille GAA,doire colmcille,club,,True
+1511724472,54.922687,-6.904838,pitch,Kevin Lynch's GAA,kevin lynch s,club,,True
+1511724651,54.984378,-7.302298,pitch,"Pearse's GAA, Waterside",pearse s gaa waterside,club,,True
+1517484261,52.465748,-7.329087,sports_centre,Kilmoganny GAA Club,kilmoganny,club,,True
+1526872680,52.932892,-8.986997,pitch,Ruan GAA,ruan,club,,True
+1526872719,52.621931,-9.646083,pitch,O'Currys GAA,o currys,club,,True
+1526872760,52.906761,-9.336877,pitch,Moy GAA,moy,club,,True
+1526872974,52.939687,-9.447219,pitch,Liscannor GAA,liscannor,club,,True
+1526873079,52.994905,-8.734044,pitch,Killanena,killanena,club,,True
+1526873168,52.529891,-9.015181,pitch,St. Kieran's,st kieran s,club,,True
+1526873237,52.787255,-9.028851,pitch,Ballyea GAA,ballyea,club,,True
+1527170259,52.104581,-9.632089,pitch,Listry,listry,club,,True
+1527171251,52.463129,-9.272934,pitch,Athea GAA,athea,club,,True
+1527171628,52.646553,-8.936732,pitch,Ballysteen GAA,ballysteen,club,,True
+1527171729,52.51066,-8.616386,pitch,Camogue Rovers,camogue rovers,club,,True
+1527171806,52.41208,-8.969846,pitch,Feohanagh / Castlemahon,feohanagh castlemahon,club,,True
+1527171894,52.474166,-8.494986,pitch,Knockainey,knockainey,club,,True
+1527192387,52.312916,-8.936874,pitch,Tullylease GAA,tullylease,club,,True
+1527925089,52.403008,-9.634905,sports_centre,Lixnaw Hurling Club.,lixnaw,club,,True
+1529004821,53.519832,-6.167071,pitch,Lusk United AFC Racecours Commons Training Grounds,lusk united afc racecours commons training grounds,functional,,True
+1533203294,52.343931,-8.917014,pitch,Dromcollogher GAA Pitch,dromcollogher gaa pitch,club,,True
+1533709808,54.039429,-8.574732,sports_centre,Bunnanaddan GAA Club,bunnanaddan,club,,True
+1533710279,54.058814,-8.723397,sports_centre,Kilcoyne Memorial Park,kilcoyne memorial park,ground,memorial,True
+1533711533,54.270882,-8.542952,sports_centre,Sligo GAA Centre of Excellence,sligo gaa centre of excellence,club,,True
