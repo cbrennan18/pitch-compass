@@ -2,12 +2,13 @@
 
 **Pitch Compass** — *Every GAA pitch in Ireland, and which way it points.*
 
-Exploration ran July 2026 in three rounds: orientation and a soccer
+Exploration ran July 2026 in four rounds: orientation and a soccer
 control; sunset, twin pitches, sizes and names; county assignment and
-regional geography. This document freezes the data, methods and findings
+regional geography; and a final round of direct tests and robustness
+checks. This document freezes the data, methods and findings
 the write-up builds on. Everything is reproducible from the scripts in
 this directory; all headline numbers were computed by the project's own
-`analyse.py` against the frozen datasets.
+`analyse.py` and `analyse_extra.py` against the frozen datasets.
 
 ## The question
 
@@ -63,6 +64,16 @@ of a N–S or E–W axis (uniform expectation 33.3%). Urban means within
 20 km of Dublin, Cork, Galway, Limerick or Belfast. The GAA-vs-soccer
 rural comparison is a 10,000-trial permutation test (seed 1798). Sunset
 azimuths come from the standard declination formula at latitude 53.4°.
+The final round adds a coastline derived from the same county boundary
+files — no new download — by edge cancellation: every polygon segment is
+hashed by its endpoints and those appearing once are exterior, while
+internal borders appear twice and cancel; the endpoint hash is snapped to
+~100 m (`HASH_PREC = 3`) because the two agencies digitise the shared
+borders independently, and a 3 km cross-file scrub drops the ROI–NI land
+border. It is validated by known distances — Dingle, Bundoran and Youghal
+all under 1 km from the derived coast, Cusack Park in Mullingar 74 km
+inland. Headline results are stable across aspect thresholds 1.15–1.4 and
+cardinal/sunset tolerances of 10–20°.
 
 ## Findings
 
@@ -89,7 +100,8 @@ R₄ = 0.0957 (n = 2,167) vs rural soccer 0.0598 (n = 1,471); gap 0.0359.
 Permutation test, 10,000 shuffles, seed 1798: **p = 0.0549** — just shy
 of significance. The honest reading: in the countryside the two codes
 are statistically indistinguishable, with a hint that GAA adds a whisper
-of its own order on top of the land's.
+of its own order on top of the land's — a whisper that does not clear the
+project's corrected significance bar (Finding 15).
 
 **6. The folklore's ghost: pitches slightly avoid the midsummer sunset.**
 Pitches within 15° of the June-solstice sunset axis (131.8°): 363, vs
@@ -97,7 +109,8 @@ Pitches within 15° of the June-solstice sunset axis (131.8°): 363, vs
 sunset axis (48.2°) is exactly as diagonal, yet less depleted (427;
 equinox 509). Same geometry, different deficit, and the larger avoidance
 falls in the season when evening matches are actually played into low
-sun (June-vs-winter z ≈ 2.3 — suggestive, not conclusive). A faint
+sun (June-vs-winter z ≈ 2.3, p = 0.023 — suggestive, not conclusive, and
+short of the corrected bar the deficit itself clears; Finding 15). A faint
 fingerprint of the one piece of folklore everyone cites.
 
 **7. Orientation at a club is binary: copy or turn square.** Of 1,346
@@ -127,26 +140,50 @@ epithets, deduped: Gaels 19, Óg 14, Rovers 10, Emmets 8, Shamrocks 8,
 Harps 5 — Robert Emmet leads the patriots across all naming. "Park"
 outnumbers "Páirc" roughly three to one.
 
-**10. The counties differ — and the Ice Age shows its hand.** Most
-internally ordered county: **Longford** (n = 33, R₄ = 0.41), ordered
-around a *diagonal* axis (49.3°) with just 9.1% of pitches cardinal.
-Most chaotic: **Tyrone** (R₄ = 0.018 — pitches point anywhere). The
-**drumlin belt** (Cavan, Monaghan, Down, Leitrim — glacial hills with a
-shared NE–SW grain) is more internally ordered than the rest of the
-island (R₄ = 0.172 vs 0.119) around a tilted axis (58.6° vs 82.6°),
-with cardinal-% collapsing to 23.7 vs 39.7. Cavan is the thesis in one
-row: R₄ = 0.234, mean axis 40.5°, and the lowest cardinal share in
-Ireland (14.1%). Longford — drumlin country not even included in the
-pre-registered set — topping the table is the pattern volunteering
-itself. Pitches in drumlin country align with the hills the ice left.
+**10. The counties differ — and the Ice Age shows its hand.** Read one
+county at a time, the league table is mostly mirage: bootstrap 95% CIs
+(2,000 resamples, seed 1798) show that at n ≈ 30–60 nearly every county's
+R₄ reaches down to where pure noise sits at that sample size — only
+**Cork** (R₄ = 0.286, n = 272), **Dublin** (0.318, n = 252) and
+**Tipperary** (0.331, n = 124) clear their own uniform-noise ceilings.
+What survives is regional. The **drumlin belt** (Cavan, Monaghan, Down,
+Leitrim — glacial hills with a shared NE–SW grain) is more internally
+ordered than the rest of the island (R₄ = 0.172 vs 0.119) around a tilted
+axis (58.6° vs 82.6°), cardinal-% collapsing to 23.7 vs 39.7 — and it
+clears the project's corrected significance bar (Finding 15). The sharpest
+single contrast holds up too: **Longford minus Tyrone**, an R₄ difference
+of 0.392, 95% CI [0.084, 0.527], excluding zero. Longford (n = 33,
+R₄ = 0.41, ordered around a *diagonal* 49.3° axis, just 9.1% cardinal) and
+Cavan (R₄ = 0.234, mean axis 40.5°, the lowest cardinal share in Ireland
+at 14.1%) are best read now not as chart-toppers but as illustrations of
+the belt — Longford, drumlin country not even in the pre-registered set,
+tilting exactly the way the drumlins do, while Tyrone (R₄ = 0.018) points
+anywhere. Pitches in drumlin country align with the hills the ice left.
 
-**11. The Atlantic wind gets nothing.** If the prevailing
-south-westerlies shaped pitches, the seaboard counties (Kerry, Clare,
-Galway, Mayo, Sligo, Donegal) should share an axis. They are instead the
-least coherent region measured: R₄ = 0.045 (n = 516) vs 0.124 east of
-them. The wind hypothesis predicted coherence and found chaos. (Rugged
-terrain — every pitch its own valley — is the charitable alternative
-reading; either way, no folklore.)
+**11. The Atlantic wind gets nothing — and this time it was tested
+head-on.** If the prevailing south-westerlies shaped pitches, the seaboard
+counties (Kerry, Clare, Galway, Mayo, Sligo, Donegal) should share an
+axis. They are instead the least coherent region measured: R₄ = 0.045
+(n = 516) vs 0.124 east of them. The final round put the wind on trial
+directly. The wind-axis test counts pitches lying *along* the wind (45°)
+against those turned *across* it (135°) — two equally diagonal lines, so
+the diagonal grid deficit hits both identically and any gap between them
+is wind and only wind. There is no gap in any cohort (45-vs-135 z = 0.78
+island, 0.58 rural, 1.29 seaboard, 0.20 drumlin); both diagonals are
+merely depleted together (island z = −2.28 and −3.41 against uniform — the
+grid, not the weather). The drumlin belt is the clean discriminator: a
+wind would push 45° over 135°, yet the belt's 45-vs-135 z is ≈ 0.2 — its
+tilt is symmetric about the diagonal, the ice's signature, not the wind's.
+A derived coastline (edge-cancelled from the county boundaries; see
+Method) lets us look from the other side: across pitches < 5 km, 5–15 km
+and > 15 km from the sea, the angle between a pitch and its nearest length
+of coast is flat in every band — no along-coast shelter bulge, no
+facing-the-sea peak. Two small twitches in the 5–15 km ring (a
+parallel-to-coast excess, z = 2.28; a 45-vs-135 lean, z = 2.70) fall well
+short of the corrected bar and are read as noise. The wind hypothesis
+predicted coherence and, tested four ways, found chaos. (Rugged terrain —
+every pitch its own valley — remains the charitable reading; either way,
+no folklore.)
 
 **12. Four provinces, four relationships with the compass.** Munster the
 most ordered (R₄ = 0.255, 41.8% cardinal — Tipperary and Cork driving
@@ -165,14 +202,34 @@ break.
 else's grid. One minor genuine code difference: soccer has a faint
 single-axis preference for E–W (2θ R = 0.047, p = 0.004) that GAA lacks.
 
+**15. An honesty count: six findings survive the multiple-comparisons
+bar.** Run enough tests and something will look significant by chance, so
+we counted every hypothesis test in the project — 21 of them — and applied
+a Bonferroni correction: a result now has to clear α = 0.05 / 21 = 0.00238,
+not 0.05, to count. Six clear it: the island cardinal effect (Finding 2),
+its urban and rural halves (Finding 3), the drumlin belt's tilt
+(Finding 10), the June-sunset deficit (Finding 6), and the
+copy-or-turn-square rule at twin pitches (Finding 7). The three faint
+fingerprints stay faint by design — the June-versus-winter sunset gap
+(p = 0.023), the extra rural order in GAA over soccer (p = 0.055), and
+soccer's lone E–W lean (p = 0.004) all miss the corrected threshold and
+are reported as suggestive only, not as verdicts.
+
 ## Limitations
 
 OSM coverage is not a census; polygons measure what mappers drew.
-Urban/rural is a 20 km five-city proxy. County extremes at n ≈ 30–50
-carry wide error bars — regional coherences are the robust findings,
-single-county superlatives should be quoted with their n. The seaboard
-null may blend terrain with wind. The sunset deficit and the rural
-GAA–soccer gap are both sub-threshold signals, reported as suggestive.
+Urban/rural is a 20 km five-city proxy. County extremes at n ≈ 30–60
+carry wide error bars: bootstrap CIs put nearly every single-county R₄
+within reach of uniform noise, and only Cork, Dublin and Tipperary clear
+their own noise ceilings — so the regional coherences, not the
+single-county superlatives, are the robust findings. The seaboard null may
+blend terrain with wind. The rural GAA–soccer gap and the
+June-versus-winter sunset contrast are sub-threshold signals, reported as
+suggestive; the June-sunset deficit itself clears the corrected bar
+(Finding 15). The derived coastline is edge-cancelled from generalised
+boundaries, and its cross-file scrub can shave a little genuine coast where
+the ROI and NI shorelines pass within 3 km at Lough Foyle and Carlingford
+Lough.
 Name dedications await the human review pass (110 unattributed people);
 club-vs-ground bucketing is a heuristic with known leakage. Sizes may be
 conservative if polygons trace grass rather than lines. Nothing was
@@ -184,7 +241,11 @@ manually curated except where explicitly stated — which is the point.
 (Irish soccer control → `soccer_out/`), `assign_counties.py` (county
 boundaries in `boundaries/` → `gaa_out/county_map.csv`, self-verifying),
 `analyse.py` (all findings from the frozen CSVs → terminal +
-`gaa_out/analysis_summary.json`), `make_rose.py` (roses from either
+`gaa_out/analysis_summary.json`), `analyse_extra.py` (final-round tests —
+wind axis, coastline suite, bootstrap CIs, robustness grid,
+multiple-comparisons inventory — from the frozen CSVs plus a coastline
+derived from the boundaries → terminal + `gaa_out/extra_summary.json`,
+`gaa_out/coastline_segments.csv`), `make_rose.py` (roses from either
 dataset). Pull and derivation scripts are stdlib-only; matplotlib for
 roses only. Raw Overpass responses are committed alongside derived data.
 

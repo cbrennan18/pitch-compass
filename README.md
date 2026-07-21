@@ -18,8 +18,13 @@ out not to be GAA wisdom either. In towns, pitches simply follow the
 streets around them. In the countryside the pattern fades and tilts with
 the grain of the land — and Irish soccer pitches, measured the same way,
 show exactly the same thing. The compass belongs to the country, not to
-the code. And in a final twist, the big county grounds mostly run
-east–west: straight into the setting sun the folklore warns about.
+the code. We even put the prevailing south-westerlies on trial directly —
+pitches lying along the wind against pitches turned across it — and they
+left no mark. The one real geographic fingerprint, pitches in the drumlin
+country of the northern midlands lining up with hills the last ice sheet
+moulded, held up even when we tried to explain it away as wind. And in a
+final twist, the big county grounds mostly run east–west: straight into
+the setting sun the folklore warns about.
 
 The full workings — data, method, statistics, and honest caveats — are in
 [`exploration/FINDINGS.md`](exploration/FINDINGS.md).
