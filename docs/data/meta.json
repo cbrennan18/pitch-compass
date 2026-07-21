@@ -1,0 +1,112 @@
+{
+ "project": "Pitch Compass",
+ "generated_utc": "2026-07-21T20:42:06Z",
+ "signal_n": 2707,
+ "soccer_signal_n": 2458,
+ "island": {
+  "twotheta_R": 0.017,
+  "twotheta_p": 0.44290446664991845,
+  "fourtheta_R": 0.107,
+  "fourtheta_p": 3.5765055733452655e-14,
+  "cardinal_pct": 38.0,
+  "cardinal_expected_pct": 33.3
+ },
+ "urban": {
+  "n": 540,
+  "R4": 0.236,
+  "mean_axis": 0.1,
+  "cardinal_pct": 46.3
+ },
+ "rural": {
+  "n": 2167,
+  "R4": 0.096,
+  "mean_axis": 74.6,
+  "cardinal_pct": 36.0
+ },
+ "sunset": {
+  "june": {
+   "axis_deg": 131.8,
+   "within_15deg": 363
+  },
+  "equinox": {
+   "axis_deg": 90.0,
+   "within_15deg": 509
+  },
+  "winter": {
+   "axis_deg": 48.2,
+   "within_15deg": 427
+  },
+  "uniform_expectation": 451
+ },
+ "twins": {
+  "pairs_within_300m": 1346,
+  "parallel_pct": 50.1,
+  "perpendicular_pct": 34.1
+ },
+ "sizes": {
+  "adult_pitches": 2380,
+  "median_length_m": 141.2,
+  "median_width_m": 83.3,
+  "pct_short_under_130m": 18.7,
+  "pct_narrow_under_80m": 36.3,
+  "pct_undersized_either": 39.1,
+  "urban": {
+   "n": 465,
+   "mean_length_m": 134.7,
+   "pct_undersized": 47.7
+  },
+  "rural": {
+   "n": 1915,
+   "mean_length_m": 140.2,
+   "pct_undersized": 37.0
+  }
+ },
+ "rural_gap_permutation": {
+  "rural_gaa": {
+   "n": 2167,
+   "R4": 0.0957
+  },
+  "rural_soccer": {
+   "n": 1471,
+   "R4": 0.0598
+  },
+  "real_gap": 0.0359,
+  "trials": 10000,
+  "seed": 1798,
+  "p_value": 0.0549
+ },
+ "drumlin_belt": {
+  "n": 274,
+  "R4": 0.1724,
+  "mean_axis": 58.6,
+  "cardinal_pct": 23.7
+ },
+ "rest_of_island": {
+  "n": 2433,
+  "R4": 0.1194,
+  "mean_axis": 82.6,
+  "cardinal_pct": 39.7
+ },
+ "western_seaboard": {
+  "n": 516,
+  "R4": 0.0452,
+  "mean_axis": 70.4,
+  "cardinal_pct": 34.1
+ },
+ "stadiums": {
+  "n": 29,
+  "R4": 0.409,
+  "cardinal_pct": 55.2,
+  "note": "county grounds run east-west; see FINDINGS 13"
+ },
+ "multiple_comparisons": {
+  "n_tests": 21,
+  "bonferroni_alpha": 0.00238,
+  "survivors": 6
+ },
+ "attribution": {
+  "pitches": "Pitch data (c) OpenStreetMap contributors, ODbL 1.0 (openstreetmap.org/copyright)",
+  "boundaries": "County boundaries: Tailte Eireann (CC-BY 4.0); Ordnance Survey of Northern Ireland (UK OGL)",
+  "note": "Derived datasets shared under the source licences."
+ }
+}
