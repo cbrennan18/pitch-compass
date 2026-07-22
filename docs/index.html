@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Working title lives in exactly two swappable spots: this <title> and
-       the #site-title <h1>. The og:title stub below mirrors it. -->
-  <title>Pitch Compass — every GAA pitch in Ireland, and which way it points</title>
-  <meta name="description" content="A data-journalism survey measuring the orientation of every mapped GAA pitch in Ireland.">
-  <meta name="color-scheme" content="light">
+  <!-- Working title lives in exactly one swappable spot: this <title>.
+       The og:title mirrors it. Final name pending. -->
+  <title>Pitch Compass — which way does Ireland face?</title>
+  <meta name="description" content="Every mapped GAA pitch in Ireland, drawn at its true bearing. There is no GAA compass — but the land and the towns hold the pen.">
+  <meta name="color-scheme" content="dark">
 
-  <!-- Open Graph stubs (og:image added in a later stage, once a share card exists) -->
-  <meta property="og:title" content="Pitch Compass — every GAA pitch in Ireland, and which way it points">
-  <meta property="og:description" content="A data-journalism survey measuring the orientation of every mapped GAA pitch in Ireland.">
+  <!-- Open Graph stubs (og:image added once a share card exists — TODO) -->
+  <meta property="og:title" content="Pitch Compass — which way does Ireland face?">
+  <meta property="og:description" content="Every mapped GAA pitch in Ireland, drawn at its true bearing.">
   <meta property="og:type" content="article">
   <!-- TODO: <meta property="og:image" content="..."> — social share card, later stage -->
 
@@ -20,344 +20,139 @@
 <body>
 
 <!-- ============================================================= -->
-<!-- TITLE BLOCK                                                    -->
+<!-- ACT 1 · s0 — THE QUESTION (quiz cold open, off the stage)      -->
 <!-- ============================================================= -->
-<header class="masthead">
-  <div class="wrap">
-    <p class="masthead__kicker">A survey of the Irish playing field</p>
-    <!-- Working title. Final name TBD — swap this single element. -->
-    <h1 class="masthead__title" id="site-title">Pitch Compass</h1>
-    <p class="masthead__standfirst">Every GAA pitch in Ireland, and which way it points.</p>
-    <p class="masthead__byline">By Ciaran Brennan · <span id="dateline">TODO date</span> · Open method, open data</p>
+<div class="prose cold">
+  <p class="todo">Placeholder opening. The club has finally bought the field.
+    The digger arrives Monday. You're on the committee, and there's one
+    decision left:</p>
+  <p><strong>Which way do you face the pitch?</strong></p>
+  <div class="quiz" id="quiz">
+    <button type="button" data-a="sun">Away from the setting sun — spare the keeper's eyes</button>
+    <button type="button" data-a="wind">With the prevailing wind — it's how the game breathes</button>
+    <button type="button" data-a="north">True north — the way the old crowd insisted</button>
+    <button type="button" data-a="none">Whatever fits the field — it makes no difference</button>
   </div>
-</header>
+  <p id="quiz-after"></p>
+  <p class="scrollcue">Scroll ↓</p>
+</div>
 
-<main>
-
-  <!-- =========================================================== -->
-  <!-- I. THE FOLKLORE AND THE DISC                                 -->
-  <!-- =========================================================== -->
-  <section class="movement" id="m1" aria-labelledby="m1-title">
-    <div class="wrap">
-      <p class="movement__number">Movement I</p>
-      <h2 class="movement__title" id="m1-title">The folklore and the disc</h2>
-
-      <p class="todo">Placeholder prose. The question everyone has an opinion on and
-        nobody had measured: do GAA pitches avoid the setting sun, line up with the
-        prevailing wind, point true north? This movement sets up the folklore and
-        introduces the single image that answers it — the compass rose of every
-        pitch on the island.</p>
-      <p class="todo">Two or three sentences of the author's real opening go here,
-        landing on the headline: point them every which way and the disc is
-        featureless. There is no GAA compass.</p>
-    </div>
-
-    <div class="wrap wrap--wide">
-      <figure class="plate">
-        <div class="plate__frame">
-          <div class="plate__slot plate__slot--tall" id="slot-rose">
-            <div class="plate__placeholder">
-              <span class="mark">Fig. 1 · hero rose · interactive slot</span>
-              <p class="finding">2,707 GAA pitches, all directions folded onto one
-                axial rose. It is almost perfectly round: 2&theta; R&nbsp;=&nbsp;0.017,
-                p&nbsp;=&nbsp;0.44. No favoured playing direction exists.</p>
-            </div>
-          </div>
-        </div>
-        <figcaption class="plate__caption">
-          <span class="fig">Fig. 1.</span> Mirrored axial rose, island of Ireland
-          (n&nbsp;=&nbsp;2,707). 48 bins of 7.5&deg;. Data &copy; OpenStreetMap
-          contributors, ODbL&nbsp;1.0.
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- =========================================================== -->
-  <!-- II. THE BORROWED ORDER  (live dash-map)                      -->
-  <!-- =========================================================== -->
-  <section class="movement" id="m2" aria-labelledby="m2-title">
-    <div class="wrap">
-      <p class="movement__number">Movement II</p>
-      <h2 class="movement__title" id="m2-title">The borrowed order</h2>
-
-      <p class="todo">Placeholder prose. The order that does exist is modest and it is
-        not GAA lore. In towns the pitches follow the street grid — Dublin's pitches
-        sit dead on the compass (urban R<sub>4</sub>&nbsp;=&nbsp;0.236, 46% cardinal).
-        Introduce the dash-map: every pitch a short stroke at its true bearing, and
-        invite the reader to snap to Dublin and watch the grid appear.</p>
-      <p class="todo">A sentence noting soccer does exactly the same, so the compass
-        pull is Irish land and Irish towns, not GAA culture.</p>
-    </div>
-
-    <div class="wrap wrap--wide">
-      <figure class="plate">
-        <div class="plate__frame">
-          <!-- The load-bearing visual. JS draws 2,707 dashes here; the
-               <noscript>/no-data fallback states the finding in text. -->
-          <div class="dashmap" id="dashmap">
-            <canvas class="dashmap__canvas" id="dashmap-canvas"
-                    width="720" height="900"
-                    role="img"
-                    aria-label="Map of Ireland with every GAA pitch drawn as a short line at its playing orientation."></canvas>
-            <div class="dashmap__controls" role="group" aria-label="Map framing">
-              <button class="btn" type="button" data-preset="island" aria-pressed="true">Island</button>
-              <button class="btn" type="button" data-preset="dublin" aria-pressed="false">Dublin</button>
-              <button class="btn" type="button" data-preset="drumlin" aria-pressed="false">Cavan&ndash;Monaghan</button>
-            </div>
-            <noscript>
-              <div class="plate__slot">
-                <div class="plate__placeholder">
-                  <span class="mark">Fig. 2 · dash-map · needs JavaScript</span>
-                  <p class="finding">Every pitch drawn at its true bearing. In Dublin
-                    the strokes snap to the street grid; in Cavan&ndash;Monaghan they
-                    comb along the drumlins. A static plate will appear here in a later
-                    build.</p>
-                </div>
-              </div>
-            </noscript>
-          </div>
-        </div>
-        <figcaption class="plate__caption">
-          <span class="fig">Fig. 2.</span> The dash-map — each of 2,707 pitches as a
-          stroke at its orientation. Presets: whole island, Dublin (grid), and the
-          Cavan&ndash;Monaghan drumlin belt. Data &copy; OpenStreetMap contributors;
-          coastline derived from Tailte&nbsp;&Eacute;ireann (CC-BY&nbsp;4.0) and
-          OSNI&nbsp;(OGL) boundaries.
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- =========================================================== -->
-  <!-- III. THE LAND HOLDS THE PEN                                  -->
-  <!-- =========================================================== -->
-  <section class="movement" id="m3" aria-labelledby="m3-title">
-    <div class="wrap">
-      <p class="movement__number">Movement III</p>
-      <h2 class="movement__title" id="m3-title">The land holds the pen</h2>
-
-      <p class="todo">Placeholder prose. In the countryside the order comes from the
-        grain of the land. Send the reader back to the dash-map's
-        <em>Cavan&ndash;Monaghan</em> preset (Fig.&nbsp;2): the drumlin belt combs
-        NE&ndash;SW, aligned with hills the ice sheet moulded (belt R<sub>4</sub>
-        &nbsp;=&nbsp;0.172 around a 58.6&deg; axis, versus 0.119 for the rest of the
-        island). Pitches align with the drumlins.</p>
-      <p class="todo">A sentence on reading the counties honestly — most single-county
-        league-table positions are noise at n&nbsp;&asymp;&nbsp;30&ndash;60; what
-        survives is regional. The small-multiples plate below will carry the county
-        roses with their error bars.</p>
-    </div>
-
-    <div class="wrap wrap--wide">
-      <figure class="plate">
-        <div class="plate__frame">
-          <div class="plate__slot plate__slot--tall" id="slot-counties">
-            <div class="plate__placeholder">
-              <span class="mark">Fig. 3 · county small-multiples · slot</span>
-              <p class="finding">Thirty-two county roses, ordered by R<sub>4</sub>,
-                each with its bootstrap noise ceiling. Only Cork, Dublin and Tipperary
-                clear their own ceilings; the drumlin belt's tilt is the robust
-                regional signal.</p>
-            </div>
-          </div>
-        </div>
-        <figcaption class="plate__caption">
-          <span class="fig">Fig. 3.</span> Per-county orientation, 32 counties.
-          Bootstrap 95% CIs (2,000 resamples, seed&nbsp;1798). Data &copy; OpenStreetMap
-          contributors; counties Tailte&nbsp;&Eacute;ireann&nbsp;+&nbsp;OSNI.
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- =========================================================== -->
-  <!-- IV. THE GHOST AND THE HONESTY COUNT                          -->
-  <!-- =========================================================== -->
-  <section class="movement" id="m4" aria-labelledby="m4-title">
-    <div class="wrap">
-      <p class="movement__number">Movement IV</p>
-      <h2 class="movement__title" id="m4-title">The ghost and the honesty count</h2>
-
-      <p class="todo">Placeholder prose. One faint fingerprint of the folklore does
-        survive: pitches slightly avoid the midsummer-sunset line (363 within 15&deg;
-        of the June axis, versus ~451 expected). The control that matters is winter —
-        equally diagonal, less depleted. Introduce the sun-path figure that shows the
-        June sunset cutting across the disc.</p>
-      <p class="todo">Then the honesty count: run 21 tests and something looks
-        significant by chance, so we set the bar at Bonferroni &alpha;&nbsp;=&nbsp;0.00238.
-        Six findings clear it. The faint fingerprints are reported as suggestive, not
-        verdicts.</p>
-    </div>
-
-    <div class="wrap wrap--wide">
-      <figure class="plate">
-        <div class="plate__frame">
-          <div class="plate__slot plate__slot--tall" id="slot-sun">
-            <div class="plate__placeholder">
-              <span class="mark">Fig. 4 · sun-path · slot</span>
-              <p class="finding">The June sunset falls on a 131.8&deg; axis. Pitches
-                thin out along it — a deficit that clears the corrected bar. The
-                folklore's ghost, faint but real.</p>
-            </div>
-          </div>
-        </div>
-        <figcaption class="plate__caption">
-          <span class="fig">Fig. 4.</span> Midsummer sunset azimuth at 53.4&deg;N and
-          the pitch-orientation deficit along it. Data &copy; OpenStreetMap contributors.
-        </figcaption>
-      </figure>
-    </div>
-
-    <div class="wrap">
-      <div class="honesty" id="honesty">
-        <h3>The honesty count — six of twenty-one survive</h3>
-        <p>21 hypothesis tests. Bonferroni bar: &alpha;&nbsp;=&nbsp;0.05&nbsp;/&nbsp;21
-          &nbsp;=&nbsp;0.00238. Clearing it:</p>
-        <ol>
-          <li>Island cardinal effect (4&theta;)</li>
-          <li>Urban cardinal alignment</li>
-          <li>Rural cardinal alignment</li>
-          <li>Drumlin-belt tilt</li>
-          <li>June-sunset deficit</li>
-          <li>Copy-or-turn-square at twin pitches</li>
-        </ol>
-        <p class="todo">Author: confirm framing. Numbers injected from meta.json in a
-          later stage; static here.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================== -->
-  <!-- V. THE INTERLUDE AND THE KICKER                              -->
-  <!-- =========================================================== -->
-  <section class="movement" id="m5" aria-labelledby="m5-title">
-    <div class="wrap">
-      <p class="movement__number">Movement V</p>
-      <h2 class="movement__title" id="m5-title">The interlude and the kicker</h2>
-
-      <p class="todo">Placeholder prose. The human interlude: how a club decides its
-        orientation once and for all (twin pitches are 84% parallel-or-perpendicular),
-        how two in five pitches are undersized with width the first casualty, and how
-        Ireland names its grounds for the sacred dead and its clubs for defiance.</p>
-      <p class="todo">Then the kicker. The county grounds — the cathedrals — run
-        east&ndash;west, R<sub>4</sub>&nbsp;=&nbsp;0.409, straight into the setting sun
-        the folklore warns about. The one rule everyone cites is the one the big
-        stadiums break.</p>
-
-      <h3>Interlude — twins, sizes, names</h3>
-    </div>
-
-    <div class="wrap wrap--wide">
-      <figure class="plate">
-        <div class="plate__frame">
-          <div class="plate__slot" id="slot-twins">
-            <div class="plate__placeholder">
-              <span class="mark">Fig. 5 · twin pitches · slot</span>
-              <p class="finding">Of 1,346 neighbour-pairs, 50% are parallel and 34%
-                perpendicular — 84% at the two extremes. Orientation is decided once,
-                then copied or turned square.</p>
-            </div>
-          </div>
-        </div>
-        <figcaption class="plate__caption">
-          <span class="fig">Fig. 5.</span> Angle between neighbouring pitches within
-          300&nbsp;m (n&nbsp;=&nbsp;1,346 pairs). Data &copy; OpenStreetMap contributors.
-        </figcaption>
-      </figure>
-
-      <figure class="plate">
-        <div class="plate__frame">
-          <div class="plate__slot" id="slot-sizes">
-            <div class="plate__placeholder">
-              <span class="mark">Fig. 6 · sizes · slot</span>
-              <p class="finding">2,380 adult pitches, median 141&times;83&nbsp;m.
-                39% are undersized on at least one dimension; width is what gets
-                sacrificed, and town squeezes hardest.</p>
-            </div>
-          </div>
-        </div>
-        <figcaption class="plate__caption">
-          <span class="fig">Fig. 6.</span> Length&times;width of adult-scale pitches
-          (length&nbsp;&ge;&nbsp;100&nbsp;m). Data &copy; OpenStreetMap contributors.
-        </figcaption>
-      </figure>
-
-      <figure class="plate">
-        <div class="plate__frame">
-          <div class="plate__slot" id="slot-names">
-            <div class="plate__placeholder">
-              <span class="mark">Fig. 7 · names · slot</span>
-              <p class="finding">1,288 unique entities. Grounds remember saints,
-                patriots and the dead; clubs take epithets of defiance — Gaels,
-                &Oacute;g, Emmets. &ldquo;Park&rdquo; outnumbers &ldquo;P&aacute;irc&rdquo;
-                three to one.</p>
-            </div>
-          </div>
-        </div>
-        <figcaption class="plate__caption">
-          <span class="fig">Fig. 7.</span> Named features, classified and deduped.
-          Data &copy; OpenStreetMap contributors.
-        </figcaption>
-      </figure>
-
-      <figure class="plate">
-        <div class="plate__frame">
-          <div class="plate__slot plate__slot--tall" id="slot-stadiums">
-            <div class="plate__placeholder">
-              <span class="mark">Fig. 8 · the kicker · stadium sun diagram · slot</span>
-              <p class="finding">29 county grounds, R<sub>4</sub>&nbsp;=&nbsp;0.409,
-                long axes clustering east&ndash;west — into the setting sun. Semple
-                92&deg;, P&aacute;irc&nbsp;U&iacute;&nbsp;Rinn 89&deg;, the Gaelic
-                Grounds 84&deg;.</p>
-            </div>
-          </div>
-        </div>
-        <figcaption class="plate__caption">
-          <span class="fig">Fig. 8.</span> County-ground long axes against the sunset
-          line (n&nbsp;=&nbsp;29). Data &copy; OpenStreetMap contributors.
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- =========================================================== -->
-  <!-- HOW WE DID THIS                                              -->
-  <!-- =========================================================== -->
-  <aside class="methods" id="methods" aria-labelledby="methods-title">
-    <div class="wrap">
-      <h2 id="methods-title">How we did this</h2>
-      <p class="todo">Placeholder. Short, plain-language method: where the pitches come
-        from (OpenStreetMap), how each pitch's bearing is the long axis of its
-        minimum-area rectangle, what the signal filter keeps, and why orientation is
-        axial. The full frozen method and every number lives in the exploration log.</p>
-      <p>The repository is public and the method is open. Read the frozen findings and
-        reproduce every figure from the scripts:</p>
-      <ul>
-        <li><a href="https://github.com/cbrennan18/pitch-compass/blob/main/exploration/FINDINGS.md">FINDINGS.md — the frozen exploration log</a></li>
-        <li><a href="https://github.com/cbrennan18/pitch-compass">Source repository</a></li>
-      </ul>
-      <ul class="licences">
-        <li>Pitch data &copy; OpenStreetMap contributors, ODbL&nbsp;1.0 — openstreetmap.org/copyright</li>
-        <li>County boundaries (26): Tailte&nbsp;&Eacute;ireann, Creative Commons Attribution&nbsp;4.0</li>
-        <li>County boundaries (6): Ordnance Survey of Northern Ireland, UK Open Government Licence</li>
-        <li>The coastline is derived from those county boundary files (no separate download).</li>
-        <li>Type: Source Serif&nbsp;4, Fraunces and IBM Plex Mono — self-hosted, SIL Open Font Licence; licence files in <code>fonts/</code>.</li>
-      </ul>
-    </div>
-  </aside>
-
-</main>
-
-<footer class="site-footer">
-  <div class="wrap">
-    <!-- Title deliberately not repeated here — it lives only in <title> and
-         #site-title so the launch rename stays a two-line change. -->
-    <p>A data-journalism survey. Built by
-      <a href="https://cbrennan.ie">cbrennan.ie</a>.</p>
+<!-- ============================================================= -->
+<!-- THE STICKY STAGE · scenes s1–s8 (Acts 1–3)                     -->
+<!-- ============================================================= -->
+<div class="scrolly">
+  <div class="stage">
+    <canvas id="cv" role="img"
+      aria-label="Every mapped GAA pitch in Ireland, drawn at its true bearing and choreographed scene by scene."></canvas>
+    <noscript>
+      <p class="stage__noscript">Every one of 2,707 pitches, drawn at its true
+        bearing. Folded onto one compass the disc is almost perfectly round:
+        there is no favoured playing direction. The order that does exist is
+        the street grid in the towns and the drumlins in the country — not GAA
+        lore. The steps below tell the whole story without animation.</p>
+    </noscript>
   </div>
-</footer>
 
-<script src="js/dashmap.js" defer></script>
+  <div class="steps">
+    <!-- s1 · protagonist (personalised by the quiz answer) -->
+    <div class="step"><div class="card"><p class="todo">Meet the one pitch
+      that faces the way you chose — a real, named ground. Its name, size and
+      bearing are on the field. It agrees with you. But does Ireland?</p></div></div>
+
+    <!-- s2 · the cast assembles into the island -->
+    <div class="step"><div class="card"><p class="todo">2,707 committees
+      answered before you. Here is every one of their answers, each pitch at
+      its true shape, size and bearing. Together they draw the island unaided.
+      <em>Tap any pitch.</em></p></div></div>
+
+    <!-- s3 · the rose fold + quiz payoff line -->
+    <div class="step"><div class="card"><p class="todo">Fold every bearing onto
+      one compass. <span id="verdict">If any folklore were true, this ring
+      would bulge somewhere. It is almost perfectly round.</span>
+      <em>There is no GAA compass.</em></p></div></div>
+
+    <!-- s4 · the soccer guest cast -->
+    <div class="step"><div class="card"><p class="todo">Maybe it's a GAA thing?
+      Set the 2,458 soccer pitches beside it. Two near-identical round discs.
+      <em>It is not GAA lore — it is Irish ground.</em></p></div></div>
+
+    <!-- s5 · urban / rural regroup -->
+    <div class="step"><div class="card"><p class="todo">Split the cast in two.
+      The town pitches settle toward north–south and east–west; the country
+      pitches stay loose and tilted. The order that exists is a town order.</p></div></div>
+
+    <!-- s6 · Dublin close-up -->
+    <div class="step"><div class="card"><p class="todo">Zoom into Dublin: the
+      capital's pitches obey the <em>street grid</em> — north–south, east–west,
+      block after block.</p></div></div>
+
+    <!-- s7 · Cavan–Monaghan close-up -->
+    <div class="step"><div class="card"><p class="todo">And in the drumlin
+      country of Cavan and Monaghan, pitches comb NE–SW — aligned with hills
+      the last ice sheet moulded. <em>The land holds the pen.</em></p></div></div>
+
+    <!-- s8 · the sun sweep -->
+    <div class="step"><div class="card"><p class="todo">And <span class="sun">the
+      setting sun</span> — the one rule everyone cites? Watch it sweep the
+      seasons. Along the midsummer line there is a small, real deficit of
+      pitches: the folklore's ghost. Faint — and the only trace we found.</p></div></div>
+  </div>
+</div>
+
+<!-- ============================================================= -->
+<!-- ACT 3 · f1 — CHART: the sunset deficit (static inline SVG)     -->
+<!-- Values transcribed from data/charts.json → sunset series       -->
+<!-- (June 363, equinox 509, winter 427, uniform 451). JS-off safe. -->
+<!-- ============================================================= -->
+<section class="chart prose" aria-labelledby="f1-title">
+  <h3 id="f1-title">The sunset deficit</h3>
+  <p class="todo">Placeholder caption. Pitches within 15° of each season's
+    sunset axis. The honest comparison is winter: exactly as diagonal as June,
+    yet less depleted. June's deficit clears the uniform bar; the June-vs-winter
+    gap does not clear it.</p>
+  <figure>
+    <svg viewBox="0 0 600 340" role="img"
+      aria-label="Bar chart: pitches within 15 degrees of each season's sunset axis. June 363, equinox 509, winter 427, against a uniform expectation of 451.">
+      <!-- baseline -->
+      <line class="axis" x1="60" y1="280" x2="580" y2="280"></line>
+      <!-- uniform expectation, dashed at 451 (y = 280 - 451*0.44 = 81.6) -->
+      <line class="ref" x1="60" y1="82" x2="580" y2="82"></line>
+      <text class="tick" x="580" y="76" text-anchor="end">uniform ≈ 451</text>
+      <!-- bars: June (363), equinox (509), winter (427); scale 0.44 px/pitch -->
+      <rect class="bar" x="110" y="120" width="90" height="160"></rect>
+      <rect class="bar" x="255" y="56"  width="90" height="224"></rect>
+      <rect class="bar" x="400" y="92"  width="90" height="188"></rect>
+      <!-- value labels -->
+      <text class="tick" x="155" y="112" text-anchor="middle">363</text>
+      <text class="tick" x="300" y="48"  text-anchor="middle">509</text>
+      <text class="tick" x="445" y="84"  text-anchor="middle">427</text>
+      <!-- season labels -->
+      <text class="tick" x="155" y="298" text-anchor="middle">June</text>
+      <text class="tick" x="300" y="298" text-anchor="middle">Equinox</text>
+      <text class="tick" x="445" y="298" text-anchor="middle">Winter</text>
+      <!-- annotation on June -->
+      <text class="callout" x="155" y="330" text-anchor="middle">the folklore's ghost</text>
+    </svg>
+  </figure>
+</section>
+
+<!-- ============================================================= -->
+<!-- BUILD BOUNDARY — Acts 4–5 (charts f2–f4, the stadium kicker,   -->
+<!-- the free explorer, the county book and the methods box) land   -->
+<!-- in sub-stages 2B-ii and 2C. Nothing below this line yet.       -->
+<!-- ============================================================= -->
+
+<div class="fin">Stage 2B-i · real data, frozen July 2026 · quiet page, loud
+graphics · theme: grass, chalk, and one amber sun.</div>
+
+<!-- tap-a-pitch sheet -->
+<div class="sheet" id="sheet">
+  <button class="close" type="button" aria-label="Close">×</button>
+  <h3 id="s-name">—</h3>
+  <div class="meta" id="s-meta">—</div>
+  <div id="s-body">—</div>
+</div>
+
+<script src="js/stage.js" defer></script>
 </body>
 </html>
