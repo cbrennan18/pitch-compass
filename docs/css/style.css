@@ -68,11 +68,15 @@ canvas { display: block; width: 100%; height: 100%; }
 }
 
 .steps { position: relative; z-index: 2; pointer-events: none; }
+/* Taller than the viewport so each scene's formation can complete and then
+   HOLD on its plateau while the card scrolls up (paired with the engine's
+   settle-fraction). */
 .step {
-  min-height: 110vh; display: flex; align-items: flex-end;
+  min-height: 150vh; display: flex; align-items: flex-end;
   justify-content: center; padding: 0 1rem 10vh;
 }
-.step:first-child { min-height: 55vh; }
+.step:first-child { min-height: 60vh; }
+.step--tall { min-height: 190vh; }   /* the sun scene needs extra dwell */
 .step .card {
   pointer-events: auto; background: var(--grass);
   border: 1.5px solid var(--chalk); max-width: 30rem;
@@ -80,6 +84,7 @@ canvas { display: block; width: 100%; height: 100%; }
 }
 .step .card em { font-style: italic; }
 .step .card .sun { color: var(--amber); }
+.step .card--wide { max-width: 33rem; }   /* the sun card needs more room */
 
 /* ---- tap-a-pitch sheet ---- */
 .sheet {

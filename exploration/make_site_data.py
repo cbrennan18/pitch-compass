@@ -163,20 +163,27 @@ assert N == 2707, f"signal sample is {N}, expected 2707 — check the filter/inp
 # ---- cast.json — the Stage 2 cast: 2,707 signal pitches with full shape,
 #      name and county. Compact arrays + fields header. The four quiz
 #      protagonists are pre-located by index so s1's swap is instant. ----
-PROTAGONISTS = {  # confirmed author picks (all full-regulation named grounds)
-    "sun":   "PJ Duke Memorial Park",   # 41.8° — square to the June sunset line
-    "wind":  "Delvin GAA",              # 44.5° — on the SW prevailing axis
-    "north": "Pearse Park",             # 0.3°  — true north-south
-    "none":  "Devlin Park",             # 107.9° — spec-named default
+PROTAGONISTS = {  # confirmed author picks (character-first, full-regulation).
+    # (name, target bearing) — target disambiguates duplicate club names, e.g.
+    # two "St. Faithleach's" in Roscommon (2.9° and 47.5°): we want the wind one.
+    "sun":   ("PJ Duke Memorial Park", 41.8),        # Cavan — square to the June sunset line
+    "wind":  ("St. Faithleach's", 45.0),             # Roscommon — SW prevailing axis
+    "north": ("Pearse Park", 0.0),                   # Longford — true north-south
+    "none":  ("Ray Prendergast Memorial Park", 151.8),  # Mayo — doesn't matter
 }
-name_to_idx = {}
-for i, rec in enumerate(cast):
-    name_to_idx.setdefault(rec[5], i)   # first occurrence of each name
+
+
+def axis_diff(a, b):
+    d = abs(a - b) % 180.0
+    return min(d, 180.0 - d)
+
+
 protagonists = {}
-for key, want in PROTAGONISTS.items():
-    idx = name_to_idx.get(want)
-    assert idx is not None, f"protagonist '{want}' ({key}) not found in cast"
-    protagonists[key] = idx
+for key, (want, target) in PROTAGONISTS.items():
+    matches = [(axis_diff(rec[2], target), i) for i, rec in enumerate(cast)
+               if rec[5] == want]
+    assert matches, f"protagonist '{want}' ({key}) not found in cast"
+    protagonists[key] = min(matches)[1]   # closest bearing to the target
 
 with open(os.path.join(OUT, "cast.json"), "w") as f:
     json.dump({
