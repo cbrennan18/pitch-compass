@@ -59,7 +59,50 @@
   let mirror = null;     // rose fold mirror positions (2 per pitch)
   let soccerRose = null; // precomputed soccer guest rose [x,y] per bearing
   let roseCentre = null; // {cx,cy,R} of the centred rose (for the sun sweep)
-  let townC = null, countryC = null, halfR = 0;  // town/country half-roses
+  // town/country petal roses: 6 AXIS-bins of 30deg covering [0,180) — each
+  // pitch's bearing falls in exactly one, so shares sum to 1. Bin 0 (centred
+  // 0/180) and bin 3 (centred 90/270) are exactly make_site_data.py's own
+  // cardinal_pct population ("within 15deg of a multiple of 90"), so the
+  // petal shape and the cardinal-emphasis brightening share one definition.
+  let townPetal = null, countryPetal = null;
+  let townGi = [], countryGi = [];   // subset-local -> global P index, for ghosts
+  const EMPH_FULL = 1.0, EMPH_FAINT = 0.45;   // cardinal-emphasis alpha ratio
+
+  function axisBinOf(bDeg) {
+    const m = ((bDeg % 180) + 180) % 180;      // normalise to [0,180)
+    return Math.floor((m + 15) / 30) % 6;       // bins centred 0/30/60/90/120/150
+  }
+  function withinCardinalAxis(bDeg) {
+    const bin = axisBinOf(bDeg);
+    return bin === 0 || bin === 3;
+  }
+
+  // Petal rose for a subset of P (array of global indices). Petal length is
+  // LINEAR in bin share (matches the main rose's convention elsewhere in the
+  // piece); refR is the uniform-expectation radius for the dashed reference
+  // ring (item 2's honesty anchor, same device as f1's dashed uniform line).
+  // Each pitch draws at its TRUE bearing angle (no invented angular jitter —
+  // real bearings already spread across the bin); radius is jittered within
+  // [0, petalR] in the same "ring near the edge" style as the main rose.
+  // ghost[] mirrors each dot to bearing+180 (axial data is a line, not a
+  // ray) — same convention as the main rose's `mirror` array.
+  function buildPetalRose(cx, cy, R, giList) {
+    const n = giList.length;
+    const axisCount = new Array(6).fill(0);
+    giList.forEach(gi => axisCount[axisBinOf(P[gi].b)]++);
+    const petalR = axisCount.map(c => R * (c / n));
+    const refR = R / 6;   // uniform expectation: 1/6 share per axis-bin
+    const pos = new Array(n), ghost = new Array(n);
+    giList.forEach((gi, k) => {
+      const p = P[gi];
+      const rOut = petalR[axisBinOf(p.b)];
+      const rr = rOut * (0.70 + 0.28 * hash(gi, 5));
+      const a = (p.b - 90) * Math.PI / 180;
+      pos[k] = [cx + rr * Math.cos(a), cy + rr * Math.sin(a)];
+      ghost[k] = [cx - rr * Math.cos(a), cy - rr * Math.sin(a)];
+    });
+    return { cx, cy, R, refR, petalR, pos, ghost };
+  }
 
   function setTarget(arr, i, x, y, s, a) { arr.set([x, y, s, a], i * 4); }
 
@@ -108,31 +151,45 @@
       soccerRose[i * 2 + 1] = scy + r * Math.sin(a);
     });
 
-    // 4 — town vs country: two half-size axial roses (item 6). Same fold as
-    //     the main rose, subset by the urban flag. The town rose genuinely
-    //     bunches toward the cardinals (46% vs 36%); the annotation carries the
-    //     stat, so nothing is exaggerated — only subset and labelled.
-    townC = { cx: VW * 0.30, cy: VH * 0.52 };
-    countryC = { cx: VW * 0.70, cy: VH * 0.52 };
-    halfR = Math.min(VW, VH) * 0.20;
+    // 4 — town vs country: two BINNED PETAL ROSES (gate-fail fix #2). 12 bins
+    //     of 30deg, phase-shifted so bin centres land on 0/30/60/.../330 —
+    //     the four centred on 0/90/180/270 are exactly the pipeline's own
+    //     "within 15deg of a cardinal" definition (cardinal_pct in
+    //     make_site_data.py), so the petal shape and the cardinal-emphasis
+    //     brightening below share ONE definition, not two invented ones.
+    //     Petal length is LINEAR in bin share (same convention as the main
+    //     rose elsewhere in the piece) with a dashed reference ring at the
+    //     uniform-expectation radius (R_max/12) — the same honesty device
+    //     f1's sunset chart already uses, so a spike past the ring reads as
+    //     "more than chance," not just "longer."
+    townGi = []; countryGi = [];
+    P.forEach((p, i) => (p.urban ? townGi : countryGi).push(i));
+    const petalR4 = Math.min(VW, VH) * 0.20;
+    townPetal = buildPetalRose(VW * 0.30, VH * 0.50, petalR4, townGi);
+    countryPetal = buildPetalRose(VW * 0.70, VH * 0.50, petalR4, countryGi);
+    let ti = 0, ci = 0;
     P.forEach((p, i) => {
-      const c = p.urban ? townC : countryC;
-      const a = (p.b - 90) * Math.PI / 180;
-      const r = halfR * (0.70 + 0.28 * hash(i, 1));
-      setTarget(S[4], i, c.cx + r * Math.cos(a), c.cy + r * Math.sin(a), 0.06, 1);
+      const [x, y] = p.urban ? townPetal.pos[ti++] : countryPetal.pos[ci++];
+      // cardinal emphasis: full chalk within 15deg of N/S/E/W, faint otherwise
+      const alpha = withinCardinalAxis(p.b) ? EMPH_FULL : EMPH_FAINT;
+      setTarget(S[4], i, x, y, 0.06, alpha);
     });
 
     // 5 — Dublin close-up (street grid); 6 — Cavan–Monaghan (drumlin comb).
     //     Boxes tightened vs the prototype so the dashes read and tap at phone
-    //     scale; county borders drawn under each (items 7 & 9).
+    //     scale; county borders drawn under each (items 7 & 9). Rendered with
+    //     drawPitchSymbolic (gate-fail fix #3: min-length strokes, not true-
+    //     scale rects — a rect blobs at this zoom, a stroke reads an angle).
+    //     Cardinal emphasis (same axis test as item 2) reuses the alpha
+    //     channel, same mechanism, no new per-scene logic.
     const dub = fitter(53.28, 53.42, -6.40, -6.12, 22);
     FIT.dublin = dub;
     P.forEach((p, i) => { const [x, y] = dub.pos(p);
-      setTarget(S[5], i, x, y, dub.pxPerM, 1); });
+      setTarget(S[5], i, x, y, dub.pxPerM, withinCardinalAxis(p.b) ? EMPH_FULL : EMPH_FAINT); });
     const cav = fitter(53.92, 54.28, -7.45, -6.78, 22);
     FIT.cavan = cav;
     P.forEach((p, i) => { const [x, y] = cav.pos(p);
-      setTarget(S[6], i, x, y, cav.pxPerM, 1); });
+      setTarget(S[6], i, x, y, cav.pxPerM, withinCardinalAxis(p.b) ? EMPH_FULL : EMPH_FAINT); });
 
     // 7 — rose again, re-centred, for the sun sweep (mirror off)
     P.forEach((p, i) => S[7].set(S[2].subarray(i * 4, i * 4 + 4), i * 4));
@@ -162,6 +219,26 @@
         }
       }
     }
+    ctx.restore();
+  }
+
+  // Dublin/Cavan close-ups only (gate-fail fix #3): a single stroke with a
+  // minimum length floor, not the true-scale rect — at close-up zoom a small
+  // rectangle blobs, a line reads an angle. Bearing stays exact; length
+  // becomes symbolic. Flat thin line weight (not scaled by the artificial
+  // length) + reduced alpha: measured density in these boxes is 130
+  // (Dublin) / 91 (Cavan) pitches on one screen, so full-weight strokes in
+  // real clusters read as solid mush — dialled back so individual strokes
+  // stay legible where pitches sit close together.
+  const MIN_STROKE_PX = 18;
+  const CLOSEUP_LINE_ALPHA = 0.6;
+  const CLOSEUP_LINE_WIDTH = 1;
+  function drawPitchSymbolic(p, x, y, s, alpha) {
+    const l = Math.max(p.L * s, MIN_STROKE_PX);
+    ctx.save(); ctx.translate(x, y); ctx.rotate(p.b * Math.PI / 180);
+    ctx.globalAlpha = alpha * CLOSEUP_LINE_ALPHA;
+    ctx.strokeStyle = CHALK; ctx.lineWidth = CLOSEUP_LINE_WIDTH;
+    ctx.beginPath(); ctx.moveTo(0, -l / 2); ctx.lineTo(0, l / 2); ctx.stroke();
     ctx.restore();
   }
 
@@ -242,24 +319,40 @@
     label("Soccer", VW * 0.70, VH * 0.5 + gR + 26, CHALK, 16, false);
     ctx.restore();
   }
-  // faint N–S / E–W guide cross under a half-rose, so the cardinal bunching reads
-  function halfGuides(c, R, w) {
-    ctx.save(); ctx.strokeStyle = CHALK_LINE; ctx.globalAlpha = w * 0.7; ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(c.cx, c.cy - R * 1.02); ctx.lineTo(c.cx, c.cy + R * 1.02);
-    ctx.moveTo(c.cx - R * 1.02, c.cy); ctx.lineTo(c.cx + R * 1.02, c.cy);
-    ctx.stroke(); ctx.restore();
+  // dashed reference ring at the uniform-expectation radius (item 2's honesty
+  // anchor) — same "dashed uniform line" device f1's sunset chart uses.
+  function petalRefRing(petal, w) {
+    ctx.save(); ctx.globalAlpha = w * 0.55; ctx.strokeStyle = CHALK;
+    ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.arc(petal.cx, petal.cy, petal.refR, 0, Math.PI * 2);
+    ctx.stroke(); ctx.setLineDash([]); ctx.restore();
   }
-  function ovTownCountry(w) {
-    if (!townC) return;
-    halfGuides(townC, halfR, w);
-    halfGuides(countryC, halfR, w);
+  // mirrored ghost dots (axial data is a line, not a ray) — same convention
+  // and same settle-gated alpha source (cur) as the main rose's ovMirror,
+  // so the petal roses don't reintroduce the mid-morph smear in a new spot.
+  function petalGhosts(petal, giList, cur, w) {
+    for (let k = 0; k < giList.length; k++) {
+      const gi = giList[k];
+      const [gx, gy] = petal.ghost[k];
+      drawPitch(P[gi], gx, gy, 0.06, cur[gi * 4 + 3] * w * 0.7, CHALK);
+    }
+  }
+  function ovTownCountry(w, cur) {
+    if (!townPetal) return;
+    petalRefRing(townPetal, w); petalRefRing(countryPetal, w);
+    petalGhosts(townPetal, townGi, cur, w);
+    petalGhosts(countryPetal, countryGi, cur, w);
     ctx.save(); ctx.globalAlpha = w;
     // stats transcribed from the pipeline: urban 46.3% / rural 36.0% cardinal
-    label("town", townC.cx, townC.cy - halfR - 24, CHALK, 16, false);
-    label("46% cardinal", townC.cx, townC.cy - halfR - 5, CHALK_FAINT, 13);
-    label("country", countryC.cx, countryC.cy - halfR - 24, CHALK, 16, false);
-    label("36% cardinal", countryC.cx, countryC.cy - halfR - 5, CHALK_FAINT, 13);
+    label("town", townPetal.cx, townPetal.cy - townPetal.R - 24, CHALK, 16, false);
+    label("46% cardinal", townPetal.cx, townPetal.cy - townPetal.R - 5, CHALK_FAINT, 13);
+    label("country", countryPetal.cx, countryPetal.cy - countryPetal.R - 24, CHALK, 16, false);
+    label("36% cardinal", countryPetal.cx, countryPetal.cy - countryPetal.R - 5, CHALK_FAINT, 13);
+    // TODO(author): final wording — states the encoding so the eye isn't
+    // asked to infer it (item 2 requirement).
+    label("petal length = share of pitches on that axis · bright = within 15° of N/S/E/W",
+      (townPetal.cx + countryPetal.cx) / 2,
+      Math.max(townPetal.cy, countryPetal.cy) + townPetal.R + 36, CHALK_FAINT, 12, false);
     ctx.restore();
   }
   // chalk-italic annotation with a thin leader line into the cluster (item 9).
@@ -271,13 +364,26 @@
     label(text, tx, ty, CHALK, 15);   // italic
     ctx.restore();
   }
+  // TODO(author): both close-ups also need a small permanent caption stating
+  // "pitches shown as symbols, not to scale" (gate-fail fix #3) — drawn here
+  // as a faint corner note pending the author's final wording/placement.
+  function closeupNote(w) {
+    ctx.save(); ctx.globalAlpha = w * 0.8;
+    ctx.fillStyle = CHALK_FAINT;
+    ctx.font = "italic 12px " + SERIF;
+    ctx.textAlign = "right";
+    ctx.fillText("symbols, not scale", VW - 12, VH - 14);
+    ctx.restore();
+  }
   function ovDublin(w) {
     annotate("the capital's pitches obey the street grid",
       VW / 2, VH * 0.13, VW / 2, VH * 0.38, w);
+    closeupNote(w);
   }
   function ovCavan(w) {
     annotate("combed NE–SW with the drumlins",
       VW / 2, VH * 0.13, VW / 2, VH * 0.38, w);
+    closeupNote(w);
   }
   function axisLine(cx, cy, R, azDeg, dash) {
     const a = (azDeg - 90) * Math.PI / 180;
@@ -316,29 +422,55 @@
   const OVERLAYS = { 0: ovProtagonist, 2: ovMirror, 3: ovSoccer,
                      4: ovTownCountry, 5: ovDublin, 6: ovCavan, 7: ovSun };
 
-  // ---------- scroll + draw ----------
-  const scrolly = document.querySelector(".scrolly");
+  // ---------- scroll + draw: CARD-DRIVEN pacing (gate-fail fix #1) ----------
+  // The old model divided the .scrolly element's total scroll distance into
+  // N-1 UNIFORM segments — it never looked at where the .step cards actually
+  // sit, and the CSS step heights are not uniform (60vh / 150vh x6 / 190vh),
+  // so segment boundaries and card boundaries drifted apart, worse further
+  // down the page. Replaced: each transition is now driven by the live
+  // getBoundingClientRect() of its OWN destination card.
   const ease = t => t < .5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
-  function progress() {
-    const r = scrolly.getBoundingClientRect();
-    return Math.max(0, Math.min(1, -r.top / (r.height - VH)));
+  const cardEls = Array.from(document.querySelectorAll(".steps .card"));  // index = scene index (0..7)
+
+  // How much scroll (as a fraction of one viewport height) each morph takes.
+  // A card's own arrival is complete — formation fully done — exactly when
+  // its top edge reaches the viewport bottom (top === VH); before that it's
+  // still below the fold. Reaching 1 there, and staying there while the card
+  // travels up through and off the viewport, IS the hold — it falls out of
+  // the clamp for free, no separate plateau logic needed.
+  const ARRIVE_FRAC = 0.6;   // tunable: ARRIVE_PX = VH * ARRIVE_FRAC
+
+  function revealOf(cardEl, arrivePx) {
+    const top = cardEl.getBoundingClientRect().top;
+    return Math.max(0, Math.min(1, (VH + arrivePx - top) / arrivePx));
+  }
+
+  // Returns {a, tau, t}: a = index of the settled base scene; tau = raw
+  // arrival progress (0..1) of the NEXT card (card a+1); t = eased/cut tau,
+  // ready to interpolate S[a] -> S[a+1].
+  function sceneState() {
+    const arrivePx = VH * ARRIVE_FRAC;
+    const reveal = [1];   // reveal[0] = 1 constant: scene 0 needs no card to "arrive"
+    for (let i = 1; i <= 7; i++) reveal[i] = cardEls[i]
+      ? revealOf(cardEls[i], arrivePx) : 1;
+    let settled = 0;
+    while (settled < 7 && reveal[settled + 1] >= 1) settled++;
+    const a = Math.min(N - 2, settled);
+    const tau = reveal[a + 1];
+    const t = reduced ? Math.round(tau) : ease(tau);
+    return { a, tau, t };
   }
 
   let CUR = new Float32Array(P.length * 4);
 
-  // Formation completes in the first SIGMA of each segment, then HOLDS on a
-  // plateau while the step card scrolls to the top (item 2). Reduced motion
-  // ignores the tween entirely and cuts.
-  const SIGMA = 0.55;
-
   function draw() {
-    if (!S.length) return;
-    const p = progress() * (N - 1);
-    const a = Math.min(N - 2, Math.floor(p));
-    const u = p - a;                             // local scroll within segment
-    const tau = Math.min(1, u / SIGMA);          // formation param -> 1, then holds
-    const t = reduced ? Math.round(tau) : ease(tau);
+    if (!S.length || !cardEls.length) return;
+    const { a, tau, t } = sceneState();
     const A = S[a], B = S[a + 1];
+    // Dublin(5)/Cavan(6) render with the min-length symbolic stroke whenever
+    // either scene is the source or destination of the current transition —
+    // covers arriving at 5, holding 5, 5->6, holding 6, and departing 6.
+    const symbolic = (a === 4 || a === 5 || a === 6);
 
     ctx.clearRect(0, 0, VW, VH);
 
@@ -356,10 +488,16 @@
       const al = A[j + 3] + (B[j + 3] - A[j + 3]) * t;
       CUR[j] = x; CUR[j + 1] = y; CUR[j + 2] = s; CUR[j + 3] = al;
       if (al < 0.02) continue;
-      drawPitch(P[i], x, y, s, al, CHALK);
+      if (symbolic) drawPitchSymbolic(P[i], x, y, s, al);
+      else drawPitch(P[i], x, y, s, al, CHALK);
     }
 
-    // overlays: triangular weight around the owning scene
+    // overlays: triangular weight around the owning scene. With a/t now
+    // driven by real card position, this same formula also fixes overlay
+    // fade-OUT: an overlay's weight is (a===i) ? 1-t : ... — i.e. it now
+    // fades out exactly as the NEXT card arrives (1 - reveal(card[i+1])),
+    // not on some fraction of a uniform slice. No overlay can persist past
+    // its owning scene: once a > i, its branch condition is false and w=0.
     for (const key in OVERLAYS) {
       const i = +key;
       const w = a === i - 1 ? t : (a === i ? 1 - t : 0);
@@ -370,6 +508,13 @@
         const gate = (reduced || a !== 1) ? 1
           : Math.max(0, Math.min(1, (tau - 0.82) / 0.18));
         ovMirror(w * gate, CUR);
+      } else if (i === 4) {
+        // petal-rose ghosts: same settle gate, same reason (item 2's ghosts
+        // are a full copy of the moving cast too — avoid reintroducing the
+        // scene-2 smear in a new spot).
+        const gate = (reduced || a !== 3) ? 1
+          : Math.max(0, Math.min(1, (tau - 0.82) / 0.18));
+        ovTownCountry(w * gate, CUR);
       } else if (i === 7) {
         // sun sweep bound to the same model: sweeps as the scene settles, holds
         const sweepT = reduced ? t : (a === 6 ? tau : 1);
@@ -421,7 +566,8 @@
       const r = cv.getBoundingClientRect();
       const mx = e.clientX - r.left, my = e.clientY - r.top;
       // wider hit target in the Dublin/Cavan close-ups (item 7)
-      const scene = Math.round(progress() * (N - 1));
+      const { a: tapA, t: tapT } = sceneState();
+      const scene = tapT > 0.5 ? tapA + 1 : tapA;
       const rad = (scene === 5 || scene === 6) ? 40 : 26;
       let best = -1, bd = rad * rad;
       for (let i = 0; i < P.length; i++) {
