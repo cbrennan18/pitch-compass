@@ -336,14 +336,207 @@
 </div>
 
 <!-- ============================================================= -->
-<!-- BUILD BOUNDARY — the free explorer, the county book and the    -->
-<!-- methods box land in sub-stage 2C. Nothing below this line yet. -->
+<!-- STAGE 2C · THE HANDOVER — the sticky choreography ends here.   -->
+<!-- The explorer is free-roaming: its own canvas, own pan/zoom      -->
+<!-- engine (docs/js/explorer.js), no card-driven pacing, no scroll  -->
+<!-- hijack outside the "Explore" gate below.                        -->
 <!-- ============================================================= -->
+<section class="explorer prose" id="explorer" aria-labelledby="explorer-title">
+  <div class="intro">
+    <h3 id="explorer-title">Now it's yours</h3>
+    <p class="todo">Placeholder handover copy. Every pitch above is a real
+      place. Pan, zoom, tap any pitch, or find your own county below.</p>
+  </div>
 
-<div class="fin">Stage 2B-ii · real data, frozen July 2026 · quiet page, loud
+  <div class="explorer-frame" id="explorer-frame">
+    <div class="explorer-controls">
+      <button type="button" id="ex-toggle" aria-pressed="false">Explore ▸</button>
+      <button type="button" id="ex-zoom-in" aria-label="Zoom in">+</button>
+      <button type="button" id="ex-zoom-out" aria-label="Zoom out">−</button>
+      <button type="button" id="ex-reset">Reset view</button>
+      <select id="ex-county" aria-label="Jump to a county">
+        <option value="">All counties — island</option>
+        <!-- 32 counties, alphabetical (the county BOOK below is R4-ordered;
+             this picker is alphabetical, the natural order for a lookup) -->
+        <option value="Antrim">Antrim</option>
+        <option value="Armagh">Armagh</option>
+        <option value="Carlow">Carlow</option>
+        <option value="Cavan">Cavan</option>
+        <option value="Clare">Clare</option>
+        <option value="Cork">Cork</option>
+        <option value="Derry">Derry</option>
+        <option value="Donegal">Donegal</option>
+        <option value="Down">Down</option>
+        <option value="Dublin">Dublin</option>
+        <option value="Fermanagh">Fermanagh</option>
+        <option value="Galway">Galway</option>
+        <option value="Kerry">Kerry</option>
+        <option value="Kildare">Kildare</option>
+        <option value="Kilkenny">Kilkenny</option>
+        <option value="Laois">Laois</option>
+        <option value="Leitrim">Leitrim</option>
+        <option value="Limerick">Limerick</option>
+        <option value="Longford">Longford</option>
+        <option value="Louth">Louth</option>
+        <option value="Mayo">Mayo</option>
+        <option value="Meath">Meath</option>
+        <option value="Monaghan">Monaghan</option>
+        <option value="Offaly">Offaly</option>
+        <option value="Roscommon">Roscommon</option>
+        <option value="Sligo">Sligo</option>
+        <option value="Tipperary">Tipperary</option>
+        <option value="Tyrone">Tyrone</option>
+        <option value="Waterford">Waterford</option>
+        <option value="Westmeath">Westmeath</option>
+        <option value="Wexford">Wexford</option>
+        <option value="Wicklow">Wicklow</option>
+      </select>
+    </div>
+    <div id="county-stat"></div>
+    <div class="explorer-canvas-wrap">
+      <canvas id="ex-canvas" role="img"
+        aria-label="Free-roaming map of every pitch in Ireland. Pan and zoom to explore; tap a pitch for its details."></canvas>
+    </div>
+    <p class="explorer-hint">Pinch to zoom anytime. Tap "Explore" to drag-pan
+      with one finger — otherwise the page scrolls normally. Arrow keys pan,
+      +/− zoom, 0 resets, when the map has focus.</p>
+    <noscript>
+      <p class="explorer__noscript">The explorer needs JavaScript to draw.
+        Every pitch shown on the stage above is real and already has its
+        true position, shape and bearing — this section would let you pan
+        and zoom that same map freely and jump to any of the 32 counties.
+        The county book below has the same numbers, statically.</p>
+    </noscript>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- THE COUNTY BOOK — all 32 counties, ordered by R4. Static        -->
+<!-- HTML/CSS, generated from docs/data/county_stats.json —          -->
+<!-- readable with JS off. Mean axis shown as "—" where R4 < 0.05:   -->
+<!-- the circular mean is not meaningfully defined that close to      -->
+<!-- uniform (matches the author-approved prototype's own convention, -->
+<!-- e.g. Tyrone). Only Leitrim carries the low-n note — that's the   -->
+<!-- one county county_stats.json's own low_n flag actually sets.     -->
+<!-- ============================================================= -->
+<section class="outro" aria-labelledby="book-title">
+  <div class="prose">
+    <h3 id="book-title">The county book</h3>
+    <p class="todo">Placeholder. All 32 counties, ordered by how strongly
+      their pitches agree with each other (R₄). Read the low end as
+      "unordered," not "wrong" — every county still has a real pitch behind
+      every number.</p>
+  </div>
+  <div class="counties">
+  <div class="ccard"><h4>Longford</h4>
+    <div class="row"><span>pitches <b>33</b></span><span>order R₄ <b>0.41</b></span><span>mean axis <b>49°</b></span><span>cardinal <b>9%</b></span></div></div>
+  <div class="ccard"><h4>Roscommon</h4>
+    <div class="row"><span>pitches <b>51</b></span><span>order R₄ <b>0.34</b></span><span>mean axis <b>14°</b></span><span>cardinal <b>39%</b></span></div></div>
+  <div class="ccard"><h4>Tipperary</h4>
+    <div class="row"><span>pitches <b>124</b></span><span>order R₄ <b>0.33</b></span><span>mean axis <b>79°</b></span><span>cardinal <b>45%</b></span></div></div>
+  <div class="ccard"><h4>Dublin</h4>
+    <div class="row"><span>pitches <b>252</b></span><span>order R₄ <b>0.32</b></span><span>mean axis <b>6°</b></span><span>cardinal <b>49%</b></span></div></div>
+  <div class="ccard"><h4>Offaly</h4>
+    <div class="row"><span>pitches <b>57</b></span><span>order R₄ <b>0.30</b></span><span>mean axis <b>83°</b></span><span>cardinal <b>47%</b></span></div></div>
+  <div class="ccard"><h4>Cork</h4>
+    <div class="row"><span>pitches <b>272</b></span><span>order R₄ <b>0.29</b></span><span>mean axis <b>77°</b></span><span>cardinal <b>45%</b></span></div></div>
+  <div class="ccard"><h4>Louth</h4>
+    <div class="row"><span>pitches <b>50</b></span><span>order R₄ <b>0.29</b></span><span>mean axis <b>85°</b></span><span>cardinal <b>52%</b></span></div></div>
+  <div class="ccard"><h4>Down</h4>
+    <div class="row"><span>pitches <b>93</b></span><span>order R₄ <b>0.28</b></span><span>mean axis <b>66°</b></span><span>cardinal <b>28%</b></span></div></div>
+  <div class="ccard"><h4>Wicklow</h4>
+    <div class="row"><span>pitches <b>59</b></span><span>order R₄ <b>0.27</b></span><span>mean axis <b>18°</b></span><span>cardinal <b>39%</b></span></div></div>
+  <div class="ccard"><h4>Limerick</h4>
+    <div class="row"><span>pitches <b>97</b></span><span>order R₄ <b>0.25</b></span><span>mean axis <b>69°</b></span><span>cardinal <b>30%</b></span></div></div>
+  <div class="ccard"><h4>Cavan</h4>
+    <div class="row"><span>pitches <b>71</b></span><span>order R₄ <b>0.23</b></span><span>mean axis <b>40°</b></span><span>cardinal <b>14%</b></span></div></div>
+  <div class="ccard"><h4>Kerry</h4>
+    <div class="row"><span>pitches <b>95</b></span><span>order R₄ <b>0.23</b></span><span>mean axis <b>76°</b></span><span>cardinal <b>39%</b></span></div></div>
+  <div class="ccard"><h4>Meath</h4>
+    <div class="row"><span>pitches <b>103</b></span><span>order R₄ <b>0.23</b></span><span>mean axis <b>90°</b></span><span>cardinal <b>47%</b></span></div></div>
+  <div class="ccard"><h4>Donegal</h4>
+    <div class="row"><span>pitches <b>50</b></span><span>order R₄ <b>0.22</b></span><span>mean axis <b>61°</b></span><span>cardinal <b>26%</b></span></div></div>
+  <div class="ccard"><h4>Waterford</h4>
+    <div class="row"><span>pitches <b>80</b></span><span>order R₄ <b>0.22</b></span><span>mean axis <b>83°</b></span><span>cardinal <b>48%</b></span></div></div>
+  <div class="ccard"><h4>Laois</h4>
+    <div class="row"><span>pitches <b>68</b></span><span>order R₄ <b>0.21</b></span><span>mean axis <b>71°</b></span><span>cardinal <b>40%</b></span></div></div>
+  <div class="ccard"><h4>Monaghan</h4>
+    <div class="row"><span>pitches <b>81</b></span><span>order R₄ <b>0.19</b></span><span>mean axis <b>58°</b></span><span>cardinal <b>22%</b></span></div></div>
+  <div class="ccard"><h4>Mayo</h4>
+    <div class="row"><span>pitches <b>84</b></span><span>order R₄ <b>0.19</b></span><span>mean axis <b>18°</b></span><span>cardinal <b>34%</b></span></div></div>
+  <div class="ccard"><h4>Sligo</h4>
+    <div class="row"><span>pitches <b>49</b></span><span>order R₄ <b>0.19</b></span><span>mean axis <b>89°</b></span><span>cardinal <b>49%</b></span></div></div>
+  <div class="ccard"><h4>Derry</h4>
+    <div class="row"><span>pitches <b>68</b></span><span>order R₄ <b>0.19</b></span><span>mean axis <b>68°</b></span><span>cardinal <b>34%</b></span></div></div>
+  <div class="ccard"><h4>Wexford</h4>
+    <div class="row"><span>pitches <b>73</b></span><span>order R₄ <b>0.18</b></span><span>mean axis <b>73°</b></span><span>cardinal <b>38%</b></span></div></div>
+  <div class="ccard"><h4>Leitrim</h4>
+    <div class="row"><span>pitches <b>29</b></span><span>order R₄ <b>0.17</b></span><span>mean axis <b>68°</b></span><span>cardinal <b>38%</b></span></div>
+    <div class="note">n = 29 — treat as a story, not a verdict: the bootstrap says most county rankings are noise.</div></div>
+  <div class="ccard"><h4>Clare</h4>
+    <div class="row"><span>pitches <b>59</b></span><span>order R₄ <b>0.17</b></span><span>mean axis <b>70°</b></span><span>cardinal <b>37%</b></span></div></div>
+  <div class="ccard"><h4>Kilkenny</h4>
+    <div class="row"><span>pitches <b>79</b></span><span>order R₄ <b>0.17</b></span><span>mean axis <b>83°</b></span><span>cardinal <b>42%</b></span></div></div>
+  <div class="ccard"><h4>Westmeath</h4>
+    <div class="row"><span>pitches <b>39</b></span><span>order R₄ <b>0.15</b></span><span>mean axis <b>20°</b></span><span>cardinal <b>26%</b></span></div></div>
+  <div class="ccard"><h4>Fermanagh</h4>
+    <div class="row"><span>pitches <b>39</b></span><span>order R₄ <b>0.12</b></span><span>mean axis <b>66°</b></span><span>cardinal <b>44%</b></span></div></div>
+  <div class="ccard"><h4>Galway</h4>
+    <div class="row"><span>pitches <b>179</b></span><span>order R₄ <b>0.11</b></span><span>mean axis <b>45°</b></span><span>cardinal <b>28%</b></span></div></div>
+  <div class="ccard"><h4>Armagh</h4>
+    <div class="row"><span>pitches <b>79</b></span><span>order R₄ <b>0.11</b></span><span>mean axis <b>62°</b></span><span>cardinal <b>29%</b></span></div></div>
+  <div class="ccard"><h4>Kildare</h4>
+    <div class="row"><span>pitches <b>127</b></span><span>order R₄ <b>0.09</b></span><span>mean axis <b>10°</b></span><span>cardinal <b>43%</b></span></div></div>
+  <div class="ccard"><h4>Carlow</h4>
+    <div class="row"><span>pitches <b>44</b></span><span>order R₄ <b>0.05</b></span><span>mean axis <b>—</b></span><span>cardinal <b>36%</b></span></div></div>
+  <div class="ccard"><h4>Antrim</h4>
+    <div class="row"><span>pitches <b>60</b></span><span>order R₄ <b>0.04</b></span><span>mean axis <b>—</b></span><span>cardinal <b>33%</b></span></div></div>
+  <div class="ccard"><h4>Tyrone</h4>
+    <div class="row"><span>pitches <b>63</b></span><span>order R₄ <b>0.02</b></span><span>mean axis <b>—</b></span><span>cardinal <b>33%</b></span></div></div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- METHODS — plain, quiet, at the end.                             -->
+<!-- ============================================================= -->
+<aside class="methods" aria-labelledby="methods-title">
+  <div class="prose">
+    <h2 id="methods-title">How we did this</h2>
+    <p class="todo">Placeholder six-sentence method summary. (1) Every
+      pitch comes from OpenStreetMap; (2) the signal filter keeps
+      2,707 GAA-tagged pitches by shape and size; (3) a pitch's bearing is
+      the long axis of its minimum-area rotated rectangle; (4) orientation
+      is axial (a line, not a direction), so every statistic folds bearings
+      onto a half-circle; (5) county assignment is ray-cast point-in-polygon
+      against the boundary files; (6) every number on this page is
+      regenerated from the frozen exploration log, nothing hand-typed.</p>
+    <p>The method is open and the repository is public. Read the frozen
+      findings and reproduce every figure from the scripts:</p>
+    <ul>
+      <li><a href="https://github.com/cbrennan18/pitch-compass/blob/main/exploration/FINDINGS.md">FINDINGS.md — the frozen exploration log</a></li>
+      <li><a href="https://github.com/cbrennan18/pitch-compass">Source repository</a></li>
+    </ul>
+    <ul>
+      <li>Pitch data © OpenStreetMap contributors, ODbL 1.0 — openstreetmap.org/copyright</li>
+      <li>County boundaries (26): Tailte Éireann, Creative Commons Attribution 4.0</li>
+      <li>County boundaries (6): Ordnance Survey of Northern Ireland, UK Open Government Licence</li>
+      <li>The coastline is derived from those same county boundary files — no separate download.</li>
+    </ul>
+    <p class="todo">Corrections-welcome placeholder. Spot an error, a
+      misattributed name, or a pitch that shouldn't be in the signal
+      sample? Open an issue on the repository above — every finding here
+      is meant to be checked.</p>
+  </div>
+</aside>
+
+<div class="fin">Stage 2C · real data, frozen July 2026 · quiet page, loud
 graphics · theme: grass, chalk, and one amber sun.</div>
 
-<!-- tap-a-pitch sheet -->
+<footer class="site-footer">
+  <p>A data-journalism survey. Built by <a href="https://cbrennan.ie">cbrennan.ie</a>.</p>
+</footer>
+
+<!-- tap-a-pitch sheet (shared: the stage AND the explorer both open this) -->
 <div class="sheet" id="sheet">
   <button class="close" type="button" aria-label="Close">×</button>
   <h3 id="s-name">—</h3>
@@ -352,5 +545,6 @@ graphics · theme: grass, chalk, and one amber sun.</div>
 </div>
 
 <script src="js/stage.js" defer></script>
+<script src="js/explorer.js" defer></script>
 </body>
 </html>

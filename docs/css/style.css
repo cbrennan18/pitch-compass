@@ -119,6 +119,71 @@ canvas { display: block; width: 100%; height: 100%; }
 .chart .tick { fill: var(--chalk-faint); font-size: 12px; }
 .chart .callout { fill: var(--chalk); font-size: 12px; font-style: italic; }
 
+/* ---- Stage 2C: the free explorer ---- */
+.explorer { padding: 8vh 0; }
+.explorer .intro { max-width: 34rem; margin: 0 auto 1.5rem; padding: 0 1.15rem; }
+.explorer-frame { position: relative; }
+.explorer-controls {
+  max-width: 34rem; margin: 0 auto; padding: 0 1.15rem 1rem;
+  display: flex; flex-wrap: wrap; gap: .5rem; align-items: center;
+}
+.explorer-controls select, .explorer-controls button {
+  font: inherit; font-size: .92rem; color: var(--chalk); background: none;
+  border: 1.5px solid var(--chalk); padding: .45rem .7rem; cursor: pointer;
+}
+.explorer-controls button.active { background: var(--chalk); color: var(--grass); }
+.explorer-controls select { flex: 1 1 12rem; }
+#county-stat {
+  max-width: 34rem; margin: 0 auto; padding: 0 1.15rem 1rem;
+  color: var(--chalk-faint); font-size: .92rem; min-height: 1.4em;
+}
+#county-stat b { color: var(--chalk); font-weight: 600; }
+/* honesty note stays chalk, not amber — amber is semantic to the sun/
+   floodlight elsewhere on the site, and isn't the subject here */
+#county-stat .honesty { font-style: italic; }
+.explorer-canvas-wrap { height: 70vh; height: 70svh; }
+#ex-canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; }
+.explorer-frame.exploring #ex-canvas { touch-action: none; }
+.explorer-hint {
+  max-width: 34rem; margin: .6rem auto 0; padding: 0 1.15rem;
+  color: var(--chalk-faint); font-size: .85rem; font-style: italic;
+}
+.explorer__noscript {
+  max-width: 34rem; margin: 0 auto; padding: 2rem 1.15rem;
+  color: var(--chalk-faint); font-style: italic; text-align: center;
+  border: 1.5px solid var(--chalk-line);
+}
+
+/* ---- the county book ---- */
+.outro { padding: 10vh 0 2vh; }
+.outro .prose p + p { margin-top: 1em; }
+.counties {
+  max-width: 34rem; margin: 2rem auto 0; padding: 0 1.15rem;
+  display: grid; gap: .9rem;
+}
+.ccard { border: 1.5px solid var(--chalk); padding: .9rem 1.1rem; }
+.ccard h4 { font-size: 1.1rem; margin-bottom: .15rem; }
+.ccard .row {
+  display: flex; gap: 1.1rem; flex-wrap: wrap;
+  font-size: .92rem; color: var(--chalk-faint); margin-top: .35rem;
+}
+.ccard .row b { color: var(--chalk); font-weight: 600; }
+.ccard .note {
+  font-size: .88rem; font-style: italic; color: var(--chalk-faint);
+  margin-top: .5rem;
+}
+
+/* ---- methods box ---- */
+.methods { padding: 8vh 0 4vh; }
+.methods h2 { font-size: 1.2rem; margin-bottom: .6rem; }
+.methods p + p { margin-top: .9em; }
+.methods ul {
+  margin: .9em 0 0; padding-left: 1.2em; list-style: '— ';
+  color: var(--chalk-faint); font-size: .92rem;
+}
+.methods li + li { margin-top: .4em; }
+.methods a { text-decoration: underline; text-underline-offset: .15em; }
+
 /* ---- placeholders the author will replace ---- */
 .todo { color: var(--chalk-faint); font-style: italic; }
 .todo::before {
@@ -130,5 +195,11 @@ canvas { display: block; width: 100%; height: 100%; }
   padding: 8vh 1.15rem 16vh; max-width: 34rem; margin: 0 auto;
   color: var(--chalk-faint); font-size: .92rem; font-style: italic;
 }
+
+.site-footer {
+  padding: 4vh 1.15rem 10vh; max-width: 34rem; margin: 0 auto;
+  color: var(--chalk-faint); font-size: .92rem;
+}
+.site-footer a { text-decoration: underline; text-underline-offset: .15em; }
 
 @media (prefers-reduced-motion: reduce) { .sheet { transition: none; } }
