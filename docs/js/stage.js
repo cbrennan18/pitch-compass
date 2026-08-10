@@ -1,24 +1,37 @@
-/* Pitch Compass — the floodlit stage engine (Stage 2B-i: Acts 1–3).
+/* Pitch Compass — the floodlit stage engine (Stage 2B-i Acts 1–3 +
+ * 2B-ii Act 5's kicker; Act 4's charts are static, off-stage — see index.html).
  *
- * One canvas, N scenes. Every pitch holds a per-scene target [x,y,scale,
- * alpha]; scroll drives an eased interpolation between consecutive scenes.
- * Scenes are DESCRIPTORS with an optional overlay(ctx, w, t) hook — the
- * rose mirror, the soccer guest rose, the sun sweep and the on-canvas
- * labels are overlays, not special-cased scene indices. This generalises
- * the v4 prototype's hand-wired mW/sunW/kickW dispatch.
+ * TWO sticky stages sharing ONE engine. Every pitch holds a per-scene
+ * target [x,y,scale,alpha]; scroll drives an eased interpolation between
+ * consecutive scenes. Scenes are DESCRIPTORS with an optional overlay
+ * (ctx,w,t) hook — the rose mirror, the soccer guest rose, the sun sweep,
+ * the stadium kicker and the on-canvas labels are overlays, not
+ * special-cased scene indices. This generalises the v4 prototype's
+ * hand-wired mW/sunW/kickW dispatch.
  *
- * Scenes (Acts 1–3):
+ * Scenes:
  *   0 protagonist · 1 island · 2 rose · 3 soccer guest · 4 town/country
- *   5 Dublin · 6 Cavan–Monaghan · 7 rose + sun sweep
+ *   5 Dublin · 6 Cavan–Monaghan · 7 rose + sun sweep · 8 THE KICKER
+ * Scenes 0–7 live on the first sticky stage (.scrolly #1); scene 8 lives
+ * on a SECOND, independent sticky stage after the Act 4 charts — the
+ * stage deliberately un-sticks and re-sticks (see the card-driven pacing
+ * section below for why this needs no special-casing at all).
  *
- * Chalk on grass; amber is semantic (the sun only). Data © OpenStreetMap
- * contributors (ODbL 1.0); see /data and the methods box.
+ * Chalk on grass; amber is semantic (the sun sweep and the kicker's
+ * stadiums — the sun/floodlight is the subject of both). Data ©
+ * OpenStreetMap contributors (ODbL 1.0); see /data and the methods box.
  */
 (() => {
   "use strict";
-  const cv = document.getElementById("cv");
-  if (!cv) return;
-  const ctx = cv.getContext("2d");
+  // Two independent sticky stages (Act 1–3's and the kicker's), ONE shared
+  // engine: each canvas is just another render target for the same S[]/P/
+  // cardEls state. `ctx` is reassigned per canvas inside draw()'s loop —
+  // every drawing function below closes over it and always sees the right
+  // context for whichever canvas is currently being rendered.
+  const canvases = Array.from(document.querySelectorAll(".stage-canvas"));
+  if (!canvases.length) return;
+  const ctxs = canvases.map(c => c.getContext("2d"));
+  let ctx = ctxs[0];
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const CHALK = "#f4f1e4", AMBER = "#e8a13d";
@@ -29,6 +42,8 @@
   let VW = 0, VH = 0;
   let P = [];            // pitch objects {b,L,W,name,urban,gx,gy}
   let SOCCER = [];       // soccer guest bearings (numbers)
+  let ST = [];           // the 29 county grounds {b,L,W,name,gx,gy}
+  let stPos = [];        // stadium positions, island frame (scene 8)
   let OUTLINES = null;   // {coast:[[ [lon,lat],... ]], borders:[...]}
   let FIT = {};          // stored map fitters: island / dublin / cavan
   let protagonists = {}; // {sun,wind,north,none} -> index into P
@@ -54,7 +69,7 @@
   const hash = (i, salt) => ((i * 2654435761 + salt * 40503) >>> 16 & 255) / 255;
 
   // ---------- scene target arrays ----------
-  const N = 8;
+  const N = 9;
   let S = [];            // S[i] = Float32Array(P.length*4)
   let mirror = null;     // rose fold mirror positions (2 per pitch)
   let soccerRose = null; // precomputed soccer guest rose [x,y] per bearing
@@ -193,6 +208,16 @@
 
     // 7 — rose again, re-centred, for the sun sweep (mirror off)
     P.forEach((p, i) => S[7].set(S[2].subarray(i * 4, i * 4 + 4), i * 4));
+
+    // 8 — THE KICKER: cast ghosts to ~0.10 alpha on the SAME island framing
+    // as scene 1 (the piece opens and closes on the same geographic frame).
+    // The 29 county grounds draw in amber as an overlay (ovKicker) — see
+    // below for why amber is correct here (the sun/floodlight is the
+    // literal subject: county grounds cluster east–west, into the sunset).
+    const KICK_ALPHA = 0.10;
+    P.forEach((p, i) => { const [x, y] = isl.pos(p);
+      setTarget(S[8], i, x, y, isl.pxPerM, KICK_ALPHA); });
+    stPos = ST.map(s => isl.pos(s));
   }
 
   // ---------- pitch renderer: LOD stroke -> rect -> line markings ----------
@@ -418,9 +443,39 @@
     ctx.restore();
   }
 
-  // overlay owner scene index -> fn (2 and 7 are dispatched specially below)
+  // THE KICKER (scene 8, Act 5): the 29 county grounds in amber, at their
+  // true bearings, on the island frame the ghosted cast (drawn in the main
+  // per-pitch loop at KICK_ALPHA) already sits on. Named callouts for the
+  // two grounds the storyboard calls out by name. Amber is correct here —
+  // the sun/floodlight is literally the subject (long axes east–west, into
+  // the sunset the folklore warns about).
+  function ovKicker(w) {
+    if (!ST.length || !stPos.length) return;
+    for (let i = 0; i < ST.length; i++) {
+      const [x, y] = stPos[i];
+      drawPitch(ST[i], x, y, FIT.island ? FIT.island.pxPerM : 0, w, AMBER);
+    }
+    ctx.save(); ctx.globalAlpha = w; ctx.fillStyle = AMBER;
+    const semple = ST.findIndex(s => s.name.includes("Semple"));
+    const rinn = ST.findIndex(s => s.name.includes("Rinn"));
+    if (semple >= 0) {
+      const [x, y] = stPos[semple];
+      label("Semple 92°", x, y - 14, AMBER, 12, true);
+    }
+    if (rinn >= 0) {
+      const [x, y] = stPos[rinn];
+      label("Páirc Uí Rinn 89°", x, y - 14, AMBER, 12, true);
+    }
+    // TODO(author): final wording — one amber label line, per the storyboard.
+    label("the 29 county grounds — long axes east–west, into the sunset",
+      VW / 2, VH - 26, AMBER, 14, true);
+    ctx.restore();
+  }
+
+  // overlay owner scene index -> fn (2, 4 and 7 are dispatched specially below)
   const OVERLAYS = { 0: ovProtagonist, 2: ovMirror, 3: ovSoccer,
-                     4: ovTownCountry, 5: ovDublin, 6: ovCavan, 7: ovSun };
+                     4: ovTownCountry, 5: ovDublin, 6: ovCavan, 7: ovSun,
+                     8: ovKicker };
 
   // ---------- scroll + draw: CARD-DRIVEN pacing (gate-fail fix #1) ----------
   // The old model divided the .scrolly element's total scroll distance into
@@ -430,7 +485,10 @@
   // down the page. Replaced: each transition is now driven by the live
   // getBoundingClientRect() of its OWN destination card.
   const ease = t => t < .5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
-  const cardEls = Array.from(document.querySelectorAll(".steps .card"));  // index = scene index (0..7)
+  // .steps lives inside BOTH sticky stages; this selector picks up all 9
+  // cards, across both, in document order — index === scene index (0..8).
+  // Extending to a second stage needed no change here at all.
+  const cardEls = Array.from(document.querySelectorAll(".steps .card"));
 
   // How much scroll (as a fraction of one viewport height) each morph takes.
   // A card's own arrival is complete — formation fully done — exactly when
@@ -451,10 +509,10 @@
   function sceneState() {
     const arrivePx = VH * ARRIVE_FRAC;
     const reveal = [1];   // reveal[0] = 1 constant: scene 0 needs no card to "arrive"
-    for (let i = 1; i <= 7; i++) reveal[i] = cardEls[i]
+    for (let i = 1; i <= N - 1; i++) reveal[i] = cardEls[i]
       ? revealOf(cardEls[i], arrivePx) : 1;
     let settled = 0;
-    while (settled < 7 && reveal[settled + 1] >= 1) settled++;
+    while (settled < N - 1 && reveal[settled + 1] >= 1) settled++;
     const a = Math.min(N - 2, settled);
     const tau = reveal[a + 1];
     const t = reduced ? Math.round(tau) : ease(tau);
@@ -463,8 +521,12 @@
 
   let CUR = new Float32Array(P.length * 4);
 
-  function draw() {
-    if (!S.length || !cardEls.length) return;
+  // Draws the current shared scene state into whichever canvas `ctx`
+  // currently points at. draw() (below) sets `ctx` and calls this once per
+  // registered canvas — only one is ever actually sticky/visible at a given
+  // scroll position, but rendering to both is cheap and keeps this function
+  // (and everything it calls) completely unaware there are two stages.
+  function renderFrame() {
     const { a, tau, t } = sceneState();
     const A = S[a], B = S[a + 1];
     // Dublin(5)/Cavan(6) render with the min-length symbolic stroke whenever
@@ -525,6 +587,11 @@
     }
   }
 
+  function draw() {
+    if (!S.length || !cardEls.length) return;
+    ctxs.forEach(c => { ctx = c; renderFrame(); });
+  }
+
   // ---------- quiz -> protagonist personalisation + payoff line ----------
   const payoff = {
     sun: "You chose the sun — so does the folklore. If Ireland agreed, this ring would thin along the sunset line. It does not.",
@@ -562,8 +629,11 @@
     sheet.classList.add("open");
   }
   if (sheet) {
-    cv.addEventListener("click", e => {
-      const r = cv.getBoundingClientRect();
+    // Attached to both canvases — only the currently-sticky one can
+    // realistically receive a click, but CUR (shared, canvas-agnostic pixel
+    // space) makes the hit test correct regardless of which fired.
+    canvases.forEach(c => c.addEventListener("click", e => {
+      const r = c.getBoundingClientRect();
       const mx = e.clientX - r.left, my = e.clientY - r.top;
       // wider hit target in the Dublin/Cavan close-ups (item 7)
       const { a: tapA, t: tapT } = sceneState();
@@ -577,15 +647,21 @@
       }
       if (best < 0) { sheet.classList.remove("open"); return; }
       openSheet(P[best]);
-    });
+    }));
     sheet.querySelector(".close").onclick = () => sheet.classList.remove("open");
   }
 
   // ---------- boot ----------
+  // VW/VH are shared canvas-pixel space: both .stage-canvas elements use the
+  // identical CSS rule (100vw x 100svh), so their client sizes are always
+  // equal in practice — one shared measurement is correct, not an
+  // approximation. Every canvas still gets its own width/height/transform.
   function resize() {
-    VW = cv.clientWidth; VH = cv.clientHeight;
-    cv.width = VW * dpr; cv.height = VH * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    VW = canvases[0].clientWidth; VH = canvases[0].clientHeight;
+    canvases.forEach((c, k) => {
+      c.width = VW * dpr; c.height = VH * dpr;
+      ctxs[k].setTransform(dpr, 0, 0, dpr, 0, 0);
+    });
     CUR = new Float32Array(P.length * 4);
     buildScenes(); draw();
   }
@@ -600,7 +676,8 @@
     fetch("data/cast.json").then(r => r.json()),
     fetch("data/soccer_bearings.json").then(r => r.json()),
     fetch("data/outlines.json").then(r => r.json()),
-  ]).then(([castJson, soccerJson, outlinesJson]) => {
+    fetch("data/stadiums.json").then(r => r.json()),
+  ]).then(([castJson, soccerJson, outlinesJson, stadiumsJson]) => {
     const f = castJson.fields;
     const bi = f.indexOf("bearing"), li = f.indexOf("L"), wi = f.indexOf("W"),
           ni = f.indexOf("name"), ci = f.indexOf("county"), ui = f.indexOf("urban"),
@@ -614,10 +691,18 @@
     protagIdx = protagonists.none != null ? protagonists.none : 0;
     SOCCER = soccerJson.bearings;
     OUTLINES = outlinesJson;
+
+    const sf = stadiumsJson.fields;
+    const sbi = sf.indexOf("bearing"), sli = sf.indexOf("L"), swi = sf.indexOf("W"),
+          sni = sf.indexOf("name"), slati = sf.indexOf("lat"), sloni = sf.indexOf("lon");
+    ST = stadiumsJson.data.map(rec => {
+      const [x, y] = toXY(rec[slati], rec[sloni]);
+      return { b: rec[sbi], L: rec[sli], W: rec[swi], name: rec[sni], gx: x, gy: y };
+    });
+
     resize();
   }).catch(err => {
     console.error("stage data load failed", err);
-    const s = cv.closest(".stage");
-    if (s) s.classList.add("stage--failed");
+    document.querySelectorAll(".stage").forEach(s => s.classList.add("stage--failed"));
   });
 })();
