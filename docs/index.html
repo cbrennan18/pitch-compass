@@ -122,9 +122,12 @@
       aria-label="Bar chart: pitches within 15 degrees of each season's sunset axis. June 363, equinox 509, winter 427, against a uniform expectation of 451.">
       <!-- baseline -->
       <line class="axis" x1="60" y1="280" x2="580" y2="280"></line>
-      <!-- uniform expectation, dashed at 451 (y = 280 - 451*0.44 = 81.6) -->
+      <!-- uniform expectation, dashed at 451 (y = 280 - 451*0.44 = 81.6).
+           Label moved to the clear zone left of the June bar (device-gate
+           fix #7: was right-anchored at x=580, colliding with Winter's
+           "427" value label right below it). -->
       <line class="ref" x1="60" y1="82" x2="580" y2="82"></line>
-      <text class="tick" x="580" y="76" text-anchor="end">uniform ≈ 451</text>
+      <text class="tick" x="66" y="74" text-anchor="start">uniform ≈ 451</text>
       <!-- bars: June (363), equinox (509), winter (427); scale 0.44 px/pitch -->
       <rect class="bar" x="110" y="120" width="90" height="160"></rect>
       <rect class="bar" x="255" y="56"  width="90" height="224"></rect>
@@ -157,9 +160,11 @@
     <svg viewBox="0 0 600 340" role="img"
       aria-label="Bar chart: angle between 1,346 neighbouring pitch pairs within 300 metres, in six 15-degree bins from 0 to 90 degrees, against a uniform expectation of 224 pairs per bin.">
       <line class="axis" x1="60" y1="280" x2="580" y2="280"></line>
-      <!-- uniform expectation: 1346/6 = 224.3 pairs/bin -->
+      <!-- uniform expectation: 1346/6 = 224.3 pairs/bin. Label moved to the
+           clear zone above the short middle bins (device-gate fix #7: was
+           right-anchored at x=580, buried behind the tall 75-90° bar). -->
       <line class="ref" x1="60" y1="208" x2="580" y2="208"></line>
-      <text class="tick" x="580" y="202" text-anchor="end">uniform ≈ 224</text>
+      <text class="tick" x="300" y="198" text-anchor="middle">uniform ≈ 224</text>
       <rect class="bar" x="85"  y="64"  width="55" height="216"></rect>
       <rect class="bar" x="170" y="255" width="55" height="25"></rect>
       <rect class="bar" x="255" y="266" width="55" height="14"></rect>
@@ -417,8 +422,14 @@
 <!-- readable with JS off. Mean axis shown as "—" where R4 < 0.05:   -->
 <!-- the circular mean is not meaningfully defined that close to      -->
 <!-- uniform (matches the author-approved prototype's own convention, -->
-<!-- e.g. Tyrone). Only Leitrim carries the low-n note — that's the   -->
-<!-- one county county_stats.json's own low_n flag actually sets.     -->
+<!-- e.g. Tyrone).                                                    -->
+<!-- Device-gate fix #11: the honesty note is now keyed off the       -->
+<!-- bootstrap verdict (county_stats.json's noise_indistinct, carried -->
+<!-- from extra_summary.json's bootstrap_ci — 2000 resamples, seed    -->
+<!-- 1798), not the old n<30 cutoff alone. 28 of 32 counties get the  -->
+<!-- note; only Cork, Dublin and Tipperary clear their own uniform-   -->
+<!-- noise ceiling. Leitrim (n=29) was never eligible for the         -->
+<!-- bootstrap at all — it keeps its own low_n-worded note instead.   -->
 <!-- ============================================================= -->
 <section class="outro" aria-labelledby="book-title">
   <div class="prose">
@@ -430,70 +441,98 @@
   </div>
   <div class="counties">
   <div class="ccard"><h4>Longford</h4>
-    <div class="row"><span>pitches <b>33</b></span><span>order R₄ <b>0.41</b></span><span>mean axis <b>49°</b></span><span>cardinal <b>9%</b></span></div></div>
+    <div class="row"><span>pitches <b>33</b></span><span>order R₄ <b>0.41</b></span><span>mean axis <b>49°</b></span><span>cardinal <b>9%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Roscommon</h4>
-    <div class="row"><span>pitches <b>51</b></span><span>order R₄ <b>0.34</b></span><span>mean axis <b>14°</b></span><span>cardinal <b>39%</b></span></div></div>
+    <div class="row"><span>pitches <b>51</b></span><span>order R₄ <b>0.34</b></span><span>mean axis <b>14°</b></span><span>cardinal <b>39%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Tipperary</h4>
     <div class="row"><span>pitches <b>124</b></span><span>order R₄ <b>0.33</b></span><span>mean axis <b>79°</b></span><span>cardinal <b>45%</b></span></div></div>
   <div class="ccard"><h4>Dublin</h4>
     <div class="row"><span>pitches <b>252</b></span><span>order R₄ <b>0.32</b></span><span>mean axis <b>6°</b></span><span>cardinal <b>49%</b></span></div></div>
   <div class="ccard"><h4>Offaly</h4>
-    <div class="row"><span>pitches <b>57</b></span><span>order R₄ <b>0.30</b></span><span>mean axis <b>83°</b></span><span>cardinal <b>47%</b></span></div></div>
+    <div class="row"><span>pitches <b>57</b></span><span>order R₄ <b>0.30</b></span><span>mean axis <b>83°</b></span><span>cardinal <b>47%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Cork</h4>
     <div class="row"><span>pitches <b>272</b></span><span>order R₄ <b>0.29</b></span><span>mean axis <b>77°</b></span><span>cardinal <b>45%</b></span></div></div>
   <div class="ccard"><h4>Louth</h4>
-    <div class="row"><span>pitches <b>50</b></span><span>order R₄ <b>0.29</b></span><span>mean axis <b>85°</b></span><span>cardinal <b>52%</b></span></div></div>
+    <div class="row"><span>pitches <b>50</b></span><span>order R₄ <b>0.29</b></span><span>mean axis <b>85°</b></span><span>cardinal <b>52%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Down</h4>
-    <div class="row"><span>pitches <b>93</b></span><span>order R₄ <b>0.28</b></span><span>mean axis <b>66°</b></span><span>cardinal <b>28%</b></span></div></div>
+    <div class="row"><span>pitches <b>93</b></span><span>order R₄ <b>0.28</b></span><span>mean axis <b>66°</b></span><span>cardinal <b>28%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Wicklow</h4>
-    <div class="row"><span>pitches <b>59</b></span><span>order R₄ <b>0.27</b></span><span>mean axis <b>18°</b></span><span>cardinal <b>39%</b></span></div></div>
+    <div class="row"><span>pitches <b>59</b></span><span>order R₄ <b>0.27</b></span><span>mean axis <b>18°</b></span><span>cardinal <b>39%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Limerick</h4>
-    <div class="row"><span>pitches <b>97</b></span><span>order R₄ <b>0.25</b></span><span>mean axis <b>69°</b></span><span>cardinal <b>30%</b></span></div></div>
+    <div class="row"><span>pitches <b>97</b></span><span>order R₄ <b>0.25</b></span><span>mean axis <b>69°</b></span><span>cardinal <b>30%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Cavan</h4>
-    <div class="row"><span>pitches <b>71</b></span><span>order R₄ <b>0.23</b></span><span>mean axis <b>40°</b></span><span>cardinal <b>14%</b></span></div></div>
+    <div class="row"><span>pitches <b>71</b></span><span>order R₄ <b>0.23</b></span><span>mean axis <b>40°</b></span><span>cardinal <b>14%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Kerry</h4>
-    <div class="row"><span>pitches <b>95</b></span><span>order R₄ <b>0.23</b></span><span>mean axis <b>76°</b></span><span>cardinal <b>39%</b></span></div></div>
+    <div class="row"><span>pitches <b>95</b></span><span>order R₄ <b>0.23</b></span><span>mean axis <b>76°</b></span><span>cardinal <b>39%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Meath</h4>
-    <div class="row"><span>pitches <b>103</b></span><span>order R₄ <b>0.23</b></span><span>mean axis <b>90°</b></span><span>cardinal <b>47%</b></span></div></div>
+    <div class="row"><span>pitches <b>103</b></span><span>order R₄ <b>0.23</b></span><span>mean axis <b>90°</b></span><span>cardinal <b>47%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Donegal</h4>
-    <div class="row"><span>pitches <b>50</b></span><span>order R₄ <b>0.22</b></span><span>mean axis <b>61°</b></span><span>cardinal <b>26%</b></span></div></div>
+    <div class="row"><span>pitches <b>50</b></span><span>order R₄ <b>0.22</b></span><span>mean axis <b>61°</b></span><span>cardinal <b>26%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Waterford</h4>
-    <div class="row"><span>pitches <b>80</b></span><span>order R₄ <b>0.22</b></span><span>mean axis <b>83°</b></span><span>cardinal <b>48%</b></span></div></div>
+    <div class="row"><span>pitches <b>80</b></span><span>order R₄ <b>0.22</b></span><span>mean axis <b>83°</b></span><span>cardinal <b>48%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Laois</h4>
-    <div class="row"><span>pitches <b>68</b></span><span>order R₄ <b>0.21</b></span><span>mean axis <b>71°</b></span><span>cardinal <b>40%</b></span></div></div>
+    <div class="row"><span>pitches <b>68</b></span><span>order R₄ <b>0.21</b></span><span>mean axis <b>71°</b></span><span>cardinal <b>40%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Monaghan</h4>
-    <div class="row"><span>pitches <b>81</b></span><span>order R₄ <b>0.19</b></span><span>mean axis <b>58°</b></span><span>cardinal <b>22%</b></span></div></div>
+    <div class="row"><span>pitches <b>81</b></span><span>order R₄ <b>0.19</b></span><span>mean axis <b>58°</b></span><span>cardinal <b>22%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Mayo</h4>
-    <div class="row"><span>pitches <b>84</b></span><span>order R₄ <b>0.19</b></span><span>mean axis <b>18°</b></span><span>cardinal <b>34%</b></span></div></div>
+    <div class="row"><span>pitches <b>84</b></span><span>order R₄ <b>0.19</b></span><span>mean axis <b>18°</b></span><span>cardinal <b>34%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Sligo</h4>
-    <div class="row"><span>pitches <b>49</b></span><span>order R₄ <b>0.19</b></span><span>mean axis <b>89°</b></span><span>cardinal <b>49%</b></span></div></div>
+    <div class="row"><span>pitches <b>49</b></span><span>order R₄ <b>0.19</b></span><span>mean axis <b>89°</b></span><span>cardinal <b>49%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Derry</h4>
-    <div class="row"><span>pitches <b>68</b></span><span>order R₄ <b>0.19</b></span><span>mean axis <b>68°</b></span><span>cardinal <b>34%</b></span></div></div>
+    <div class="row"><span>pitches <b>68</b></span><span>order R₄ <b>0.19</b></span><span>mean axis <b>68°</b></span><span>cardinal <b>34%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Wexford</h4>
-    <div class="row"><span>pitches <b>73</b></span><span>order R₄ <b>0.18</b></span><span>mean axis <b>73°</b></span><span>cardinal <b>38%</b></span></div></div>
+    <div class="row"><span>pitches <b>73</b></span><span>order R₄ <b>0.18</b></span><span>mean axis <b>73°</b></span><span>cardinal <b>38%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Leitrim</h4>
     <div class="row"><span>pitches <b>29</b></span><span>order R₄ <b>0.17</b></span><span>mean axis <b>68°</b></span><span>cardinal <b>38%</b></span></div>
     <div class="note">n = 29 — treat as a story, not a verdict: the bootstrap says most county rankings are noise.</div></div>
   <div class="ccard"><h4>Clare</h4>
-    <div class="row"><span>pitches <b>59</b></span><span>order R₄ <b>0.17</b></span><span>mean axis <b>70°</b></span><span>cardinal <b>37%</b></span></div></div>
+    <div class="row"><span>pitches <b>59</b></span><span>order R₄ <b>0.17</b></span><span>mean axis <b>70°</b></span><span>cardinal <b>37%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Kilkenny</h4>
-    <div class="row"><span>pitches <b>79</b></span><span>order R₄ <b>0.17</b></span><span>mean axis <b>83°</b></span><span>cardinal <b>42%</b></span></div></div>
+    <div class="row"><span>pitches <b>79</b></span><span>order R₄ <b>0.17</b></span><span>mean axis <b>83°</b></span><span>cardinal <b>42%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Westmeath</h4>
-    <div class="row"><span>pitches <b>39</b></span><span>order R₄ <b>0.15</b></span><span>mean axis <b>20°</b></span><span>cardinal <b>26%</b></span></div></div>
+    <div class="row"><span>pitches <b>39</b></span><span>order R₄ <b>0.15</b></span><span>mean axis <b>20°</b></span><span>cardinal <b>26%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Fermanagh</h4>
-    <div class="row"><span>pitches <b>39</b></span><span>order R₄ <b>0.12</b></span><span>mean axis <b>66°</b></span><span>cardinal <b>44%</b></span></div></div>
+    <div class="row"><span>pitches <b>39</b></span><span>order R₄ <b>0.12</b></span><span>mean axis <b>66°</b></span><span>cardinal <b>44%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Galway</h4>
-    <div class="row"><span>pitches <b>179</b></span><span>order R₄ <b>0.11</b></span><span>mean axis <b>45°</b></span><span>cardinal <b>28%</b></span></div></div>
+    <div class="row"><span>pitches <b>179</b></span><span>order R₄ <b>0.11</b></span><span>mean axis <b>45°</b></span><span>cardinal <b>28%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Armagh</h4>
-    <div class="row"><span>pitches <b>79</b></span><span>order R₄ <b>0.11</b></span><span>mean axis <b>62°</b></span><span>cardinal <b>29%</b></span></div></div>
+    <div class="row"><span>pitches <b>79</b></span><span>order R₄ <b>0.11</b></span><span>mean axis <b>62°</b></span><span>cardinal <b>29%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Kildare</h4>
-    <div class="row"><span>pitches <b>127</b></span><span>order R₄ <b>0.09</b></span><span>mean axis <b>10°</b></span><span>cardinal <b>43%</b></span></div></div>
+    <div class="row"><span>pitches <b>127</b></span><span>order R₄ <b>0.09</b></span><span>mean axis <b>10°</b></span><span>cardinal <b>43%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Carlow</h4>
-    <div class="row"><span>pitches <b>44</b></span><span>order R₄ <b>0.05</b></span><span>mean axis <b>—</b></span><span>cardinal <b>36%</b></span></div></div>
+    <div class="row"><span>pitches <b>44</b></span><span>order R₄ <b>0.05</b></span><span>mean axis <b>—</b></span><span>cardinal <b>36%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Antrim</h4>
-    <div class="row"><span>pitches <b>60</b></span><span>order R₄ <b>0.04</b></span><span>mean axis <b>—</b></span><span>cardinal <b>33%</b></span></div></div>
+    <div class="row"><span>pitches <b>60</b></span><span>order R₄ <b>0.04</b></span><span>mean axis <b>—</b></span><span>cardinal <b>33%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   <div class="ccard"><h4>Tyrone</h4>
-    <div class="row"><span>pitches <b>63</b></span><span>order R₄ <b>0.02</b></span><span>mean axis <b>—</b></span><span>cardinal <b>33%</b></span></div></div>
+    <div class="row"><span>pitches <b>63</b></span><span>order R₄ <b>0.02</b></span><span>mean axis <b>—</b></span><span>cardinal <b>33%</b></span></div>
+    <div class="note">Order not distinguishable from chance: this county’s bootstrap confidence interval reaches the noise ceiling for its sample size — treat the ranking as a story, not a verdict.</div></div>
   </div>
 </section>
 

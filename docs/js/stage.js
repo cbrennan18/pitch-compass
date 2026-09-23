@@ -38,6 +38,7 @@
   const CHALK_FAINT = "rgba(244,241,228,.62)";
   const CHALK_LINE = "rgba(244,241,228,.28)";
   const SERIF = "Charter, Georgia, 'Times New Roman', serif";
+  const ALPHA_SKIP = 0.05;   // device-gate fix #9 (was 0.02)
 
   let VW = 0, VH = 0;
   let P = [];            // pitch objects {b,L,W,name,urban,gx,gy}
@@ -72,8 +73,11 @@
   const N = 9;
   let S = [];            // S[i] = Float32Array(P.length*4)
   let mirror = null;     // rose fold mirror positions (2 per pitch)
+  let guestMirror = null;   // GAA disc's mirror ghost, in the soccer-guest scene
   let soccerRose = null; // precomputed soccer guest rose [x,y] per bearing
+  let soccerMirror = null;  // soccer disc's mirror ghost (device-gate fix #1)
   let roseCentre = null; // {cx,cy,R} of the centred rose (for the sun sweep)
+  let guestCentre = null, soccerCentre = null;   // {cx,cy,R} of scene 3's two discs
   // town/country petal roses: 6 AXIS-bins of 30deg covering [0,180) — each
   // pitch's bearing falls in exactly one, so shares sum to 1. Bin 0 (centred
   // 0/180) and bin 3 (centred 90/270) are exactly make_site_data.py's own
@@ -150,20 +154,30 @@
     });
 
     // 3 — soccer guest: the GAA rose slides left and shrinks; a second rose
-    //     (the 2,458 soccer bearings) forms on the right as an overlay
+    //     (the 2,458 soccer bearings) forms on the right as an overlay. Both
+    //     discs get a mirror ghost too (device-gate fix #1 — this scene's
+    //     GAA disc was half-folded same as scenes 2/7 were).
     const gcx = VW * 0.30, gcy = VH * 0.5, gR = Math.min(VW, VH) * 0.24;
+    guestCentre = { cx: gcx, cy: gcy, R: gR };
+    guestMirror = new Float32Array(P.length * 2);
     P.forEach((p, i) => {
       const a = (p.b - 90) * Math.PI / 180;
       const r = gR * (0.70 + 0.28 * hash(i, 1));
       setTarget(S[3], i, gcx + r * Math.cos(a), gcy + r * Math.sin(a), 0.075, 1);
+      guestMirror[i * 2] = gcx - r * Math.cos(a);
+      guestMirror[i * 2 + 1] = gcy - r * Math.sin(a);
     });
     const scx = VW * 0.70, scy = VH * 0.5;
+    soccerCentre = { cx: scx, cy: scy, R: gR };
     soccerRose = new Float32Array(SOCCER.length * 2);
+    soccerMirror = new Float32Array(SOCCER.length * 2);
     SOCCER.forEach((b, i) => {
       const a = (b - 90) * Math.PI / 180;
       const r = gR * (0.70 + 0.28 * hash(i, 7));
       soccerRose[i * 2] = scx + r * Math.cos(a);
       soccerRose[i * 2 + 1] = scy + r * Math.sin(a);
+      soccerMirror[i * 2] = scx - r * Math.cos(a);
+      soccerMirror[i * 2 + 1] = scy - r * Math.sin(a);
     });
 
     // 4 — town vs country: two BINNED PETAL ROSES (gate-fail fix #2). 12 bins
@@ -179,9 +193,39 @@
     //     "more than chance," not just "longer."
     townGi = []; countryGi = [];
     P.forEach((p, i) => (p.urban ? townGi : countryGi).push(i));
-    const petalR4 = Math.min(VW, VH) * 0.20;
-    townPetal = buildPetalRose(VW * 0.30, VH * 0.50, petalR4, townGi);
-    countryPetal = buildPetalRose(VW * 0.70, VH * 0.50, petalR4, countryGi);
+    // device-gate fix #4: was Math.min(VW,VH)*0.20 (~90px blobs) side by
+    // side always — unreadable, and the caption clipped at both edges on
+    // narrow viewports. Now stacked vertically (town above country) below
+    // TOWNCOUNTRY_STACK_BELOW_PX, and in both layouts the radius is DERIVED
+    // from the actual space needed for the labels/gap/caption margins
+    // (rather than a fixed fraction of VW/VH that happened to fit on the
+    // one viewport it was eyeballed against) — so it's provably ~2x+
+    // larger with no overlap or clipping across viewport shapes, not just
+    // the common ones. Verified numerically across 10 representative
+    // viewports (phone/tablet, portrait/landscape, incl. short-landscape
+    // extremes) — see the build report.
+    const TOWNCOUNTRY_STACK_BELOW_PX = 640;
+    const TC_SIDE_M = 26, TC_TOP_M = 14, TC_LABEL_H = 24, TC_CAP_H = 50, TC_BOT_M = 14;
+    const stacked = VW < TOWNCOUNTRY_STACK_BELOW_PX;
+    let tcx, tcy, ccx, ccy, petalR4;
+    if (stacked) {
+      const gapM = 20;
+      const rByW = (VW - 2 * TC_SIDE_M) / 2;
+      const rByH = (VH - TC_TOP_M - 2 * TC_LABEL_H - gapM - TC_CAP_H - TC_BOT_M) / 4;
+      petalR4 = Math.max(30, Math.min(rByW, rByH));
+      tcx = ccx = VW / 2;
+      tcy = TC_TOP_M + TC_LABEL_H + petalR4;
+      ccy = tcy + petalR4 + gapM + TC_LABEL_H + petalR4;
+    } else {
+      const gapM = 30;
+      const rByW = (VW - 2 * TC_SIDE_M - gapM) / 4;
+      const rByH = Math.min(VH / 2 - TC_TOP_M - TC_LABEL_H, VH / 2 - TC_CAP_H - TC_BOT_M);
+      petalR4 = Math.max(30, Math.min(rByW, rByH));
+      tcx = VW / 2 - petalR4 - gapM / 2; ccx = VW / 2 + petalR4 + gapM / 2;
+      tcy = ccy = VH / 2;
+    }
+    townPetal = buildPetalRose(tcx, tcy, petalR4, townGi);
+    countryPetal = buildPetalRose(ccx, ccy, petalR4, countryGi);
     let ti = 0, ci = 0;
     P.forEach((p, i) => {
       const [x, y] = p.urban ? townPetal.pos[ti++] : countryPetal.pos[ci++];
@@ -214,7 +258,9 @@
     // The 29 county grounds draw in amber as an overlay (ovKicker) — see
     // below for why amber is correct here (the sun/floodlight is the
     // literal subject: county grounds cluster east–west, into the sunset).
-    const KICK_ALPHA = 0.10;
+    const KICK_ALPHA = 0.24;   // device-gate fix #3: raised from 0.10 — the
+                                 // ghosted cast needs to read as a visible
+                                 // backdrop, not near-invisible dust
     P.forEach((p, i) => { const [x, y] = isl.pos(p);
       setTarget(S[8], i, x, y, isl.pxPerM, KICK_ALPHA); });
     stPos = ST.map(s => isl.pos(s));
@@ -267,11 +313,51 @@
     ctx.restore();
   }
 
+  // Rose-context mark (device-gate fixes #1/#2): every folded-compass scene
+  // (main rose, soccer guest, sun sweep) draws EVERY dot — GAA primary, GAA
+  // mirror ghost, soccer primary, soccer mirror ghost — with this ONE
+  // renderer. A rose is a folded diagram, not a spatial map: true L/W
+  // doesn't belong here (that's what made the GAA disc a "smooth solid
+  // mass" of true-scale rects while the soccer guest, which has no L/W,
+  // came out as unrelated tick marks). Fixed length/width/alpha, angle =
+  // true bearing — position (already jittered by radius) carries the
+  // density signal, mark geometry carries nothing but direction, and it's
+  // now IDENTICAL for both codebases so the two discs are a fair comparison.
+  const ROSE_MARK_PX = 12, ROSE_MARK_ALPHA = 0.6, ROSE_MARK_WIDTH = 1;
+  function drawRoseMark(bDeg, x, y, alpha) {
+    if (alpha < ALPHA_SKIP) return;
+    ctx.save(); ctx.translate(x, y); ctx.rotate(bDeg * Math.PI / 180);
+    ctx.globalAlpha = alpha * ROSE_MARK_ALPHA;
+    ctx.strokeStyle = CHALK; ctx.lineWidth = ROSE_MARK_WIDTH;
+    ctx.beginPath(); ctx.moveTo(0, -ROSE_MARK_PX / 2); ctx.lineTo(0, ROSE_MARK_PX / 2); ctx.stroke();
+    ctx.restore();
+  }
+
   function label(text, x, y, col, size, italic) {
     ctx.fillStyle = col || CHALK;
     ctx.font = (italic === false ? "" : "italic ") + (size || 15) + "px " + SERIF;
     ctx.textAlign = "center";
     ctx.fillText(text, x, y);
+  }
+
+  // Word-wrapped, centred label (device-gate fix #4) — canvas has no native
+  // text wrap, and the town/country caption was a single fillText call that
+  // clipped at both viewport edges on narrow screens. Greedy-wraps to
+  // maxWidth via measureText, one fillText per line.
+  function wrapLabel(text, cx, y, maxWidth, col, size, lineH) {
+    ctx.fillStyle = col || CHALK_FAINT;
+    ctx.font = "italic " + (size || 12) + "px " + SERIF;
+    ctx.textAlign = "center";
+    const words = text.split(" ");
+    const lines = [];
+    let line = "";
+    for (const word of words) {
+      const test = line ? line + " " + word : word;
+      if (line && ctx.measureText(test).width > maxWidth) { lines.push(line); line = word; }
+      else line = test;
+    }
+    if (line) lines.push(line);
+    lines.forEach((l, i) => ctx.fillText(l, cx, y + i * (lineH || (size || 12) + 4)));
   }
 
   // faint chalk coast + county borders, projected through a stored fitter,
@@ -294,13 +380,30 @@
     strokePaths(OUTLINES.coast, fit, w * 0.42, 1);     // coast a touch stronger
     ctx.restore();
   }
+  // device-gate fix #10: on the very first approach (scene0 protagonist ->
+  // scene1 island), the island outline used to ramp in on the raw t of that
+  // whole approach window — starting the instant the island card entered
+  // its ARRIVE_PX zone, while the protagonist card was still comfortably
+  // readable. Delayed so the outline only starts appearing in the LAST
+  // (1-OUTLINE_DELAY) share of that approach, once the island is genuinely
+  // forming. Scoped to exactly the (i===1, a===0) case — Dublin/Cavan's
+  // already-approved outline timing (2B-i) is untouched.
+  const OUTLINE_DELAY = 0.55;
   function outlineWeight(i, a, t) {   // triangular around owning scene i
+    if (i === 1 && a === 0) {
+      return Math.max(0, Math.min(1, (t - OUTLINE_DELAY) / (1 - OUTLINE_DELAY)));
+    }
     return a === i - 1 ? t : (a === i ? 1 - t : 0);
   }
 
-  // N/S/E/W around a centred rose, chalk-faint (item 4)
+  // N/S/E/W around a centred rose, chalk-faint (item 4; radius fixed for
+  // device-gate fix #6 — letters were partly occluded by the rose's own
+  // outer marks. A flat pixel margin outside R clears any petal/mark that
+  // reaches close to R, unlike the old 6%-of-R factor which shrank to
+  // nothing on a small rose.)
+  const COMPASS_MARGIN_PX = 16;
   function drawCompass(cx, cy, R, w) {
-    const r = R * 1.06;
+    const r = R * 1.15 + COMPASS_MARGIN_PX;
     const pts = [["N", 0, -1], ["S", 0, 1], ["E", 1, 0], ["W", -1, 0]];
     ctx.save(); ctx.globalAlpha = w * 0.72;
     for (const [t, dx, dy] of pts) label(t, cx + dx * r, cy + dy * r + 5, CHALK_FAINT, 13, false);
@@ -319,6 +422,14 @@
       CHALK_FAINT, 13);
     ctx.restore();
   }
+  // The full axial ring: primary cast (drawn by the main per-pitch loop,
+  // unchanged true-LOD rendering) + its mirror ghost (axial data is a line,
+  // not a ray — every bearing counts at b AND b+180). Device-gate fix #1:
+  // this is now CALLED for every scene that shows a complete rose (2 and 7
+  // — see the overlay dispatch below), not scene 2 only, so no scene shows
+  // a half-folded "C". The function itself is untouched: scene 7's disc is
+  // a literal copy of scene 2's (S[7] = S[2]), so reusing it as-is keeps
+  // both scenes visually identical, not just individually complete.
   function ovMirror(w, cur) {
     for (let i = 0; i < P.length; i++) {
       drawPitch(P[i], mirror[i * 2], mirror[i * 2 + 1], 0.09,
@@ -326,22 +437,30 @@
     }
     if (roseCentre) drawCompass(roseCentre.cx, roseCentre.cy, roseCentre.R, w);
   }
-  function ovSoccer(w) {
+  // Device-gate fix #2: GAA and soccer now share ONE mark renderer
+  // (drawRoseMark) for every dot in this scene — primary GAA (drawn by the
+  // main per-pitch loop, guestRoseMode), GAA's mirror ghost, primary
+  // soccer, and soccer's mirror ghost. Only the bearing DATA differs between the two
+  // discs now; a reader comparing "smooth mass" vs "spiky bristles" was
+  // comparing two different renderers, not two different datasets. No
+  // bearing value, for either cast, is touched here — this is render-only.
+  function ovSoccer(w, cur, gaaGate) {
     ctx.save();
-    for (let i = 0; i < SOCCER.length; i++) {
-      const x = soccerRose[i * 2], y = soccerRose[i * 2 + 1];
-      const a = (SOCCER[i] - 90) * Math.PI / 180;
-      ctx.globalAlpha = w * 0.62; ctx.strokeStyle = CHALK; ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(x - 5 * Math.cos(a), y - 5 * Math.sin(a));
-      ctx.lineTo(x + 5 * Math.cos(a), y + 5 * Math.sin(a));
-      ctx.stroke();
+    // GAA disc's mirror ghost (own centre/radius — this scene shrinks and
+    // relocates the GAA disc left of centre, same convention as scene 2/7).
+    for (let i = 0; i < P.length; i++) {
+      drawRoseMark(P[i].b, guestMirror[i * 2], guestMirror[i * 2 + 1],
+        cur[i * 4 + 3] * w * gaaGate * 0.7);
     }
-    // label the two discs on-canvas (item 5)
-    const gR = Math.min(VW, VH) * 0.24;
+    // Soccer disc: primary + mirror ghost, identical geometry to the GAA disc.
+    for (let i = 0; i < SOCCER.length; i++) {
+      drawRoseMark(SOCCER[i], soccerRose[i * 2], soccerRose[i * 2 + 1], w);
+      drawRoseMark(SOCCER[i], soccerMirror[i * 2], soccerMirror[i * 2 + 1], w * 0.7);
+    }
+    // label the two discs on-canvas
     ctx.globalAlpha = w;
-    label("GAA", VW * 0.30, VH * 0.5 + gR + 26, CHALK, 16, false);
-    label("Soccer", VW * 0.70, VH * 0.5 + gR + 26, CHALK, 16, false);
+    label("GAA", guestCentre.cx, guestCentre.cy + guestCentre.R + 26, CHALK, 16, false);
+    label("Soccer", soccerCentre.cx, soccerCentre.cy + soccerCentre.R + 26, CHALK, 16, false);
     ctx.restore();
   }
   // dashed reference ring at the uniform-expectation radius (item 2's honesty
@@ -374,19 +493,24 @@
     label("country", countryPetal.cx, countryPetal.cy - countryPetal.R - 24, CHALK, 16, false);
     label("36% cardinal", countryPetal.cx, countryPetal.cy - countryPetal.R - 5, CHALK_FAINT, 13);
     // TODO(author): final wording — states the encoding so the eye isn't
-    // asked to infer it (item 2 requirement).
-    label("petal length = share of pitches on that axis · bright = within 15° of N/S/E/W",
+    // asked to infer it. Word-wrapped (device-gate fix #4): was a single
+    // fillText that clipped at both viewport edges on narrow screens.
+    wrapLabel("petal length = share of pitches on that axis · bright = within 15° of N/S/E/W",
       (townPetal.cx + countryPetal.cx) / 2,
-      Math.max(townPetal.cy, countryPetal.cy) + townPetal.R + 36, CHALK_FAINT, 12, false);
+      Math.max(townPetal.cy, countryPetal.cy) + townPetal.R + 34,
+      Math.min(VW - 32, 420), CHALK_FAINT, 12, 16);
     ctx.restore();
   }
   // chalk-italic annotation with a thin leader line into the cluster (item 9).
-  // TODO(author): final wording for both close-up labels.
-  function annotate(text, tx, ty, lx, ly, w) {
+  // TODO(author): final wording for both close-up labels. The leader line
+  // itself always stays chalk-faint (a neutral connector, not "the sun");
+  // `col` (device-gate fix #3) lets the LABEL TEXT go amber for the kicker,
+  // where the label is naming an amber mark — reused as-is, not duplicated.
+  function annotate(text, tx, ty, lx, ly, w, col) {
     ctx.save(); ctx.globalAlpha = w;
     ctx.strokeStyle = CHALK_FAINT; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(tx, ty + 6); ctx.lineTo(lx, ly); ctx.stroke();
-    label(text, tx, ty, CHALK, 15);   // italic
+    label(text, tx, ty, col || CHALK, 15);   // italic
     ctx.restore();
   }
   // TODO(author): both close-ups also need a small permanent caption stating
@@ -396,8 +520,15 @@
     ctx.save(); ctx.globalAlpha = w * 0.8;
     ctx.fillStyle = CHALK_FAINT;
     ctx.font = "italic 12px " + SERIF;
-    ctx.textAlign = "right";
-    ctx.fillText("symbols, not scale", VW - 12, VH - 14);
+    // device-gate fix #8: was right-anchored at a hardcoded VW-12, which
+    // clipped at the right edge. Measure the string and clamp its LEFT
+    // edge explicitly, so it can never render past the canvas bounds
+    // regardless of viewport width or text metrics.
+    const text = "symbols, not scale";
+    const margin = 14;
+    const tw = ctx.measureText(text).width;
+    ctx.textAlign = "left";
+    ctx.fillText(text, Math.max(margin, VW - tw - margin), VH - 16);
     ctx.restore();
   }
   function ovDublin(w) {
@@ -443,30 +574,51 @@
     ctx.restore();
   }
 
+  // Device-gate fix #3: the 29 grounds as amber SYMBOLIC strokes — a floored
+  // minimum length well above their old true-scale size (which, at island
+  // zoom, rendered as near-dots), so each one reads as a LINE with a
+  // visible direction, not a speck. Reuses the drawPitchSymbolic pattern
+  // (floor a true length, don't fix it outright) so a few genuinely large
+  // grounds can still read slightly longer than the rest.
+  const KICK_MIN_STROKE_PX = 34;
+  const KICK_LINE_ALPHA = 0.9, KICK_LINE_WIDTH = 1.6;
+  function drawStadiumMark(s, x, y, alpha) {
+    const pxPerM = FIT.island ? FIT.island.pxPerM : 0;
+    const l = Math.max(s.L * pxPerM, KICK_MIN_STROKE_PX);
+    ctx.save(); ctx.translate(x, y); ctx.rotate(s.b * Math.PI / 180);
+    ctx.globalAlpha = alpha * KICK_LINE_ALPHA;
+    ctx.strokeStyle = AMBER; ctx.lineWidth = KICK_LINE_WIDTH;
+    ctx.beginPath(); ctx.moveTo(0, -l / 2); ctx.lineTo(0, l / 2); ctx.stroke();
+    ctx.restore();
+  }
+
   // THE KICKER (scene 8, Act 5): the 29 county grounds in amber, at their
   // true bearings, on the island frame the ghosted cast (drawn in the main
-  // per-pitch loop at KICK_ALPHA) already sits on. Named callouts for the
-  // two grounds the storyboard calls out by name. Amber is correct here —
-  // the sun/floodlight is literally the subject (long axes east–west, into
-  // the sunset the folklore warns about).
+  // per-pitch loop at KICK_ALPHA) already sits on, with the coast + county
+  // borders drawn under both (device-gate fix #3 — see the outlineWeight(8,
+  // ...) call in renderFrame). Named callouts for the two grounds the
+  // storyboard calls out by name, now attached with a leader line via
+  // annotate() (were floating text before). Amber is correct here — the
+  // sun/floodlight is literally the subject (long axes east–west, into the
+  // sunset the folklore warns about).
   function ovKicker(w) {
     if (!ST.length || !stPos.length) return;
     for (let i = 0; i < ST.length; i++) {
       const [x, y] = stPos[i];
-      drawPitch(ST[i], x, y, FIT.island ? FIT.island.pxPerM : 0, w, AMBER);
+      drawStadiumMark(ST[i], x, y, w);
     }
-    ctx.save(); ctx.globalAlpha = w; ctx.fillStyle = AMBER;
     const semple = ST.findIndex(s => s.name.includes("Semple"));
     const rinn = ST.findIndex(s => s.name.includes("Rinn"));
     if (semple >= 0) {
       const [x, y] = stPos[semple];
-      label("Semple 92°", x, y - 14, AMBER, 12, true);
+      annotate("Semple 92°", x, y - 36, x, y, w, AMBER);
     }
     if (rinn >= 0) {
       const [x, y] = stPos[rinn];
-      label("Páirc Uí Rinn 89°", x, y - 14, AMBER, 12, true);
+      annotate("Páirc Uí Rinn 89°", x, y - 36, x, y, w, AMBER);
     }
     // TODO(author): final wording — one amber label line, per the storyboard.
+    ctx.save(); ctx.globalAlpha = w;
     label("the 29 county grounds — long axes east–west, into the sunset",
       VW / 2, VH - 26, AMBER, 14, true);
     ctx.restore();
@@ -519,6 +671,16 @@
     return { a, tau, t };
   }
 
+  // Anti-smear settle gate: an overlay that's a full ghost copy of the
+  // moving cast (rose mirrors, petal-rose ghosts) must not draw until the
+  // cast has actually finished arriving at scene `fromScene + 1` — else it
+  // captures the mid-morph position. Shared by every such overlay (device-
+  // gate fix #1 generalises this beyond scene 2 without duplicating it).
+  function settleGate(a, tau, fromScene) {
+    return (reduced || a !== fromScene) ? 1
+      : Math.max(0, Math.min(1, (tau - 0.82) / 0.18));
+  }
+
   let CUR = new Float32Array(P.length * 4);
 
   // Draws the current shared scene state into whichever canvas `ctx`
@@ -533,6 +695,15 @@
     // either scene is the source or destination of the current transition —
     // covers arriving at 5, holding 5, 5->6, holding 6, and departing 6.
     const symbolic = (a === 4 || a === 5 || a === 6);
+    // device-gate fix #2: scene 3 (soccer guest) only. The GAA disc's
+    // primary dots switch to the same fixed rose mark the soccer disc (and
+    // both discs' mirror ghosts) use in ovSoccer — so the "smooth mass vs
+    // spiky bristles" mismatch was a renderer mismatch, not a data one; the
+    // two discs are now drawn identically. Scoped narrowly on purpose:
+    // scene 2/7's own (already-approved, 2B-i) primary rendering is
+    // untouched, switching over only once the guest scene is more-arrived-
+    // than-not (t>0.5) during the 2->3 approach, and for all of the 3 hold.
+    const guestRoseMode = (a === 2 && t > 0.5) || a === 3;
 
     ctx.clearRect(0, 0, VW, VH);
 
@@ -541,6 +712,8 @@
     if ((ow = outlineWeight(1, a, t)) > 0.02) drawOutlines(FIT.island, ow);
     if ((ow = outlineWeight(5, a, t)) > 0.02) drawOutlines(FIT.dublin, ow);
     if ((ow = outlineWeight(6, a, t)) > 0.02) drawOutlines(FIT.cavan, ow);
+    // device-gate fix #3: the kicker needs a recognisable Ireland under it
+    if ((ow = outlineWeight(8, a, t)) > 0.02) drawOutlines(FIT.island, ow);
 
     for (let i = 0; i < P.length; i++) {
       const j = i * 4;
@@ -549,8 +722,13 @@
       const s = A[j + 2] + (B[j + 2] - A[j + 2]) * t;
       const al = A[j + 3] + (B[j + 3] - A[j + 3]) * t;
       CUR[j] = x; CUR[j + 1] = y; CUR[j + 2] = s; CUR[j + 3] = al;
-      if (al < 0.02) continue;
+      // device-gate fix #9: the parked (0.02-scale, 0-alpha) rest-of-cast in
+      // the protagonist scene was leaving a faint smudge inside the big
+      // pitch rectangle — raised from 0.02 so any near-zero float residue
+      // from the interpolation still gets skipped outright, not drawn.
+      if (al < ALPHA_SKIP) continue;
       if (symbolic) drawPitchSymbolic(P[i], x, y, s, al);
+      else if (guestRoseMode) drawRoseMark(P[i].b, x, y, al);
       else drawPitch(P[i], x, y, s, al, CHALK);
     }
 
@@ -567,19 +745,24 @@
       if (i === 2) {
         // rose mirror gated to the hold plateau on arrival (kills the mid-morph
         // smear: the cast is settled before the mirror draws). Cuts if reduced.
-        const gate = (reduced || a !== 1) ? 1
-          : Math.max(0, Math.min(1, (tau - 0.82) / 0.18));
-        ovMirror(w * gate, CUR);
+        ovMirror(w * settleGate(a, tau, 1), CUR);
+      } else if (i === 3) {
+        // device-gate fix #1: the soccer-guest scene's GAA disc also needs
+        // its mirror ghost (was half-folded before) — same settle gate,
+        // fromScene = i-1 = 2 (rose -> guest arrival), same reasoning.
+        ovSoccer(w, CUR, settleGate(a, tau, 2));
       } else if (i === 4) {
         // petal-rose ghosts: same settle gate, same reason (item 2's ghosts
         // are a full copy of the moving cast too — avoid reintroducing the
         // scene-2 smear in a new spot).
-        const gate = (reduced || a !== 3) ? 1
-          : Math.max(0, Math.min(1, (tau - 0.82) / 0.18));
-        ovTownCountry(w * gate, CUR);
+        ovTownCountry(w * settleGate(a, tau, 3), CUR);
       } else if (i === 7) {
-        // sun sweep bound to the same model: sweeps as the scene settles, holds
+        // sun sweep bound to the same model: sweeps as the scene settles, holds.
+        // device-gate fix #1: the sun scene ALSO needs the full mirrored ring
+        // (was half-folded — ovMirror was keyed to scene 2 only). Same
+        // function, same settle-gate pattern, fromScene = i-1 = 6.
         const sweepT = reduced ? t : (a === 6 ? tau : 1);
+        ovMirror(w * settleGate(a, tau, 6), CUR);
         ovSun(w, sweepT);
       } else {
         OVERLAYS[i](w);

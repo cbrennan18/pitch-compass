@@ -120,14 +120,26 @@
   // (stroke -> rect -> halfway/20m lines) as the reader zooms toward a
   // single real pitch — "see its actual shape" falls out of one continuous
   // renderer, not a mode switch the reader has to notice.
-  const MIN_STROKE_PX = 18;
-  function renderPitch(p, x, y, s, alpha) {
+  //
+  // Device-gate fix #5: the floor used to be a FLAT 18px regardless of
+  // zoom — right for the close-ups (a fixed frame), wrong for a zoomable
+  // island view, where 2,707 flat-18px strokes at zoom-out overlap into a
+  // hairball. The floor now SCALES with zoom: near-invisible short ticks
+  // (a clean point-cloud) at ZOOM_MIN, ramping up to the same 18px close-up
+  // convention by FLOOR_RAMP_ZOOM — beyond which true scale naturally takes
+  // over anyway as the reader keeps zooming in.
+  const MIN_FLOOR_LOW = 2.5, MIN_FLOOR_HIGH = 18, FLOOR_RAMP_ZOOM = 8;
+  function strokeFloorPx(zoom) {
+    const t = Math.max(0, Math.min(1, (zoom - ZOOM_MIN) / (FLOOR_RAMP_ZOOM - ZOOM_MIN)));
+    return MIN_FLOOR_LOW + (MIN_FLOOR_HIGH - MIN_FLOOR_LOW) * t;
+  }
+  function renderPitch(p, x, y, s, alpha, floorPx) {
     const l = p.L * s, w = p.W * s;
     ctx.save(); ctx.translate(x, y); ctx.rotate(p.b * Math.PI / 180);
     ctx.strokeStyle = CHALK;
-    if (l < MIN_STROKE_PX) {
+    if (l < floorPx) {
       ctx.globalAlpha = alpha * 0.6; ctx.lineWidth = 1;
-      const fl = Math.max(l, MIN_STROKE_PX);
+      const fl = Math.max(l, floorPx);
       ctx.beginPath(); ctx.moveTo(0, -fl / 2); ctx.lineTo(0, fl / 2); ctx.stroke();
     } else {
       ctx.globalAlpha = alpha; ctx.lineWidth = Math.min(1.5, .8 + l / 220);
@@ -173,13 +185,14 @@
     // world units are toXY's cos(lat)-scaled degrees, not metres — convert
     // world-scale to px-per-metre the same way stage.js's fitter does
     const pxPerM = (baseScale * camera.zoom) / 111320;
+    const floorPx = strokeFloorPx(camera.zoom);   // device-gate fix #5
     for (let i = 0; i < P.length; i++) {
       const p = P[i];
       const [x, y] = worldToScreen(p.gx, p.gy);
       if (x < -40 || x > VW + 40 || y < -40 || y > VH + 40) { CUR[i * 2] = -9999; continue; }
       const alpha = (filterCounty && p.county !== filterCounty) ? DIM_ALPHA : 1;
       CUR[i * 2] = x; CUR[i * 2 + 1] = y;
-      renderPitch(p, x, y, pxPerM, alpha);
+      renderPitch(p, x, y, pxPerM, alpha, floorPx);
     }
   }
 

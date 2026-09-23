@@ -352,19 +352,35 @@ with open(os.path.join(OUT, "rose.json"), "w") as f:
     }, f, separators=(",", ":"))
 
 # ===============================================================
-# county_stats.json — county_stats.csv verbatim, typed
+# county_stats.json — county_stats.csv verbatim, typed, PLUS the
+# bootstrap noise-verdict from extra_summary.json (device-gate fix #11).
+# low_n is the frozen n<30 cutoff (Leitrim only) — a SAMPLE-SIZE fact.
+# noise_indistinct is a DIFFERENT, stronger fact: analyse_extra.py's
+# bootstrap round (2000 resamples, seed 1798) tests whether each
+# county's R4 confidence interval reaches down to the 95th-percentile
+# R4 of pure uniform noise at that county's n. True = the county's
+# apparent order could be chance. It was computed for n>=30 counties
+# only (Leitrim, n=29, was never eligible — that's what low_n already
+# flags), so it's null for exactly that one county. Read verbatim from
+# the frozen bootstrap_ci block; nothing here is invented.
 # ===============================================================
+
+esum = json.load(open(ipath("gaa_out", "extra_summary.json")))
+boot_by_county = {c["county"]: c for c in esum["bootstrap_ci"]["counties"]}
 
 counties = []
 with open(ipath("gaa_out", "county_stats.csv")) as f:
     for r in csv.DictReader(f):
+        county = r["county"]
+        b = boot_by_county.get(county)
         counties.append({
-            "county": r["county"],
+            "county": county,
             "n": int(r["n"]),
             "R4": float(r["R4"]),
             "mean_axis": float(r["mean_axis"]),
             "cardinal_pct": float(r["cardinal_pct"]),
             "low_n": r["low_n"].strip().lower() == "true",
+            "noise_indistinct": b["ci_overlaps_noise"] if b else None,
         })
 with open(os.path.join(OUT, "county_stats.json"), "w") as f:
     json.dump(counties, f, separators=(",", ":"))
@@ -749,7 +765,7 @@ with open(os.path.join(OUT, "charts.json"), "w") as f:
 # ===============================================================
 
 asum = json.load(open(ipath("gaa_out", "analysis_summary.json")))
-esum = json.load(open(ipath("gaa_out", "extra_summary.json")))
+# esum already loaded above, for county_stats.json's bootstrap verdict
 
 
 def find_p(substr):
@@ -873,6 +889,15 @@ print(f"multiple comparisons: {mc['n_tests']} tests, "
 ep = ", ".join(f"{w} {c}" for w, c in epithet_leaderboard)
 print(f"names epithets (deduped, chart uses these): {ep}")
 print("   NB FINDINGS says Rovers 10 / Emmets 8 — drafting erratum; pipeline: 11 / 9")
+print("-" * 60)
+ni_clear = sorted(c["county"] for c in counties if c["noise_indistinct"] is False)
+ni_null = sorted(c["county"] for c in counties if c["noise_indistinct"] is None)
+ni_flag = sorted(c["county"] for c in counties if c["noise_indistinct"] is True)
+print(f"bootstrap noise verdict: {len(ni_clear)} clear the noise ceiling: {', '.join(ni_clear)}"
+      f"  (expected: Cork, Dublin, Tipperary)")
+print(f"                         {len(ni_null)} never bootstrapped (n<30): {', '.join(ni_null)}"
+      f"  (expected: Leitrim)")
+print(f"                         {len(ni_flag)} flagged indistinct from noise")
 print("-" * 60)
 print("FILE SIZES  (budget: cast <170KB, outlines <120KB target / 150KB cap)")
 print(f"cast.json:           {N} records,      {size('cast.json'):>7} bytes"
