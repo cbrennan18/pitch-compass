@@ -1,20 +1,24 @@
-/* Pitch Compass — the floodlit stage engine (Stage 3A: single sticky stage,
- * Acts 1–4; the kicker/cv2 stage was removed, f1/f2/f4 moved out of the
- * scroll flow — see index.html and the Stage 3A build report).
+/* Pitch Compass — the floodlit stage engine (Stage 3A-ii: real-device
+ * fixes after phone testing — resize/flicker fix, settled-scene caching,
+ * camera moves instead of hard cuts, sun sweep cut. See index.html and
+ * the Stage 3A / 3A-ii build reports).
  *
  * ONE sticky stage, one canvas. Every pitch holds a per-scene target
  * [x,y,scale,alpha]; scroll drives an eased interpolation between
  * consecutive scenes. Scenes are DESCRIPTORS with an optional overlay
- * (ctx,w,t) hook — the rose mirror, the soccer guest rose, the sun sweep
- * and the on-canvas labels are overlays, not special-cased scene indices.
- * This generalises the v4 prototype's hand-wired mW/sunW dispatch.
+ * (ctx,w,t) hook — the rose mirror, the soccer guest rose and the
+ * on-canvas labels are overlays, not special-cased scene indices. This
+ * generalises the v4 prototype's hand-wired mW dispatch.
  *
- * Scenes:
+ * Scenes (9, but only 7 have their own scroll card — see SCENE_CARD near
+ * sceneState() for how 5/7 share a neighbour's card as a camera move):
  *   0 protagonist · 1 island · 2 rose · 3 soccer guest · 4 town/country
- *   5 Dublin · 6 Cavan–Monaghan · 7 rose + sun sweep (last; holds here)
+ *   5 Dublin wide (camera-only) · 6 Dublin 6km · 7 back-to-island
+ *   (camera-only) · 8 Cavan–Monaghan (last; holds here)
  *
- * Chalk on grass; amber is semantic (the sun sweep is the only amber
- * content left). Data © OpenStreetMap contributors (ODbL 1.0); see /data
+ * Chalk on grass; amber is now used nowhere (the sun sweep, its only
+ * remaining use, was cut in 3A-ii). Data © OpenStreetMap contributors
+ * (ODbL 1.0); see /data
  * and the methods box.
  */
 (() => {
@@ -28,7 +32,7 @@
   let ctx = ctxs[0];
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const CHALK = "#f4f1e4", AMBER = "#e8a13d";
+  const CHALK = "#f4f1e4";   // AMBER removed Stage 3A-ii: its only use (the sun sweep) was cut
   const CHALK_FAINT = "rgba(244,241,228,.62)";
   const CHALK_LINE = "rgba(244,241,228,.28)";
   const SERIF = "Charter, Georgia, 'Times New Roman', serif";
@@ -40,6 +44,8 @@
   let OUTLINES = null;   // {coast:[[ [lon,lat],... ]], borders:[...]}
   let DUBLIN_STREETS = null;   // lazy-loaded, Dublin scene only (item 3)
   let dublinStreetsRequested = false;
+  let CM_BORDERS = null;       // lazy-loaded, Cavan scene only (Stage 3A-ii, item C)
+  let cmBordersRequested = false;
   let FIT = {};          // stored map fitters: island / dublin / cavan
   let protagonists = {}; // {sun,wind,north,none} -> index into P
   let protagIdx = 0;     // current protagonist (quiz-selected)
@@ -72,7 +78,10 @@
   const hash = (i, salt) => ((i * 2654435761 + salt * 40503) >>> 16 & 255) / 255;
 
   // ---------- scene target arrays ----------
-  const N = 8;   // Stage 3A: scene 8 (the kicker) removed -- 0..7 now
+  // Stage 3A-ii: sun sweep (was 7) cut; two camera-only keyframes (Dublin-
+  // wide, back-to-island) added for item C -- 0..8 now, 9 scenes total,
+  // but still only 7 cards (see SCENE_CARD near sceneState()).
+  const N = 9;
   let S = [];            // S[i] = Float32Array(P.length*4)
   let mirror = null;     // rose fold mirror positions (2 per pitch)
   let guestMirror = null;   // GAA disc's mirror ghost, in the soccer-guest scene
@@ -174,8 +183,21 @@
     //     stacked petals, sized to fill whatever space that leaves.
     let gcx, gcy, gR, scx, scy;
     if (isPortrait) {
-      const topM = 20, gapM = 44, botM = 20, labelH = 30;
-      const bandH = (VH - topM - gapM - botM - 2 * labelH) / 2;
+      // Stage 3A-ii fix: two stacked circles need 4 radii of vertical space
+      // (2 diameters), not 2 -- this divided by 2, so gR could come out
+      // width-bound (169px) even when the real two-circle footprint (4*gR)
+      // didn't fit the actual height, overflowing at anything under ~820px
+      // (confirmed clipped at 664/667/750, barely fit at 844 by luck). The
+      // petal-stack formula below (scene 4) already divides by 4 correctly;
+      // this now matches it.
+      // MARK_MARGIN: drawRoseMark ticks (ROSE_MARK_PX=12) extend a few px
+      // beyond a mark's own jittered radius (max 0.98*gR) -- without this,
+      // gR sized to exactly fill VH still let mark tips poke 1-3px past
+      // the edge at the tightest heights (confirmed at 375x667). A flat
+      // pixel budget, not a fraction of gR, so it holds at every size.
+      const MARK_MARGIN = 8;
+      const topM = 20, gapM = 44, botM = 20 + MARK_MARGIN, labelH = 30;
+      const bandH = (VH - topM - gapM - botM - 2 * labelH) / 4;
       gR = Math.max(40, Math.min((VW - 2 * 26) / 2, bandH));
       gcx = scx = VW / 2;
       gcy = topM + labelH + gR;
@@ -260,31 +282,41 @@
       setTarget(S[4], i, x, y, 0.06, alpha);
     });
 
-    // 5 — Dublin close-up (street grid); 6 — Cavan–Monaghan (drumlin comb).
-    //     Boxes tightened vs the prototype so the dashes read and tap at phone
-    //     scale; county borders drawn under each (items 7 & 9). Rendered with
-    //     drawPitchSymbolic (gate-fail fix #3: min-length strokes, not true-
-    //     scale rects — a rect blobs at this zoom, a stroke reads an angle).
-    //     Cardinal emphasis (same axis test as item 2) reuses the alpha
-    //     channel, same mechanism, no new per-scene logic.
-    //     Stage 3A, item 3: tightened from ~18.6x15.6km to a ~6km box
-    //     centred on Croke Park/Drumcondra (the densest cluster found — see
-    //     the build report), so pitches draw via drawPitch (true shape),
-    //     not drawPitchSymbolic, wherever they clear MIN_STROKE_PX.
+    // Stage 3A-ii, item C: camera MOVES instead of hard cuts. Dublin-wide
+    // (5) and back-to-island (7) are extra CAMERA keyframes -- they get a
+    // real target array like every other scene, but no card of their own
+    // (see SCENE_CARD below): island -> Dublin-wide -> Dublin-6km reads as
+    // one continuous zoom across the scroll distance that used to be a
+    // single hard cut, and Dublin-6km -> back-to-island -> Cavan reads as
+    // zoom-out-then-in instead of a second hard cut.
+
+    // 5 — Dublin WIDE: the whole county fit (outlines.json's own Dublin
+    // bbox), pitches as symbols (not true shape -- 252 pitches county-wide
+    // would be sub-pixel dots at this zoom anyway; a fixed-length symbol
+    // reads as "there's a pitch here" the way the close-ups already do).
+    const dubWide = fitter(53.178, 53.635, -6.547, -5.996, 20);
+    FIT.dublinWide = dubWide;
+    P.forEach((p, i) => { const [x, y] = dubWide.pos(p);
+      setTarget(S[5], i, x, y, dubWide.pxPerM, withinCardinalAxis(p.b) ? EMPH_FULL : EMPH_FAINT); });
+
+    // 6 — Dublin 6km (unchanged from Stage 3A): true shape via drawPitch
+    // wherever a pitch clears DUBLIN_TRUE_SHAPE_MIN_PX, streets underneath.
     const dub = fitter(53.3429, 53.3971, -6.2852, -6.1948, 22);
     FIT.dublin = dub;
     P.forEach((p, i) => { const [x, y] = dub.pos(p);
-      setTarget(S[5], i, x, y, dub.pxPerM, withinCardinalAxis(p.b) ? EMPH_FULL : EMPH_FAINT); });
+      setTarget(S[6], i, x, y, dub.pxPerM, withinCardinalAxis(p.b) ? EMPH_FULL : EMPH_FAINT); });
+
+    // 7 — back-to-island: literally scene 1's island framing again (same
+    // fitter, same positions) -- the camera zooming out to the same
+    // geographic frame it started from, before zooming into Cavan.
+    P.forEach((p, i) => S[7].set(S[1].subarray(i * 4, i * 4 + 4), i * 4));
+
+    // 8 — Cavan-Monaghan (drumlin comb). Last scene now. Cardinal emphasis
+    // (same axis test as item 2) reuses the alpha channel, same mechanism.
     const cav = fitter(53.92, 54.28, -7.45, -6.78, 22);
     FIT.cavan = cav;
     P.forEach((p, i) => { const [x, y] = cav.pos(p);
-      setTarget(S[6], i, x, y, cav.pxPerM, withinCardinalAxis(p.b) ? EMPH_FULL : EMPH_FAINT); });
-
-    // 7 — rose again, re-centred, for the sun sweep (mirror off). Last
-    // scene now (Stage 3A removed the kicker) — sceneState() naturally
-    // holds here once fully arrived, same mechanism that used to hold on
-    // the kicker.
-    P.forEach((p, i) => S[7].set(S[2].subarray(i * 4, i * 4 + 4), i * 4));
+      setTarget(S[8], i, x, y, cav.pxPerM, withinCardinalAxis(p.b) ? EMPH_FULL : EMPH_FAINT); });
   }
 
   // ---------- pitch renderer: LOD stroke -> rect -> line markings ----------
@@ -404,6 +436,32 @@
     ctx.save();
     strokePaths(OUTLINES.borders, fit, w * 0.22, 1);   // internal borders, faintest
     strokePaths(OUTLINES.coast, fit, w * 0.42, 1);     // coast a touch stronger
+    ctx.restore();
+  }
+
+  // Stage 3A-ii, item C: Cavan + Monaghan drawn at higher weight than the
+  // faint island borders already under them (outlines.json's borders
+  // aren't individually named, so a bbox emphasis would also catch
+  // Leitrim/Fermanagh/Meath/Tyrone -- this uses a small named file
+  // instead, docs/data/cm_borders.json, generated from the same boundary
+  // source assign_counties.py reads). Labelled so there's a sense of
+  // where the close-up actually is, per the phone-test note.
+  function drawCMBorders(w) {
+    if (!CM_BORDERS || !FIT.cavan) return;
+    ctx.save();
+    for (const name of ["Cavan", "Monaghan"]) {
+      const paths = CM_BORDERS[name];
+      if (!paths) continue;
+      strokePaths(paths, FIT.cavan, w * 0.85, 1.6);
+      // label near the ring's own centroid (simple point average -- these
+      // are single simplified rings, not multi-part, so this stays inside
+      // the county for both)
+      let sx = 0, sy = 0, n = 0;
+      for (const [lon, lat] of paths[0]) { sx += lon; sy += lat; n++; }
+      const [lx, ly] = FIT.cavan.posLL(sx / n, sy / n);
+      ctx.globalAlpha = w;
+      label(name, lx, ly, CHALK, 15, false);
+    }
     ctx.restore();
   }
   // device-gate fix #10: on the very first approach (scene0 protagonist ->
@@ -569,38 +627,10 @@
       VW / 2, VH * 0.13, VW / 2, VH * 0.38, w);
     closeupNote(w);
   }
-  function axisLine(cx, cy, R, azDeg, dash) {
-    const a = (azDeg - 90) * Math.PI / 180;
-    ctx.setLineDash(dash || []);
-    ctx.beginPath();
-    ctx.moveTo(cx - R * Math.cos(a), cy - R * Math.sin(a));
-    ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a));
-    ctx.stroke();
-    ctx.setLineDash([]);
-    return [cx + R * Math.cos(a), cy + R * Math.sin(a)];   // the "setting" end
-  }
-  function ovSun(w, t) {
-    if (!roseCentre) return;
-    const { cx, cy } = roseCentre, R = Math.min(VW, VH) * 0.46;
-    const az = 228 + (311.8 - 228) * Math.min(1, t);   // sweep winter -> June
-    // the ghost winter axis + both counts fade in once the sweep has settled
-    const ghost = Math.max(0, Math.min(1, (t - 0.55) / 0.45)) * w;
-    ctx.save();
-    drawCompass(cx, cy, roseCentre.R, w);
-    if (ghost > 0.02) {
-      ctx.strokeStyle = AMBER; ctx.globalAlpha = ghost * 0.5; ctx.lineWidth = 1.5;
-      const wend = axisLine(cx, cy, R, 228, [5, 5]);     // winter, dashed ghost
-      ctx.globalAlpha = ghost;
-      label("winter 427", wend[0], wend[1] + 16, AMBER, 14);
-    }
-    ctx.strokeStyle = AMBER; ctx.globalAlpha = w; ctx.lineWidth = 2;
-    const jend = axisLine(cx, cy, R, az);                 // June, solid
-    ctx.fillStyle = AMBER;
-    ctx.beginPath(); ctx.arc(jend[0], jend[1], 7, 0, 7); ctx.fill();
-    label(t >= 0.98 ? "June 363" : "sunset, by season",
-      jend[0], jend[1] - 14, AMBER, 14);
-    ctx.restore();
-  }
+  // Stage 3A-ii, item D: the sun-sweep scene (and axisLine, its only
+  // caller) was removed -- phone testing found it "adds little." f1
+  // (the sunset-deficit chart) already carries the same June/winter
+  // numbers in the stage's <noscript> fallback (moved there in 3A).
 
   // Stage 3A, item 3: the Dublin street layer. Lazy-loaded (see the fetch
   // trigger near boot, below) and drawn only for the Dublin scene, faint
@@ -623,9 +653,12 @@
     ctx.restore();
   }
 
-  // overlay owner scene index -> fn (2, 4 and 7 are dispatched specially below)
+  // overlay owner scene index -> fn (2, 4 dispatched specially below).
+  // Stage 3A-ii: 5 (Dublin-wide) and 7 (back-to-island) are camera-only
+  // keyframes with no label of their own -- they're not in this map, so
+  // they simply draw no overlay, same as scene 1 (island).
   const OVERLAYS = { 0: ovProtagonist, 2: ovMirror, 3: ovSoccer,
-                     4: ovTownCountry, 5: ovDublin, 6: ovCavan, 7: ovSun };
+                     4: ovTownCountry, 6: ovDublin, 8: ovCavan };
 
   // ---------- scroll + draw: CARD-DRIVEN pacing (gate-fail fix #1) ----------
   // The old model divided the .scrolly element's total scroll distance into
@@ -635,10 +668,25 @@
   // down the page. Replaced: each transition is now driven by the live
   // getBoundingClientRect() of its OWN destination card.
   const ease = t => t < .5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
-  // .steps lives inside BOTH sticky stages; this selector picks up all 9
-  // cards, across both, in document order — index === scene index (0..8).
-  // Extending to a second stage needed no change here at all.
+  // 7 cards remain (protagonist's own card at index 0 is still unused, as
+  // before — scene 0 needs no card to "arrive"): island, rose, soccer,
+  // townCountry, dublin, cavan at indices 1-6.
   const cardEls = Array.from(document.querySelectorAll(".steps .card"));
+
+  // Stage 3A-ii, item C: SCENE_CARD[i] = [cardIdx, subStart, subEnd] --
+  // which card drives scene i's arrival, and which sub-range of that
+  // card's raw reveal maps to scene i's own local [0,1] tau. Every scene
+  // with its own card uses the full [0,1] range (unchanged behaviour).
+  // Dublin-wide (5) and Dublin-6km (6) share card 5 (Dublin's), split at
+  // its reveal midpoint; back-to-island (7) and Cavan (8) share card 6
+  // (Cavan's) the same way — so the camera move happens smoothly within
+  // the SAME scroll distance a single hard cut used to take, no new cards
+  // or scroll length.
+  const SCENE_CARD = {
+    1: [1, 0, 1], 2: [2, 0, 1], 3: [3, 0, 1], 4: [4, 0, 1],
+    5: [5, 0, 0.5], 6: [5, 0.5, 1],
+    7: [6, 0, 0.5], 8: [6, 0.5, 1],
+  };
 
   // How much scroll (as a fraction of one viewport height) each morph takes.
   // A card's own arrival is complete — formation fully done — exactly when
@@ -659,8 +707,11 @@
   function sceneState() {
     const arrivePx = VH * ARRIVE_FRAC;
     const reveal = [1];   // reveal[0] = 1 constant: scene 0 needs no card to "arrive"
-    for (let i = 1; i <= N - 1; i++) reveal[i] = cardEls[i]
-      ? revealOf(cardEls[i], arrivePx) : 1;
+    for (let i = 1; i <= N - 1; i++) {
+      const [cardIdx, subStart, subEnd] = SCENE_CARD[i];
+      const raw = cardEls[cardIdx] ? revealOf(cardEls[cardIdx], arrivePx) : 1;
+      reveal[i] = Math.max(0, Math.min(1, (raw - subStart) / (subEnd - subStart)));
+    }
     let settled = 0;
     while (settled < N - 1 && reveal[settled + 1] >= 1) settled++;
     const a = Math.min(N - 2, settled);
@@ -695,6 +746,33 @@
 
   let CUR = new Float32Array(P.length * 4);
 
+  // Stage 3A-ii, item B: settled-frame cache for the rose (2) and soccer
+  // (3) scenes. Measured cost (4x CPU throttle): the per-pitch loop and
+  // the mirror-ghost overlay are each ~4.5ms for these scenes, roughly
+  // doubling frame cost to redraw ~2,700 pitches twice a frame -- for
+  // nothing, once the scene has settled and NOTHING is moving (every
+  // scroll position within a hold produces bit-identical output). Raw
+  // pixel-to-pixel canvas copy (no dpr scaling math needed: cache and
+  // live canvas share identical device-pixel dimensions whenever the
+  // cache is valid). Invalidated on any rebuild (width or qualifying
+  // height change -- see rebuild()) and implicitly on scene change,
+  // since the cache is keyed by scene index and a mismatched vw/vh
+  // simply isn't used.
+  const settledCache = {};
+  function invalidateSettledCache() { for (const k in settledCache) delete settledCache[k]; }
+  function blitSettledCache(entry) {
+    ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.drawImage(entry.canvas, 0, 0);
+    ctx.restore();
+  }
+  function snapshotSettledCache(sceneIdx) {
+    const off = document.createElement("canvas");
+    off.width = ctx.canvas.width; off.height = ctx.canvas.height;
+    off.getContext("2d").drawImage(ctx.canvas, 0, 0);
+    settledCache[sceneIdx] = { canvas: off, vw: VW, vh: VH };
+  }
+
   // Draws the current shared scene state into whichever canvas `ctx`
   // currently points at. draw() (below) sets `ctx` and calls this once per
   // registered canvas — only one is ever actually sticky/visible at a given
@@ -702,16 +780,24 @@
   // (and everything it calls) completely unaware there are two stages.
   function renderFrame() {
     const { a, tau, t } = sceneState();
+    // pure hold (tau===0: the NEXT card hasn't started approaching yet) on
+    // the rose or soccer scene -- reuse the cached settled frame if we
+    // have one at this size instead of redrawing the full cast + ghosts.
+    const cacheable = tau === 0 && (a === 2 || a === 3);
+    if (cacheable) {
+      const cached = settledCache[a];
+      if (cached && cached.vw === VW && cached.vh === VH) { blitSettledCache(cached); return; }
+    }
     const A = S[a], B = S[a + 1];
-    // Cavan(6) (and the town/country->Dublin approach, a===4) still render
-    // with the min-length symbolic stroke throughout, as before.
-    const symbolic = (a === 4 || a === 6);
-    // Stage 3A, item 3: Dublin (a===5, whether holding or already departing
-    // toward Cavan) now draws TRUE shape via drawPitch wherever a pitch
-    // clears DUBLIN_TRUE_SHAPE_MIN_PX, falling back to the symbolic stroke
-    // only below it -- the tightened 6km bbox makes most pitches legible at
-    // true scale (see the build report: only 14% fall under this floor).
-    const dublinTrueShape = a === 5;
+    // Stage 3A-ii: symbolic (min-length stroke) for every petal/close-up
+    // scene and its approach -- townCountry(4), Dublin-wide(5, "pitches as
+    // symbols" per the camera-move spec), back-to-island(7) and Cavan(8,
+    // the last scene, holds).
+    const symbolic = (a === 4 || a === 5 || a === 7 || a === 8);
+    // Dublin 6km (a===6) only: true shape via drawPitch wherever a pitch
+    // clears DUBLIN_TRUE_SHAPE_MIN_PX, falling back to symbolic below it
+    // (only 14% fall under that floor at this bbox -- see the build report).
+    const dublinTrueShape = a === 6;
     // device-gate fix #2: scene 3 (soccer guest) only. The GAA disc's
     // primary dots switch to the same fixed rose mark the soccer disc (and
     // both discs' mirror ghosts) use in ovSoccer — so the "smooth mass vs
@@ -724,12 +810,17 @@
 
     ctx.clearRect(0, 0, VW, VH);
 
-    // backdrops UNDER the cast: coast + county borders on the map scenes,
-    // Dublin's street layer under its pitches too (Stage 3A, item 3)
+    // backdrops UNDER the cast: coast + county borders on every map scene,
+    // Dublin's street layer under its pitches too (Stage 3A, item 3).
+    // Stage 3A-ii: Dublin-wide(5) and back-to-island(7, reusing the island
+    // frame) get the same backdrop treatment as every other map scene;
+    // Cavan(8) additionally draws the named Cavan+Monaghan emphasis.
     let ow;
     if ((ow = outlineWeight(1, a, t)) > 0.02) drawOutlines(FIT.island, ow);
-    if ((ow = outlineWeight(5, a, t)) > 0.02) { drawOutlines(FIT.dublin, ow); drawStreets(ow); }
-    if ((ow = outlineWeight(6, a, t)) > 0.02) drawOutlines(FIT.cavan, ow);
+    if ((ow = outlineWeight(5, a, t)) > 0.02) drawOutlines(FIT.dublinWide, ow);
+    if ((ow = outlineWeight(6, a, t)) > 0.02) { drawOutlines(FIT.dublin, ow); drawStreets(ow); }
+    if ((ow = outlineWeight(7, a, t)) > 0.02) drawOutlines(FIT.island, ow);
+    if ((ow = outlineWeight(8, a, t)) > 0.02) { drawOutlines(FIT.cavan, ow); drawCMBorders(ow); }
 
     for (let i = 0; i < P.length; i++) {
       const j = i * 4;
@@ -776,28 +867,19 @@
         // are a full copy of the moving cast too — avoid reintroducing the
         // scene-2 smear in a new spot).
         ovTownCountry(w * settleGate(a, tau, 3), CUR);
-      } else if (i === 7) {
-        // sun sweep bound to the same model: sweeps as the scene settles, holds.
-        // device-gate fix #1: the sun scene ALSO needs the full mirrored ring
-        // (was half-folded — ovMirror was keyed to scene 2 only). Same
-        // function, same settle-gate pattern, fromScene = i-1 = 6.
-        // Stage 3A: sweepT now shares arriveWeight's delay on the a===6
-        // branch too (not just raw tau) — w is already zero until the sun
-        // is meant to be visible, so without this the sweep's winter->June
-        // animation would "pop in" already half-swept instead of covering
-        // its full range across the window it's actually shown in.
-        const sweepT = reduced ? t : (a === 6 ? arriveWeight(tau) : 1);
-        ovMirror(w * settleGate(a, tau, 6), CUR);
-        ovSun(w, sweepT);
       } else {
         OVERLAYS[i](w);
       }
     }
+
+    if (cacheable && !settledCache[a]) snapshotSettledCache(a);
   }
 
   function draw() {
     if (!S.length || !cardEls.length) return;
-    maybeLoadDublinStreets(sceneState().a);
+    const { a } = sceneState();
+    maybeLoadDublinStreets(a);
+    maybeLoadCMBorders(a);
     ctxs.forEach(c => { ctx = c; renderFrame(); });
   }
 
@@ -844,10 +926,11 @@
     canvases.forEach(c => c.addEventListener("click", e => {
       const r = c.getBoundingClientRect();
       const mx = e.clientX - r.left, my = e.clientY - r.top;
-      // wider hit target in the Dublin/Cavan close-ups (item 7)
+      // wider hit target in the Dublin/Cavan close-ups (item 7).
+      // Stage 3A-ii: Dublin 6km is now scene 6, Cavan is scene 8.
       const { a: tapA, t: tapT } = sceneState();
       const scene = tapT > 0.5 ? tapA + 1 : tapA;
-      const rad = (scene === 5 || scene === 6) ? 40 : 26;
+      const rad = (scene === 6 || scene === 8) ? 40 : 26;
       let best = -1, bd = rad * rad;
       for (let i = 0; i < P.length; i++) {
         if (CUR[i * 4 + 3] < 0.2) continue;
@@ -865,33 +948,103 @@
   // identical CSS rule (100vw x 100svh), so their client sizes are always
   // equal in practice — one shared measurement is correct, not an
   // approximation. Every canvas still gets its own width/height/transform.
-  function resize() {
-    VW = canvases[0].clientWidth; VH = canvases[0].clientHeight;
+  // Stage 3A-ii, item B: the flicker's confirmed root cause. iOS Safari's
+  // address bar collapsing/expanding fires several `resize` events during
+  // its own ~250-500ms animation, each a HEIGHT-ONLY change of order
+  // 50-100px. The old resize() rebuilt buildScenes() (a real per-pitch
+  // cost, ~5-6ms measured) on every single one, unconditionally -- so an
+  // address-bar transition mid-scroll cost 60ms+ of stacked rebuild work
+  // and produced 30-35ms frames (measured: 4 of 14 frames during one
+  // simulated collapse burst), which is the flicker.
+  //
+  // Fix, matching what was asked, revised once during this build after
+  // profiling caught a second-order bug in the first version (see below):
+  // a full buildScenes() rebuild only happens for a WIDTH change or a
+  // height change of >=150px from the last rebuilt size (comfortably
+  // above the address bar's own ~50-100px range, so this is a size-class
+  // distinction, not a magic number tuned to one device), debounced
+  // 150ms so a burst of qualifying events (e.g. real orientation change,
+  // which also fires several resizes) coalesces into one rebuild.
+  //
+  // On an IGNORED (small, height-only) change, this now does NOTHING —
+  // not even a cheap canvas-pixel resize. First version updated the
+  // canvas bitmap size immediately on every event "so nothing looks
+  // clipped mid-transition", but that desynced the live VW/VH from the
+  // coordinate space S[] and the settled-frame cache were actually built
+  // for: the cache's stored vw/vh no longer matched live VW/VH, so it
+  // missed on every frame during a resize burst and fell through to a
+  // full per-pitch re-render anyway — re-profiling with the resize-storm
+  // simulation still showed 3 of 12 frames over 16ms even though
+  // buildScenes() itself was correctly no longer firing. Leaving the
+  // canvas bitmap untouched during an ignored change means the CSS box
+  // (`canvas { width:100%; height:100% }`) simply scales the existing
+  // bitmap to fit — a barely-perceptible blur for a <150px, sub-second
+  // mismatch, not a positional or clipping bug, and zero JS work.
+  const RESIZE_HEIGHT_IGNORE_PX = 150;
+  const RESIZE_DEBOUNCE_MS = 150;
+  let lastBuiltVW = 0, lastBuiltVH = 0, resizeDebounceTimer = null;
+
+  function applyCanvasPixelSize(w, h) {
+    VW = w; VH = h;
     canvases.forEach((c, k) => {
-      c.width = VW * dpr; c.height = VH * dpr;
+      c.width = VW * dpr; c.height = VH * dpr;   // DPR cap stays at 2 (see `dpr` above)
       ctxs[k].setTransform(dpr, 0, 0, dpr, 0, 0);
     });
+  }
+
+  function rebuild() {
+    applyCanvasPixelSize(canvases[0].clientWidth, canvases[0].clientHeight);
+    lastBuiltVW = VW; lastBuiltVH = VH;
     CUR = new Float32Array(P.length * 4);
+    invalidateSettledCache();   // Stage 3A-ii, item B: new framing, cache is stale
     buildScenes(); draw();
   }
+
+  function onResize() {
+    const w = canvases[0].clientWidth, h = canvases[0].clientHeight;
+    const widthChanged = w !== lastBuiltVW;
+    const heightJump = Math.abs(h - lastBuiltVH);
+    if (!lastBuiltVW || widthChanged || heightJump >= RESIZE_HEIGHT_IGNORE_PX) {
+      clearTimeout(resizeDebounceTimer);
+      resizeDebounceTimer = setTimeout(rebuild, RESIZE_DEBOUNCE_MS);
+    }
+    // else: genuinely do nothing (see the comment above rebuild()).
+  }
+
   let ticking = false;
   addEventListener("scroll", () => {
     if (!ticking) { ticking = true;
       requestAnimationFrame(() => { draw(); ticking = false; }); }
   }, { passive: true });
-  addEventListener("resize", resize);
+  // visualViewport is the event actually designed for this (address-bar
+  // chrome changes, on-screen keyboard) and fires independently of
+  // `resize`, which some browsers suppress for chrome-only changes.
+  // Falls back to window resize where visualViewport isn't available.
+  if (window.visualViewport) {
+    visualViewport.addEventListener("resize", onResize);
+  } else {
+    addEventListener("resize", onResize);
+  }
 
-  // Stage 3A, item 3: the Dublin street layer loads lazily, only once the
-  // Dublin scene is near (a===4, approaching, or a===5 already there/past
-  // it toward 6) — not in the initial Promise.all. Checked from inside
-  // draw() (cheap — the scene state is already computed every frame for
-  // rendering) and fired at most once.
+  // Stage 3A, item 3: the Dublin street layer loads lazily, only once
+  // town/country (4) is approaching Dublin-wide (5) — not in the initial
+  // Promise.all. Checked from inside draw() (cheap — the scene state is
+  // already computed every frame for rendering) and fired at most once.
   function maybeLoadDublinStreets(a) {
     if (dublinStreetsRequested || a < 4) return;
     dublinStreetsRequested = true;
     fetch("data/dublin_streets.json").then(r => r.json()).then(j => {
       DUBLIN_STREETS = j.data; draw();
     }).catch(err => console.error("dublin_streets.json load failed", err));
+  }
+  // Stage 3A-ii, item C: same lazy pattern, triggered once back-to-island
+  // (7) is near, so it's loaded well before Cavan (8) actually needs it.
+  function maybeLoadCMBorders(a) {
+    if (cmBordersRequested || a < 6) return;
+    cmBordersRequested = true;
+    fetch("data/cm_borders.json").then(r => r.json()).then(j => {
+      CM_BORDERS = j.counties; draw();
+    }).catch(err => console.error("cm_borders.json load failed", err));
   }
 
   Promise.all([
@@ -913,7 +1066,9 @@
     SOCCER = soccerJson.bearings;
     OUTLINES = outlinesJson;
 
-    resize();
+    // initial boot: rebuild() itself measures + applies + builds, no
+    // debounce needed here (that's only for subsequent resize events)
+    rebuild();
   }).catch(err => {
     console.error("stage data load failed", err);
     document.querySelectorAll(".stage").forEach(s => s.classList.add("stage--failed"));

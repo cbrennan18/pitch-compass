@@ -89,7 +89,9 @@ canvas { display: block; width: 100%; height: 100%; }
    prior round, confirmed on device). Raised to sit closer to the other
    steps' dwell time under the new card-driven pacing model. */
 .step:first-child { min-height: 130vh; }
-.step--tall { min-height: 190vh; }   /* the sun scene needs extra dwell */
+/* Stage 3A-ii: was the (now-cut) sun scene's; reused for Dublin/Cavan,
+   which each now drive two camera-move phases off one card (item C). */
+.step--tall { min-height: 190vh; }
 .step .card {
   pointer-events: auto; background: var(--grass);
   border: 1.5px solid var(--chalk); max-width: 30rem;
@@ -97,7 +99,6 @@ canvas { display: block; width: 100%; height: 100%; }
 }
 .step .card em { font-style: italic; }
 .step .card .sun { color: var(--amber); }
-.step .card--wide { max-width: 33rem; }   /* the sun card needs more room */
 
 /* ---- tap-a-pitch sheet ---- */
 .sheet {
