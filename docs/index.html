@@ -46,11 +46,36 @@
     <canvas class="stage-canvas" id="cv" role="img"
       aria-label="Every mapped GAA pitch in Ireland, drawn at its true bearing and choreographed scene by scene."></canvas>
     <noscript>
-      <p class="stage__noscript">Every one of 2,707 pitches, drawn at its true
-        bearing. Folded onto one compass the disc is almost perfectly round:
-        there is no favoured playing direction. The order that does exist is
-        the street grid in the towns and the drumlins in the country — not GAA
-        lore. The steps below tell the whole story without animation.</p>
+      <!-- Stage 3A: was a single absolutely-centred <p>; now a column
+           wrapper since the f1 chart (moved here from the main flow, still
+           JS-off safe SVG) sits below the text. Values transcribed from
+           data/charts.json -> sunset series (June 363, equinox 509, winter
+           427, uniform 451), unchanged from before. -->
+      <div class="stage__noscript">
+        <p>Every one of 2,707 pitches, drawn at its true
+          bearing. Folded onto one compass the disc is almost perfectly round:
+          there is no favoured playing direction. The order that does exist is
+          the street grid in the towns and the drumlins in the country — not GAA
+          lore. The steps below tell the whole story without animation.</p>
+        <figure class="stage__noscript-chart">
+          <svg viewBox="0 0 600 340" role="img"
+            aria-label="Bar chart: pitches within 15 degrees of each season's sunset axis. June 363, equinox 509, winter 427, against a uniform expectation of 451.">
+            <line class="axis" x1="60" y1="280" x2="580" y2="280"></line>
+            <line class="ref" x1="60" y1="82" x2="580" y2="82"></line>
+            <text class="tick" x="66" y="74" text-anchor="start">uniform ≈ 451</text>
+            <rect class="bar" x="110" y="120" width="90" height="160"></rect>
+            <rect class="bar" x="255" y="56"  width="90" height="224"></rect>
+            <rect class="bar" x="400" y="92"  width="90" height="188"></rect>
+            <text class="tick" x="155" y="112" text-anchor="middle">363</text>
+            <text class="tick" x="300" y="48"  text-anchor="middle">509</text>
+            <text class="tick" x="445" y="84"  text-anchor="middle">427</text>
+            <text class="tick" x="155" y="298" text-anchor="middle">June</text>
+            <text class="tick" x="300" y="298" text-anchor="middle">Equinox</text>
+            <text class="tick" x="445" y="298" text-anchor="middle">Winter</text>
+            <text class="callout" x="155" y="330" text-anchor="middle">the folklore's ghost</text>
+          </svg>
+        </figure>
+      </div>
     </noscript>
   </div>
 
@@ -107,90 +132,9 @@
 </div>
 
 <!-- ============================================================= -->
-<!-- ACT 3 · f1 — CHART: the sunset deficit (static inline SVG)     -->
-<!-- Values transcribed from data/charts.json → sunset series       -->
-<!-- (June 363, equinox 509, winter 427, uniform 451). JS-off safe. -->
-<!-- ============================================================= -->
-<section class="chart prose" aria-labelledby="f1-title">
-  <h3 id="f1-title">The sunset deficit</h3>
-  <p class="todo">Placeholder caption. Pitches within 15° of each season's
-    sunset axis. The honest comparison is winter: exactly as diagonal as June,
-    yet less depleted. June's deficit clears the uniform bar; the June-vs-winter
-    gap does not clear it.</p>
-  <figure>
-    <svg viewBox="0 0 600 340" role="img"
-      aria-label="Bar chart: pitches within 15 degrees of each season's sunset axis. June 363, equinox 509, winter 427, against a uniform expectation of 451.">
-      <!-- baseline -->
-      <line class="axis" x1="60" y1="280" x2="580" y2="280"></line>
-      <!-- uniform expectation, dashed at 451 (y = 280 - 451*0.44 = 81.6).
-           Label moved to the clear zone left of the June bar (device-gate
-           fix #7: was right-anchored at x=580, colliding with Winter's
-           "427" value label right below it). -->
-      <line class="ref" x1="60" y1="82" x2="580" y2="82"></line>
-      <text class="tick" x="66" y="74" text-anchor="start">uniform ≈ 451</text>
-      <!-- bars: June (363), equinox (509), winter (427); scale 0.44 px/pitch -->
-      <rect class="bar" x="110" y="120" width="90" height="160"></rect>
-      <rect class="bar" x="255" y="56"  width="90" height="224"></rect>
-      <rect class="bar" x="400" y="92"  width="90" height="188"></rect>
-      <!-- value labels -->
-      <text class="tick" x="155" y="112" text-anchor="middle">363</text>
-      <text class="tick" x="300" y="48"  text-anchor="middle">509</text>
-      <text class="tick" x="445" y="84"  text-anchor="middle">427</text>
-      <!-- season labels -->
-      <text class="tick" x="155" y="298" text-anchor="middle">June</text>
-      <text class="tick" x="300" y="298" text-anchor="middle">Equinox</text>
-      <text class="tick" x="445" y="298" text-anchor="middle">Winter</text>
-      <!-- annotation on June -->
-      <text class="callout" x="155" y="330" text-anchor="middle">the folklore's ghost</text>
-    </svg>
-  </figure>
-</section>
-
-<!-- ============================================================= -->
-<!-- ACT 4 · f2 — CHART: twins (static inline SVG) — the stage's    -->
-<!-- rest. Values from data/charts.json → twins series (n=1,346).   -->
-<!-- ============================================================= -->
-<section class="chart prose" aria-labelledby="f2-title">
-  <h3 id="f2-title">Twins</h3>
-  <p class="todo">Placeholder caption. n = 1,346 neighbour-pairs within
-    300 m, by the angle between them. Orientation is decided once, then
-    copied or turned square — the two ends of the range tower over the
-    middle.</p>
-  <figure>
-    <svg viewBox="0 0 600 340" role="img"
-      aria-label="Bar chart: angle between 1,346 neighbouring pitch pairs within 300 metres, in six 15-degree bins from 0 to 90 degrees, against a uniform expectation of 224 pairs per bin.">
-      <line class="axis" x1="60" y1="280" x2="580" y2="280"></line>
-      <!-- uniform expectation: 1346/6 = 224.3 pairs/bin. Label moved to the
-           clear zone above the short middle bins (device-gate fix #7: was
-           right-anchored at x=580, buried behind the tall 75-90° bar). -->
-      <line class="ref" x1="60" y1="208" x2="580" y2="208"></line>
-      <text class="tick" x="300" y="198" text-anchor="middle">uniform ≈ 224</text>
-      <rect class="bar" x="85"  y="64"  width="55" height="216"></rect>
-      <rect class="bar" x="170" y="255" width="55" height="25"></rect>
-      <rect class="bar" x="255" y="266" width="55" height="14"></rect>
-      <rect class="bar" x="340" y="271" width="55" height="9"></rect>
-      <rect class="bar" x="425" y="260" width="55" height="20"></rect>
-      <rect class="bar" x="510" y="133" width="55" height="147"></rect>
-      <text class="tick" x="113" y="56"  text-anchor="middle">674</text>
-      <text class="tick" x="198" y="247" text-anchor="middle">79</text>
-      <text class="tick" x="283" y="258" text-anchor="middle">45</text>
-      <text class="tick" x="368" y="263" text-anchor="middle">27</text>
-      <text class="tick" x="453" y="252" text-anchor="middle">62</text>
-      <text class="tick" x="538" y="125" text-anchor="middle">459</text>
-      <text class="tick" x="113" y="298" text-anchor="middle">0–15°</text>
-      <text class="tick" x="198" y="298" text-anchor="middle">15–30°</text>
-      <text class="tick" x="283" y="298" text-anchor="middle">30–45°</text>
-      <text class="tick" x="368" y="298" text-anchor="middle">45–60°</text>
-      <text class="tick" x="453" y="298" text-anchor="middle">60–75°</text>
-      <text class="tick" x="538" y="298" text-anchor="middle">75–90°</text>
-      <text class="callout" x="113" y="330" text-anchor="middle">copied</text>
-      <text class="callout" x="538" y="330" text-anchor="middle">turned square</text>
-    </svg>
-  </figure>
-</section>
-
-<!-- ============================================================= -->
 <!-- ACT 4 · f3 — CHART: sizes (static inline SVG)                  -->
+<!-- Stage 3A: f1 moved into the stage's <noscript> fallback above;  -->
+<!-- f2 (twins) and f4 (names) removed from the flow entirely.       -->
 <!-- Values from data/charts.json → sizes series (n=2,380 adult).   -->
 <!-- Threshold marked as a VERTICAL dashed chalk line — same device -->
 <!-- as f1/f2's dashed reference, oriented for a length histogram   -->
@@ -243,109 +187,12 @@
 </section>
 
 <!-- ============================================================= -->
-<!-- ACT 4 · f4 — CHART: names (static inline SVG)                  -->
-<!-- Values from data/charts.json → names series. No dashed         -->
-<!-- reference line here — there is no null model for a name        -->
-<!-- leaderboard, so none is drawn rather than inventing one.        -->
-<!-- ============================================================= -->
-<section class="chart prose" aria-labelledby="f4-title">
-  <h3 id="f4-title">Names</h3>
-  <p class="todo">Placeholder caption. 1,333 named features dedupe to 1,288
-    unique entities. Grounds remember saints, patriots and the unnamed
-    dead; clubs take epithets of defiance.</p>
-
-  <h4>Ground dedications (heuristic)</h4>
-  <figure>
-    <svg viewBox="0 0 600 340" role="img"
-      aria-label="Bar chart: ground-name dedication counts. Unattributed 110, saint 30, place or other 22, patriot 13, memorial 12, clergy 7.">
-      <line class="axis" x1="60" y1="280" x2="580" y2="280"></line>
-      <rect class="bar" x="85"  y="60"  width="55" height="220"></rect>
-      <rect class="bar" x="170" y="220" width="55" height="60"></rect>
-      <rect class="bar" x="255" y="236" width="55" height="44"></rect>
-      <rect class="bar" x="340" y="254" width="55" height="26"></rect>
-      <rect class="bar" x="425" y="256" width="55" height="24"></rect>
-      <rect class="bar" x="510" y="266" width="55" height="14"></rect>
-      <text class="tick" x="113" y="52"  text-anchor="middle">110</text>
-      <text class="tick" x="198" y="212" text-anchor="middle">30</text>
-      <text class="tick" x="283" y="228" text-anchor="middle">22</text>
-      <text class="tick" x="368" y="246" text-anchor="middle">13</text>
-      <text class="tick" x="453" y="248" text-anchor="middle">12</text>
-      <text class="tick" x="538" y="258" text-anchor="middle">7</text>
-      <text class="tick" x="113" y="298" text-anchor="middle">unattrib.</text>
-      <text class="tick" x="198" y="298" text-anchor="middle">saint</text>
-      <text class="tick" x="283" y="298" text-anchor="middle">place</text>
-      <text class="tick" x="368" y="298" text-anchor="middle">patriot</text>
-      <text class="tick" x="453" y="298" text-anchor="middle">memorial</text>
-      <text class="tick" x="538" y="298" text-anchor="middle">clergy</text>
-      <text class="callout" x="300" y="330" text-anchor="middle">110 of 194 grounds are dedicated to a person the name alone can't identify</text>
-    </svg>
-  </figure>
-
-  <h4>Club epithets</h4>
-  <figure>
-    <svg viewBox="0 0 600 340" role="img"
-      aria-label="Bar chart: club-name epithet leaderboard. Gaels 19, Og 14, Rovers 11, Emmets 9, Shamrocks 8, Harps 5.">
-      <line class="axis" x1="60" y1="280" x2="580" y2="280"></line>
-      <rect class="bar" x="85"  y="62"  width="55" height="218"></rect>
-      <rect class="bar" x="170" y="119" width="55" height="161"></rect>
-      <rect class="bar" x="255" y="154" width="55" height="126"></rect>
-      <rect class="bar" x="340" y="176" width="55" height="104"></rect>
-      <rect class="bar" x="425" y="188" width="55" height="92"></rect>
-      <rect class="bar" x="510" y="222" width="55" height="58"></rect>
-      <text class="tick" x="113" y="54"  text-anchor="middle">19</text>
-      <text class="tick" x="198" y="111" text-anchor="middle">14</text>
-      <text class="tick" x="283" y="146" text-anchor="middle">11</text>
-      <text class="tick" x="368" y="168" text-anchor="middle">9</text>
-      <text class="tick" x="453" y="180" text-anchor="middle">8</text>
-      <text class="tick" x="538" y="214" text-anchor="middle">5</text>
-      <text class="tick" x="113" y="298" text-anchor="middle">Gaels</text>
-      <text class="tick" x="198" y="298" text-anchor="middle">Óg</text>
-      <text class="tick" x="283" y="298" text-anchor="middle">Rovers</text>
-      <text class="tick" x="368" y="298" text-anchor="middle">Emmets</text>
-      <text class="tick" x="453" y="298" text-anchor="middle">Shamrocks</text>
-      <text class="tick" x="538" y="298" text-anchor="middle">Harps</text>
-    </svg>
-  </figure>
-
-  <p class="todo">Dedication figures are a string-matching heuristic and
-    await the author's human review pass (names_review.csv) — reported as
-    found, not hidden. Epithet counts are the deduped unique-entity figures
-    from the frozen names pipeline.</p>
-</section>
-
-<!-- ============================================================= -->
-<!-- ACT 5 · s9 — THE KICKER, on its OWN sticky stage. The Act 4     -->
-<!-- charts above deliberately break the stage: this .scrolly is a  -->
-<!-- second, independent sticky region with its own canvas, driven  -->
-<!-- by the SAME card-driven engine (docs/js/stage.js) — the card   -->
-<!-- below is just scene index 8 to that engine, nothing special-   -->
-<!-- cased. See stage.js's header comment for how resume is verified. -->
-<!-- ============================================================= -->
-<div class="scrolly">
-  <div class="stage">
-    <canvas class="stage-canvas" id="cv2" role="img"
-      aria-label="The 29 county grounds drawn in amber over the ghosted island cast, long axes running east to west."></canvas>
-    <noscript>
-      <p class="stage__noscript">The 29 county grounds — the cathedrals —
-        cluster east–west: Semple 92°, Páirc Uí Rinn 89°. Straight into the
-        setting sun the folklore warns about. The one rule everyone cites is
-        the one the big grounds break.</p>
-    </noscript>
-  </div>
-  <div class="steps">
-    <div class="step step--tall"><div class="card"><p class="todo">The
-      kicker. One last thing. The county grounds — <span class="sun">the
-      cathedrals</span> — cluster east–west: Semple 92°, Páirc Uí Rinn 89°.
-      Straight into the setting sun the folklore warns about. The one rule
-      everyone cites is the one the big grounds break.</p></div></div>
-  </div>
-</div>
-
-<!-- ============================================================= -->
 <!-- STAGE 2C · THE HANDOVER — the sticky choreography ends here.   -->
 <!-- The explorer is free-roaming: its own canvas, own pan/zoom      -->
 <!-- engine (docs/js/explorer.js), no card-driven pacing, no scroll  -->
-<!-- hijack outside the "Explore" gate below.                        -->
+<!-- hijack outside the "Explore" gate below. Stage 3A removed the   -->
+<!-- kicker (cv2, its card, the stadiums.json load) that used to     -->
+<!-- sit between the Act 4 charts and here.                          -->
 <!-- ============================================================= -->
 <section class="explorer prose" id="explorer" aria-labelledby="explorer-title">
   <div class="intro">

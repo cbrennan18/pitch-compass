@@ -1,9 +1,8 @@
-/* Pitch Compass — the floodlit theme (Stage 2).
+/* Pitch Compass — the floodlit theme (Stage 3A).
  * Grass field, chalk line-markings, one amber sun. System serif only:
  * zero webfonts. Amber is SEMANTIC — it appears only where the sun is the
- * subject (the sun sweep, and later the stadium kicker). Nothing else is
- * ever amber. No gradients, no glows, no shadows. A quiet page; the
- * graphics are the loud part.
+ * subject (the sun sweep). Nothing else is ever amber. No gradients, no
+ * glows, no shadows. A quiet page; the graphics are the loud part.
  */
 :root {
   --grass: #16301f;        /* the field, evening */
@@ -55,11 +54,22 @@ a { color: var(--chalk); }
 .scrolly { position: relative; }
 .stage { position: sticky; top: 0; height: 100vh; height: 100svh; }
 canvas { display: block; width: 100%; height: 100%; }
+/* Stage 3A: was a single centred <p>; now a column wrapper (text + the
+   f1 chart moved here from the main flow) that scrolls if it's taller
+   than the sticky stage. */
 .stage__noscript {
-  position: absolute; inset: 0; display: flex; align-items: center;
-  justify-content: center; padding: 2rem; text-align: center;
+  position: absolute; inset: 0; overflow-y: auto;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 1.5rem; padding: 2rem; text-align: center;
   color: var(--chalk-faint); font-style: italic;
 }
+.stage__noscript-chart { width: 100%; max-width: 32rem; }
+.stage__noscript-chart svg { display: block; width: 100%; height: auto; }
+.stage__noscript-chart .bar { fill: var(--chalk-faint); }
+.stage__noscript-chart .axis { stroke: var(--chalk-line); stroke-width: 1; }
+.stage__noscript-chart .ref { stroke: var(--chalk-faint); stroke-width: 1; stroke-dasharray: 4 4; }
+.stage__noscript-chart .tick { fill: var(--chalk-faint); font-size: 12px; font-style: normal; }
+.stage__noscript-chart .callout { fill: var(--chalk-faint); font-size: 12px; }
 .stage--failed::after {
   content: "The stage needs the pitch data to draw — the text steps below tell the whole story.";
   position: absolute; inset: 0; display: flex; align-items: center;

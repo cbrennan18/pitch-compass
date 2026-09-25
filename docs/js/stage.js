@@ -1,33 +1,27 @@
-/* Pitch Compass — the floodlit stage engine (Stage 2B-i Acts 1–3 +
- * 2B-ii Act 5's kicker; Act 4's charts are static, off-stage — see index.html).
+/* Pitch Compass — the floodlit stage engine (Stage 3A: single sticky stage,
+ * Acts 1–4; the kicker/cv2 stage was removed, f1/f2/f4 moved out of the
+ * scroll flow — see index.html and the Stage 3A build report).
  *
- * TWO sticky stages sharing ONE engine. Every pitch holds a per-scene
- * target [x,y,scale,alpha]; scroll drives an eased interpolation between
+ * ONE sticky stage, one canvas. Every pitch holds a per-scene target
+ * [x,y,scale,alpha]; scroll drives an eased interpolation between
  * consecutive scenes. Scenes are DESCRIPTORS with an optional overlay
- * (ctx,w,t) hook — the rose mirror, the soccer guest rose, the sun sweep,
- * the stadium kicker and the on-canvas labels are overlays, not
- * special-cased scene indices. This generalises the v4 prototype's
- * hand-wired mW/sunW/kickW dispatch.
+ * (ctx,w,t) hook — the rose mirror, the soccer guest rose, the sun sweep
+ * and the on-canvas labels are overlays, not special-cased scene indices.
+ * This generalises the v4 prototype's hand-wired mW/sunW dispatch.
  *
  * Scenes:
  *   0 protagonist · 1 island · 2 rose · 3 soccer guest · 4 town/country
- *   5 Dublin · 6 Cavan–Monaghan · 7 rose + sun sweep · 8 THE KICKER
- * Scenes 0–7 live on the first sticky stage (.scrolly #1); scene 8 lives
- * on a SECOND, independent sticky stage after the Act 4 charts — the
- * stage deliberately un-sticks and re-sticks (see the card-driven pacing
- * section below for why this needs no special-casing at all).
+ *   5 Dublin · 6 Cavan–Monaghan · 7 rose + sun sweep (last; holds here)
  *
- * Chalk on grass; amber is semantic (the sun sweep and the kicker's
- * stadiums — the sun/floodlight is the subject of both). Data ©
- * OpenStreetMap contributors (ODbL 1.0); see /data and the methods box.
+ * Chalk on grass; amber is semantic (the sun sweep is the only amber
+ * content left). Data © OpenStreetMap contributors (ODbL 1.0); see /data
+ * and the methods box.
  */
 (() => {
   "use strict";
-  // Two independent sticky stages (Act 1–3's and the kicker's), ONE shared
-  // engine: each canvas is just another render target for the same S[]/P/
-  // cardEls state. `ctx` is reassigned per canvas inside draw()'s loop —
-  // every drawing function below closes over it and always sees the right
-  // context for whichever canvas is currently being rendered.
+  // One sticky stage since Stage 3A (was two, sharing one engine — the
+  // array-based canvas handling is kept as-is since it works unchanged for
+  // one canvas too, not because a second stage is expected back).
   const canvases = Array.from(document.querySelectorAll(".stage-canvas"));
   if (!canvases.length) return;
   const ctxs = canvases.map(c => c.getContext("2d"));
@@ -43,9 +37,9 @@
   let VW = 0, VH = 0;
   let P = [];            // pitch objects {b,L,W,name,urban,gx,gy}
   let SOCCER = [];       // soccer guest bearings (numbers)
-  let ST = [];           // the 29 county grounds {b,L,W,name,gx,gy}
-  let stPos = [];        // stadium positions, island frame (scene 8)
   let OUTLINES = null;   // {coast:[[ [lon,lat],... ]], borders:[...]}
+  let DUBLIN_STREETS = null;   // lazy-loaded, Dublin scene only (item 3)
+  let dublinStreetsRequested = false;
   let FIT = {};          // stored map fitters: island / dublin / cavan
   let protagonists = {}; // {sun,wind,north,none} -> index into P
   let protagIdx = 0;     // current protagonist (quiz-selected)
@@ -54,11 +48,19 @@
   const K = Math.cos(53.4 * Math.PI / 180);
   const toXY = (lat, lon) => [lon * K, -lat];
 
-  function fitter(latMin, latMax, lonMin, lonMax, pad) {
+  // bandH/bandY0 (Stage 3A, item 1): optional vertical band to CONTAIN-fit
+  // and centre within, instead of the full viewport. Defaults preserve
+  // existing behaviour for every caller except the portrait island fit,
+  // which passes bandH = VH*0.62 so the island sits in the upper band and
+  // the card below doesn't overlap it. The scale itself is computed
+  // against bandH (not VH), so this can never clip -- it's still a
+  // contain-fit, just contained within a smaller box.
+  function fitter(latMin, latMax, lonMin, lonMax, pad, bandH, bandY0) {
+    bandH = bandH || VH; bandY0 = bandY0 || 0;
     const [x0] = toXY(latMax, lonMin), [, y0] = toXY(latMax, lonMin);
     const [x1] = toXY(latMin, lonMax), [, y1] = toXY(latMin, lonMax);
-    const s = Math.min((VW - 2 * pad) / (x1 - x0), (VH - 2 * pad) / (y1 - y0));
-    const ox = (VW - s * (x1 - x0)) / 2, oy = (VH - s * (y1 - y0)) / 2;
+    const s = Math.min((VW - 2 * pad) / (x1 - x0), (bandH - 2 * pad) / (y1 - y0));
+    const ox = (VW - s * (x1 - x0)) / 2, oy = bandY0 + (bandH - s * (y1 - y0)) / 2;
     return {
       pos: p => [ox + (p.gx - x0) * s, oy + (p.gy - y0) * s],
       posLL: (lon, lat) => [ox + (lon * K - x0) * s, oy + (-lat - y0) * s],
@@ -70,7 +72,7 @@
   const hash = (i, salt) => ((i * 2654435761 + salt * 40503) >>> 16 & 255) / 255;
 
   // ---------- scene target arrays ----------
-  const N = 9;
+  const N = 8;   // Stage 3A: scene 8 (the kicker) removed -- 0..7 now
   let S = [];            // S[i] = Float32Array(P.length*4)
   let mirror = null;     // rose fold mirror positions (2 per pitch)
   let guestMirror = null;   // GAA disc's mirror ghost, in the soccer-guest scene
@@ -128,6 +130,11 @@
   function buildScenes() {
     S = Array.from({ length: N }, () => new Float32Array(P.length * 4));
 
+    // Stage 3A, item 1: one portrait test, used everywhere below instead of
+    // scene 4's old ad-hoc VW<640 check. Landscape/desktop branches are
+    // untouched verbatim.
+    const isPortrait = VH > VW * 1.2;
+
     // 0 — protagonist: the chosen named pitch alone, large; the rest hidden
     const prot = P[protagIdx];
     const psc = Math.min(VW, VH) * 0.5 / prot.L;
@@ -135,8 +142,13 @@
       p === prot ? psc : 0.02, p === prot ? 1 : 0));
 
     // 1 — island: the cast on the island, coast + county borders drawn faint
-    //     underneath (the "unaided" conceit retired — author's call)
-    const isl = fitter(51.35, 55.45, -10.6, -5.4, 24);
+    //     underneath (the "unaided" conceit retired — author's call).
+    //     Portrait: DON'T fit to height (that clips coast) — still a
+    //     contain-fit, just contained within the upper ~62% of the
+    //     viewport, so the card below doesn't sit on top of it.
+    const isl = isPortrait
+      ? fitter(51.35, 55.45, -10.6, -5.4, 24, VH * 0.62, 0)
+      : fitter(51.35, 55.45, -10.6, -5.4, 24);
     FIT.island = isl;
     P.forEach((p, i) => { const [x, y] = isl.pos(p);
       setTarget(S[1], i, x, y, isl.pxPerM, 1); });
@@ -154,10 +166,24 @@
     });
 
     // 3 — soccer guest: the GAA rose slides left and shrinks; a second rose
-    //     (the 2,458 soccer bearings) forms on the right as an overlay. Both
+    //     (the 2,458 soccer bearings) forms beside it as an overlay. Both
     //     discs get a mirror ghost too (device-gate fix #1 — this scene's
     //     GAA disc was half-folded same as scenes 2/7 were).
-    const gcx = VW * 0.30, gcy = VH * 0.5, gR = Math.min(VW, VH) * 0.24;
+    //     Portrait: stack vertically (GAA top, soccer bottom) instead of
+    //     side-by-side — same margin/label-budget pattern as scene 4's
+    //     stacked petals, sized to fill whatever space that leaves.
+    let gcx, gcy, gR, scx, scy;
+    if (isPortrait) {
+      const topM = 20, gapM = 44, botM = 20, labelH = 30;
+      const bandH = (VH - topM - gapM - botM - 2 * labelH) / 2;
+      gR = Math.max(40, Math.min((VW - 2 * 26) / 2, bandH));
+      gcx = scx = VW / 2;
+      gcy = topM + labelH + gR;
+      scy = gcy + gR + gapM + labelH + gR;
+    } else {
+      gcx = VW * 0.30; gcy = VH * 0.5; gR = Math.min(VW, VH) * 0.24;
+      scx = VW * 0.70; scy = VH * 0.5;
+    }
     guestCentre = { cx: gcx, cy: gcy, R: gR };
     guestMirror = new Float32Array(P.length * 2);
     P.forEach((p, i) => {
@@ -167,7 +193,6 @@
       guestMirror[i * 2] = gcx - r * Math.cos(a);
       guestMirror[i * 2 + 1] = gcy - r * Math.sin(a);
     });
-    const scx = VW * 0.70, scy = VH * 0.5;
     soccerCentre = { cx: scx, cy: scy, R: gR };
     soccerRose = new Float32Array(SOCCER.length * 2);
     soccerMirror = new Float32Array(SOCCER.length * 2);
@@ -204,9 +229,10 @@
     // the common ones. Verified numerically across 10 representative
     // viewports (phone/tablet, portrait/landscape, incl. short-landscape
     // extremes) — see the build report.
-    const TOWNCOUNTRY_STACK_BELOW_PX = 640;
+    // Stage 3A: gate on the shared isPortrait flag, not a width-only
+    // threshold — was VW < 640, now consistent with scenes 1/3 above.
     const TC_SIDE_M = 26, TC_TOP_M = 14, TC_LABEL_H = 24, TC_CAP_H = 50, TC_BOT_M = 14;
-    const stacked = VW < TOWNCOUNTRY_STACK_BELOW_PX;
+    const stacked = isPortrait;
     let tcx, tcy, ccx, ccy, petalR4;
     if (stacked) {
       const gapM = 20;
@@ -241,7 +267,11 @@
     //     scale rects — a rect blobs at this zoom, a stroke reads an angle).
     //     Cardinal emphasis (same axis test as item 2) reuses the alpha
     //     channel, same mechanism, no new per-scene logic.
-    const dub = fitter(53.28, 53.42, -6.40, -6.12, 22);
+    //     Stage 3A, item 3: tightened from ~18.6x15.6km to a ~6km box
+    //     centred on Croke Park/Drumcondra (the densest cluster found — see
+    //     the build report), so pitches draw via drawPitch (true shape),
+    //     not drawPitchSymbolic, wherever they clear MIN_STROKE_PX.
+    const dub = fitter(53.3429, 53.3971, -6.2852, -6.1948, 22);
     FIT.dublin = dub;
     P.forEach((p, i) => { const [x, y] = dub.pos(p);
       setTarget(S[5], i, x, y, dub.pxPerM, withinCardinalAxis(p.b) ? EMPH_FULL : EMPH_FAINT); });
@@ -250,20 +280,11 @@
     P.forEach((p, i) => { const [x, y] = cav.pos(p);
       setTarget(S[6], i, x, y, cav.pxPerM, withinCardinalAxis(p.b) ? EMPH_FULL : EMPH_FAINT); });
 
-    // 7 — rose again, re-centred, for the sun sweep (mirror off)
+    // 7 — rose again, re-centred, for the sun sweep (mirror off). Last
+    // scene now (Stage 3A removed the kicker) — sceneState() naturally
+    // holds here once fully arrived, same mechanism that used to hold on
+    // the kicker.
     P.forEach((p, i) => S[7].set(S[2].subarray(i * 4, i * 4 + 4), i * 4));
-
-    // 8 — THE KICKER: cast ghosts to ~0.10 alpha on the SAME island framing
-    // as scene 1 (the piece opens and closes on the same geographic frame).
-    // The 29 county grounds draw in amber as an overlay (ovKicker) — see
-    // below for why amber is correct here (the sun/floodlight is the
-    // literal subject: county grounds cluster east–west, into the sunset).
-    const KICK_ALPHA = 0.24;   // device-gate fix #3: raised from 0.10 — the
-                                 // ghosted cast needs to read as a visible
-                                 // backdrop, not near-invisible dust
-    P.forEach((p, i) => { const [x, y] = isl.pos(p);
-      setTarget(S[8], i, x, y, isl.pxPerM, KICK_ALPHA); });
-    stPos = ST.map(s => isl.pos(s));
   }
 
   // ---------- pitch renderer: LOD stroke -> rect -> line markings ----------
@@ -304,6 +325,11 @@
   const MIN_STROKE_PX = 18;
   const CLOSEUP_LINE_ALPHA = 0.6;
   const CLOSEUP_LINE_WIDTH = 1;
+  // Stage 3A, item 3: the decision threshold for Dublin's true-shape vs
+  // symbolic fallback (see dublinTrueShape in renderFrame) -- distinct from
+  // MIN_STROKE_PX above, which is the symbolic renderer's OWN floor once
+  // that fallback is in use, not the choice of whether to use it.
+  const DUBLIN_TRUE_SHAPE_MIN_PX = 6;
   function drawPitchSymbolic(p, x, y, s, alpha) {
     const l = Math.max(p.L * s, MIN_STROKE_PX);
     ctx.save(); ctx.translate(x, y); ctx.rotate(p.b * Math.PI / 180);
@@ -406,7 +432,7 @@
     const r = R * 1.15 + COMPASS_MARGIN_PX;
     const pts = [["N", 0, -1], ["S", 0, 1], ["E", 1, 0], ["W", -1, 0]];
     ctx.save(); ctx.globalAlpha = w * 0.72;
-    for (const [t, dx, dy] of pts) label(t, cx + dx * r, cy + dy * r + 5, CHALK_FAINT, 13, false);
+    for (const [t, dx, dy] of pts) label(t, cx + dx * r, cy + dy * r + 5, CHALK_FAINT, 14, false);
     ctx.restore();
   }
 
@@ -489,23 +515,25 @@
     ctx.save(); ctx.globalAlpha = w;
     // stats transcribed from the pipeline: urban 46.3% / rural 36.0% cardinal
     label("town", townPetal.cx, townPetal.cy - townPetal.R - 24, CHALK, 16, false);
-    label("46% cardinal", townPetal.cx, townPetal.cy - townPetal.R - 5, CHALK_FAINT, 13);
+    label("46% cardinal", townPetal.cx, townPetal.cy - townPetal.R - 5, CHALK_FAINT, 14);
     label("country", countryPetal.cx, countryPetal.cy - countryPetal.R - 24, CHALK, 16, false);
-    label("36% cardinal", countryPetal.cx, countryPetal.cy - countryPetal.R - 5, CHALK_FAINT, 13);
+    label("36% cardinal", countryPetal.cx, countryPetal.cy - countryPetal.R - 5, CHALK_FAINT, 14);
     // TODO(author): final wording — states the encoding so the eye isn't
     // asked to infer it. Word-wrapped (device-gate fix #4): was a single
     // fillText that clipped at both viewport edges on narrow screens.
+    // Stage 3A: bumped 12->14px (petal/rose label font-size floor).
     wrapLabel("petal length = share of pitches on that axis · bright = within 15° of N/S/E/W",
       (townPetal.cx + countryPetal.cx) / 2,
       Math.max(townPetal.cy, countryPetal.cy) + townPetal.R + 34,
-      Math.min(VW - 32, 420), CHALK_FAINT, 12, 16);
+      Math.min(VW - 32, 420), CHALK_FAINT, 14, 18);
     ctx.restore();
   }
   // chalk-italic annotation with a thin leader line into the cluster (item 9).
   // TODO(author): final wording for both close-up labels. The leader line
-  // itself always stays chalk-faint (a neutral connector, not "the sun");
-  // `col` (device-gate fix #3) lets the LABEL TEXT go amber for the kicker,
-  // where the label is naming an amber mark — reused as-is, not duplicated.
+  // itself always stays chalk-faint (a neutral connector). `col` lets the
+  // label text override the default chalk colour; unused since Stage 3A
+  // removed the kicker (its only amber-label caller) but kept for the
+  // Dublin/Cavan callers, which both still use the default.
   function annotate(text, tx, ty, lx, ly, w, col) {
     ctx.save(); ctx.globalAlpha = w;
     ctx.strokeStyle = CHALK_FAINT; ctx.lineWidth = 1;
@@ -563,71 +591,41 @@
       ctx.strokeStyle = AMBER; ctx.globalAlpha = ghost * 0.5; ctx.lineWidth = 1.5;
       const wend = axisLine(cx, cy, R, 228, [5, 5]);     // winter, dashed ghost
       ctx.globalAlpha = ghost;
-      label("winter 427", wend[0], wend[1] + 16, AMBER, 13);
+      label("winter 427", wend[0], wend[1] + 16, AMBER, 14);
     }
     ctx.strokeStyle = AMBER; ctx.globalAlpha = w; ctx.lineWidth = 2;
     const jend = axisLine(cx, cy, R, az);                 // June, solid
     ctx.fillStyle = AMBER;
     ctx.beginPath(); ctx.arc(jend[0], jend[1], 7, 0, 7); ctx.fill();
     label(t >= 0.98 ? "June 363" : "sunset, by season",
-      jend[0], jend[1] - 14, AMBER, 13);
+      jend[0], jend[1] - 14, AMBER, 14);
     ctx.restore();
   }
 
-  // Device-gate fix #3: the 29 grounds as amber SYMBOLIC strokes — a floored
-  // minimum length well above their old true-scale size (which, at island
-  // zoom, rendered as near-dots), so each one reads as a LINE with a
-  // visible direction, not a speck. Reuses the drawPitchSymbolic pattern
-  // (floor a true length, don't fix it outright) so a few genuinely large
-  // grounds can still read slightly longer than the rest.
-  const KICK_MIN_STROKE_PX = 34;
-  const KICK_LINE_ALPHA = 0.9, KICK_LINE_WIDTH = 1.6;
-  function drawStadiumMark(s, x, y, alpha) {
-    const pxPerM = FIT.island ? FIT.island.pxPerM : 0;
-    const l = Math.max(s.L * pxPerM, KICK_MIN_STROKE_PX);
-    ctx.save(); ctx.translate(x, y); ctx.rotate(s.b * Math.PI / 180);
-    ctx.globalAlpha = alpha * KICK_LINE_ALPHA;
-    ctx.strokeStyle = AMBER; ctx.lineWidth = KICK_LINE_WIDTH;
-    ctx.beginPath(); ctx.moveTo(0, -l / 2); ctx.lineTo(0, l / 2); ctx.stroke();
-    ctx.restore();
-  }
-
-  // THE KICKER (scene 8, Act 5): the 29 county grounds in amber, at their
-  // true bearings, on the island frame the ghosted cast (drawn in the main
-  // per-pitch loop at KICK_ALPHA) already sits on, with the coast + county
-  // borders drawn under both (device-gate fix #3 — see the outlineWeight(8,
-  // ...) call in renderFrame). Named callouts for the two grounds the
-  // storyboard calls out by name, now attached with a leader line via
-  // annotate() (were floating text before). Amber is correct here — the
-  // sun/floodlight is literally the subject (long axes east–west, into the
-  // sunset the folklore warns about).
-  function ovKicker(w) {
-    if (!ST.length || !stPos.length) return;
-    for (let i = 0; i < ST.length; i++) {
-      const [x, y] = stPos[i];
-      drawStadiumMark(ST[i], x, y, w);
+  // Stage 3A, item 3: the Dublin street layer. Lazy-loaded (see the fetch
+  // trigger near boot, below) and drawn only for the Dublin scene, faint
+  // chalk under the pitches (same draw-order convention as drawOutlines —
+  // backdrop first, cast on top). DUBLIN_STREETS is a plain array of
+  // [lon,lat] paths; projected through the SAME fitter (FIT.dublin) the
+  // pitches use, so streets and pitches always agree.
+  function drawStreets(w) {
+    if (!DUBLIN_STREETS || !FIT.dublin) return;
+    ctx.save();
+    ctx.strokeStyle = CHALK_LINE; ctx.globalAlpha = w; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (const path of DUBLIN_STREETS) {
+      for (let k = 0; k < path.length; k++) {
+        const [x, y] = FIT.dublin.posLL(path[k][0], path[k][1]);
+        k ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+      }
     }
-    const semple = ST.findIndex(s => s.name.includes("Semple"));
-    const rinn = ST.findIndex(s => s.name.includes("Rinn"));
-    if (semple >= 0) {
-      const [x, y] = stPos[semple];
-      annotate("Semple 92°", x, y - 36, x, y, w, AMBER);
-    }
-    if (rinn >= 0) {
-      const [x, y] = stPos[rinn];
-      annotate("Páirc Uí Rinn 89°", x, y - 36, x, y, w, AMBER);
-    }
-    // TODO(author): final wording — one amber label line, per the storyboard.
-    ctx.save(); ctx.globalAlpha = w;
-    label("the 29 county grounds — long axes east–west, into the sunset",
-      VW / 2, VH - 26, AMBER, 14, true);
+    ctx.stroke();
     ctx.restore();
   }
 
   // overlay owner scene index -> fn (2, 4 and 7 are dispatched specially below)
   const OVERLAYS = { 0: ovProtagonist, 2: ovMirror, 3: ovSoccer,
-                     4: ovTownCountry, 5: ovDublin, 6: ovCavan, 7: ovSun,
-                     8: ovKicker };
+                     4: ovTownCountry, 5: ovDublin, 6: ovCavan, 7: ovSun };
 
   // ---------- scroll + draw: CARD-DRIVEN pacing (gate-fail fix #1) ----------
   // The old model divided the .scrolly element's total scroll distance into
@@ -681,6 +679,20 @@
       : Math.max(0, Math.min(1, (tau - 0.82) / 0.18));
   }
 
+  // Stage 3A, item 2 (bug fix): every overlay used to have a two-transition
+  // window — non-zero while ARRIVING (a===i-1, w=t) AND while DEPARTING
+  // (a===i, w=1-t) — so an incoming overlay started drawing the instant its
+  // predecessor began fading, at full strength on top of it. That's what
+  // doubled the Cavan label onto Dublin's (both annotate() at the same
+  // canvas position) and let the amber sun line bleed into the Cavan scene
+  // (ovSun's arrival ramped from tau=0, while Cavan's own label was still
+  // near full strength). Delaying the ARRIVING half only — same idea as
+  // OUTLINE_DELAY and settleGate elsewhere in this file — leaves the first
+  // ARRIVE_DELAY share of every transition entirely to the outgoing
+  // overlay, closing both leaks with one change instead of two.
+  const ARRIVE_DELAY = 0.5;
+  const arriveWeight = t => Math.max(0, (t - ARRIVE_DELAY) / (1 - ARRIVE_DELAY));
+
   let CUR = new Float32Array(P.length * 4);
 
   // Draws the current shared scene state into whichever canvas `ctx`
@@ -691,10 +703,15 @@
   function renderFrame() {
     const { a, tau, t } = sceneState();
     const A = S[a], B = S[a + 1];
-    // Dublin(5)/Cavan(6) render with the min-length symbolic stroke whenever
-    // either scene is the source or destination of the current transition —
-    // covers arriving at 5, holding 5, 5->6, holding 6, and departing 6.
-    const symbolic = (a === 4 || a === 5 || a === 6);
+    // Cavan(6) (and the town/country->Dublin approach, a===4) still render
+    // with the min-length symbolic stroke throughout, as before.
+    const symbolic = (a === 4 || a === 6);
+    // Stage 3A, item 3: Dublin (a===5, whether holding or already departing
+    // toward Cavan) now draws TRUE shape via drawPitch wherever a pitch
+    // clears DUBLIN_TRUE_SHAPE_MIN_PX, falling back to the symbolic stroke
+    // only below it -- the tightened 6km bbox makes most pitches legible at
+    // true scale (see the build report: only 14% fall under this floor).
+    const dublinTrueShape = a === 5;
     // device-gate fix #2: scene 3 (soccer guest) only. The GAA disc's
     // primary dots switch to the same fixed rose mark the soccer disc (and
     // both discs' mirror ghosts) use in ovSoccer — so the "smooth mass vs
@@ -707,13 +724,12 @@
 
     ctx.clearRect(0, 0, VW, VH);
 
-    // backdrops UNDER the cast: coast + county borders on the map scenes
+    // backdrops UNDER the cast: coast + county borders on the map scenes,
+    // Dublin's street layer under its pitches too (Stage 3A, item 3)
     let ow;
     if ((ow = outlineWeight(1, a, t)) > 0.02) drawOutlines(FIT.island, ow);
-    if ((ow = outlineWeight(5, a, t)) > 0.02) drawOutlines(FIT.dublin, ow);
+    if ((ow = outlineWeight(5, a, t)) > 0.02) { drawOutlines(FIT.dublin, ow); drawStreets(ow); }
     if ((ow = outlineWeight(6, a, t)) > 0.02) drawOutlines(FIT.cavan, ow);
-    // device-gate fix #3: the kicker needs a recognisable Ireland under it
-    if ((ow = outlineWeight(8, a, t)) > 0.02) drawOutlines(FIT.island, ow);
 
     for (let i = 0; i < P.length; i++) {
       const j = i * 4;
@@ -727,7 +743,11 @@
       // pitch rectangle — raised from 0.02 so any near-zero float residue
       // from the interpolation still gets skipped outright, not drawn.
       if (al < ALPHA_SKIP) continue;
-      if (symbolic) drawPitchSymbolic(P[i], x, y, s, al);
+      if (dublinTrueShape) {
+        if (P[i].L * s >= DUBLIN_TRUE_SHAPE_MIN_PX) drawPitch(P[i], x, y, s, al, CHALK);
+        else drawPitchSymbolic(P[i], x, y, s, al);
+      }
+      else if (symbolic) drawPitchSymbolic(P[i], x, y, s, al);
       else if (guestRoseMode) drawRoseMark(P[i].b, x, y, al);
       else drawPitch(P[i], x, y, s, al, CHALK);
     }
@@ -740,7 +760,7 @@
     // its owning scene: once a > i, its branch condition is false and w=0.
     for (const key in OVERLAYS) {
       const i = +key;
-      const w = a === i - 1 ? t : (a === i ? 1 - t : 0);
+      const w = a === i - 1 ? arriveWeight(t) : (a === i ? 1 - t : 0);
       if (w <= 0.02) continue;
       if (i === 2) {
         // rose mirror gated to the hold plateau on arrival (kills the mid-morph
@@ -761,7 +781,12 @@
         // device-gate fix #1: the sun scene ALSO needs the full mirrored ring
         // (was half-folded — ovMirror was keyed to scene 2 only). Same
         // function, same settle-gate pattern, fromScene = i-1 = 6.
-        const sweepT = reduced ? t : (a === 6 ? tau : 1);
+        // Stage 3A: sweepT now shares arriveWeight's delay on the a===6
+        // branch too (not just raw tau) — w is already zero until the sun
+        // is meant to be visible, so without this the sweep's winter->June
+        // animation would "pop in" already half-swept instead of covering
+        // its full range across the window it's actually shown in.
+        const sweepT = reduced ? t : (a === 6 ? arriveWeight(tau) : 1);
         ovMirror(w * settleGate(a, tau, 6), CUR);
         ovSun(w, sweepT);
       } else {
@@ -772,6 +797,7 @@
 
   function draw() {
     if (!S.length || !cardEls.length) return;
+    maybeLoadDublinStreets(sceneState().a);
     ctxs.forEach(c => { ctx = c; renderFrame(); });
   }
 
@@ -855,12 +881,24 @@
   }, { passive: true });
   addEventListener("resize", resize);
 
+  // Stage 3A, item 3: the Dublin street layer loads lazily, only once the
+  // Dublin scene is near (a===4, approaching, or a===5 already there/past
+  // it toward 6) — not in the initial Promise.all. Checked from inside
+  // draw() (cheap — the scene state is already computed every frame for
+  // rendering) and fired at most once.
+  function maybeLoadDublinStreets(a) {
+    if (dublinStreetsRequested || a < 4) return;
+    dublinStreetsRequested = true;
+    fetch("data/dublin_streets.json").then(r => r.json()).then(j => {
+      DUBLIN_STREETS = j.data; draw();
+    }).catch(err => console.error("dublin_streets.json load failed", err));
+  }
+
   Promise.all([
     fetch("data/cast.json").then(r => r.json()),
     fetch("data/soccer_bearings.json").then(r => r.json()),
     fetch("data/outlines.json").then(r => r.json()),
-    fetch("data/stadiums.json").then(r => r.json()),
-  ]).then(([castJson, soccerJson, outlinesJson, stadiumsJson]) => {
+  ]).then(([castJson, soccerJson, outlinesJson]) => {
     const f = castJson.fields;
     const bi = f.indexOf("bearing"), li = f.indexOf("L"), wi = f.indexOf("W"),
           ni = f.indexOf("name"), ci = f.indexOf("county"), ui = f.indexOf("urban"),
@@ -874,14 +912,6 @@
     protagIdx = protagonists.none != null ? protagonists.none : 0;
     SOCCER = soccerJson.bearings;
     OUTLINES = outlinesJson;
-
-    const sf = stadiumsJson.fields;
-    const sbi = sf.indexOf("bearing"), sli = sf.indexOf("L"), swi = sf.indexOf("W"),
-          sni = sf.indexOf("name"), slati = sf.indexOf("lat"), sloni = sf.indexOf("lon");
-    ST = stadiumsJson.data.map(rec => {
-      const [x, y] = toXY(rec[slati], rec[sloni]);
-      return { b: rec[sbi], L: rec[sli], W: rec[swi], name: rec[sni], gx: x, gy: y };
-    });
 
     resize();
   }).catch(err => {
