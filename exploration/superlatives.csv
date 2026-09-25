@@ -1,0 +1,17 @@
+category,rank,name,county,lat,lon
+northernmost,1,"Naomh Pádraig GAA, Malin -- Connolly Park",Donegal,55.2978,-7.2621
+northernmost,2,Carndonagh GAA -- O'Doherty Park,Donegal,55.2602,-7.2468
+northernmost,3,Carndonagh GAA -- O'Doherty Park,Donegal,55.259,-7.2469
+southernmost,1,"Ilen Rovers -- Rath, Baltimore",Cork,51.4986,-9.3535
+southernmost,2,Goleen,Cork,51.4988,-9.7186
+southernmost,3,Castlehaven -- Moneyvollahane,Cork,51.5409,-9.2177
+westernmost,1,Skelligs Rangers,Kerry,51.8811,-10.3703
+westernmost,2,An Ghaeltacht -- Gallarus,Kerry,52.1816,-10.3643
+westernmost,3,An Ghaeltacht -- Gallarus,Kerry,52.1828,-10.3641
+easternmost,1,"John Mitchel's GAA, Ballygalget -- Mitchel Park",Down,54.4133,-5.4999
+easternmost,2,"St. Joseph's GAA, Ballycran -- McKenna Park",Down,54.4781,-5.5079
+easternmost,3,"St. Patrick's GAA, Portaferry -- St. Patrick's Park",Down,54.3744,-5.5298
+closest_to_june_sunset_axis,1,Ramor United Park,Cavan,53.8306,-7.0693
+closest_to_true_ns,1,Pearse Park,Longford,53.7393,-7.8049
+closest_to_true_ew,1,Blarney GAA Club,Cork,51.9291,-8.5615
+loneliest,1,Eoghan Rua Pitch,Derry,55.1646,-6.696
